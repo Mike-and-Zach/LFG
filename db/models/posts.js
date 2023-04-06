@@ -7,6 +7,17 @@ async function getAllPosts() {
     return rows;
 }
 
-module.exports = {
+async function createPost({gameTitle, description}) {
+    const { rows: [post] } = await client.query(`
+        INSERT INTO posts ("gameTitle", description)
+        VALUES ($1, $2)
+        RETURNING *;
+    `, [gameTitle, description])
 
+    return post;
+}
+
+module.exports = {
+    getAllPosts,
+    createPost
 }
