@@ -24,7 +24,7 @@ async function createPost({ gameTitle, description }) {
 
 async function deletePost(id) {
   const {
-    rows: [post],
+    rows: [post], // you dont need to make these variabes if you arnt using them
   } = await client.query(`
     DELETE FROM posts
     WHERE id=${id};
