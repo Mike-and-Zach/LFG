@@ -2,7 +2,7 @@ const {
     client,
   } = require('./client');
 const { createUser, getAllUsers } = require("./models/user")
-const { createPost, getAllPosts} = require("./models/posts")
+const { createPost, getAllPosts } = require("./models/posts")
 async function dropTables() {
     try {
         console.log("Starting to drop tables...")
