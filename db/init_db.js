@@ -2,6 +2,7 @@ const {
     client,
   } = require('./client');
 const { createUser, getAllUsers } = require("./models/user")
+const { createPost, getAllPosts} = require("./models/posts")
 async function dropTables() {
     try {
         console.log("Starting to drop tables...")
@@ -29,7 +30,7 @@ async function createTables() {
 
             CREATE TABLE posts(
                 id SERIAL PRIMARY KEY,
-                gameTitle varchar(255) NOT NULL,
+                "gameTitle" varchar(255) NOT NULL,
                 description varchar(255)
             );
 
@@ -102,12 +103,16 @@ async function populateInitialData() {
       }
     ]
 
+    const createPosts = await Promise.all(posts.map(createPost))
+
     const createdUsers = await Promise.all(users.map(createUser));
     
     console.log(("Users being created"));
-    console.log(createdUsers);
     const allUsers = await getAllUsers();
+    console.log("Posts being created");
+    const allPosts = await getAllPosts();
     console.log(allUsers);
+    console.log(allPosts);
   } catch (err) {
     console.log(err)
   }
