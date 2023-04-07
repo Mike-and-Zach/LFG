@@ -7,6 +7,7 @@ async function dropTables() {
     try {
         console.log("Starting to drop tables...")
         await client.query(`
+            DROP TABLE IF EXISTS comments;
             DROP TABLE IF EXISTS posts;
             DROP TABLE IF EXISTS users;
         `)
@@ -32,6 +33,12 @@ async function createTables() {
                 id SERIAL PRIMARY KEY,
                 "gameTitle" varchar(255) NOT NULL,
                 description varchar(255)
+            );
+
+            CREATE TABLE comments(
+              id SERIAL PRIMARY KEY,
+              "postId" INTEGER REFERENCES posts(id),
+              message text NOT NULL
             );
 
         `)
