@@ -37,8 +37,17 @@ async function getAllUsers() {
     return user;
 }
 
-  async function validateAndGetUser(email, password) {
+  async function getUserByUsername(username) {
+    const { row: [user] } = await client.query(`
+      SELECT * FROM users
+      WHERE username = $1
+    `, [username])
+    return user
+  }
+
+  async function validateAndGetUser({email, password}) {
     const user = await getUserByEmail(email);
+    console.log('validateddduser :>> ', user);
     if(!user) {
       throw new Error("Incorrect email or password")
     }
@@ -49,6 +58,9 @@ async function getAllUsers() {
       return user;
     }
   }
+
+
+
   module.exports = {
     getAllUsers,
     createUser,

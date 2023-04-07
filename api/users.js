@@ -5,7 +5,8 @@ const jwt = require("jsonwebtoken")
 const { createUser, getAllUsers, getUserByEmail, validateAndGetUser } = require("../db/models/user");
 
 router.post("/register", async (req, res, next) => {
-    console.log("req.body", req.body);
+    console.log("process.env ==> ", process.env.JWT_SECRET);
+    console.log("req.body ==> ", req.body);
     try {
         const userExists = await getUserByEmail(req.body.email);
         if (userExists) {
@@ -46,16 +47,17 @@ router.get("/", async (req, res, next) => {
     res.send(users)
 })
 
-router.get("/login", async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
     try {
         const {email, password} = req.body
         if (!email || !password) {
             next({
                 name: "Missing CredentialsError",
-                message: "Please supply both an email and a password"
+                message: "Please supply both an username and a password"
             })
         }
-        const user = await validateAndGetUser(email, password)
+        const user = await validateAndGetUser({email, password})
+        console.log(user);
 
         if (user) {
             const token = jwt.sign(
