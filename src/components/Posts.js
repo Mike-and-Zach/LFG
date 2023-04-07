@@ -2,8 +2,8 @@ import { callApi } from "../api/utils"
 import { useState, useEffect } from "react"
 import Post from "./Post"
 const Posts = () => {
-    const [posts, setPosts ] = useState([])
-    const [showMakePost, setShowMakePost] = useState(false)
+    const [posts, setPosts ] = useState([]);
+    const [showMakePost, setShowMakePost] = useState(false);
     const [gameTitle, setGameTitle] = useState("");
     const [description, setDescription] = useState("");
     const fetchPosts = async () => {
