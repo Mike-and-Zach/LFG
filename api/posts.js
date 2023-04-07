@@ -4,6 +4,8 @@ const router = express.Router();
 const {
   getAllPosts,
   createPost,
+  editPost,
+  deletePost
 } = require("../db/models/posts");
 
 router.get("/", async (req, res, next) => {
