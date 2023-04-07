@@ -5,6 +5,8 @@ import Register from "./Register";
 import Login from "./Login";
 
 const App = () => {
+    const [token, setToken] = useState("");
+    console.log(token);
     return (
     <div>
        <Link to="/login">Login</Link>
@@ -12,8 +14,8 @@ const App = () => {
        <Link to="/posts">Posts</Link>
        <Routes>
         <Route path="/posts" element={<Posts />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register token={token} setToken={setToken}/>}></Route>
+        <Route path="/login" element={<Login setToken={setToken}/>}></Route>
        </Routes>
     </div>
     )

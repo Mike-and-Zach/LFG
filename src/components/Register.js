@@ -1,22 +1,32 @@
 import { useState } from "react"
 import {callApi} from "../api/utils"
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
-
-const Register = () => {
+const Register = ({token, setToken}) => {
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
-    console.log('username, password :>> ', username, password);
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleCreateUser = async () => {
+    const navigate = useNavigate();
+
+    const handleCreateUser = async (e) => {
+        e.preventDefault();
         try {
-            const data = await callApi({
-                method: "POST",
-                path: "/users/register",
-                body: {username, email, password}
-            })
-            console.log('createUserData :>> ', data);
+            if (password === confirmPassword) {
+                const data = await callApi({
+                    method: "POST",
+                    path: "/users/register",
+                    body: {username, email, password}
+                })
+                console.log('RegisterData :>> ', data);   
+                setToken(data.token)
+                navigate("/posts")
+            } else {
+                console.log("error");
+            }
         } catch (err) {
             console.log(err);
         }
@@ -26,13 +36,15 @@ const Register = () => {
         <div>
             <h1>Register</h1>
             <form>
-                <label htmlFor="username">username:</label> <br />
+                <label htmlFor="username">Username:</label> <br />
                 <input type="text" id="username" onChange={e => setUsername(e.target.value)}/> <br />
-                <label htmlFor="email">email:</label> <br />
+                <label htmlFor="email">Email:</label> <br />
                 <input type="text" id="email" onChange={e => setEmail(e.target.value)}/> <br />
-                <label htmlFor="password">password:</label> <br />
-                <input type="password" id="password" onChange={e => setPassword(e.target.value)} />
-                <input type="submit" value="Create Account!" onClick={() => handleCreateUser()}/>
+                <label htmlFor="password">Password:</label> <br />
+                <input type="password" id="password" onChange={e => setConfirmPassword(e.target.value)} /> <br />
+                <label htmlFor="password">Confirm Password:</label> <br />
+                <input type="password" id="password" onChange={e => setPassword(e.target.value)} /> <br />
+                <input type="submit" value="Create Account!" onClick={(e) => handleCreateUser(e)}/>
             </form>
         </div>
     )
