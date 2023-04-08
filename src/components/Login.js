@@ -6,10 +6,11 @@ const Login = ({token, setToken}) => {
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    console.log('email, password :>> ', email, password);
     const navigate = useNavigate();
     console.log('token :>> ', token);
     const handleLogin = async (e) => {
-
+        e.preventDefault()
         try {
             const data = await callApi({
                 method: "POST",
@@ -17,7 +18,8 @@ const Login = ({token, setToken}) => {
                 path: "/users/login"
             })
             setToken(data.token)
-            console.log('LoinData :>> ', data);
+            window.localStorage.setItem("username", data.user.username);
+            window.localStorage.setItem("userId", data.user.id);
             navigate("/posts")
         } catch (err) {
             console.log(err);

@@ -23,9 +23,10 @@ const Posts = () => {
 
     const handleMakePost = async () => {
         try {
+            const userId = window.localStorage.getItem("userId")
             const data = await callApi({
                 method: "POST",
-                path: "/posts",
+                path: `/posts/${userId}`,
                 body: {gameTitle, description}
             })
             console.log('makePostData :>> ', data);

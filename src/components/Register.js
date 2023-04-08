@@ -3,9 +3,9 @@ import {callApi} from "../api/utils"
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 
-const Register = ({token, setToken}) => {
+const Register = ({ setToken }) => {
 
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState(window.localStorage.getItem("username") || "");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -21,7 +21,9 @@ const Register = ({token, setToken}) => {
                     path: "/users/register",
                     body: {username, email, password}
                 })
-                console.log('RegisterData :>> ', data);   
+                console.log('RegisterData :>> ', data);
+                window.localStorage.setItem("username", data.user.username);
+                window.localStorage.setItem("userId", data.user.id);
                 setToken(data.token)
                 navigate("/posts")
             } else {

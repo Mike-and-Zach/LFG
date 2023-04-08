@@ -37,11 +37,11 @@ async function getAllUsers() {
     return user;
 }
 
-  async function getUserByUsername(username) {
-    const { row: [user] } = await client.query(`
+  async function getUserById(id) {
+    const { rows: [user] } = await client.query(`
       SELECT * FROM users
-      WHERE username = $1
-    `, [username])
+      WHERE id = $1
+    `, [id])
     return user
   }
 
@@ -65,5 +65,6 @@ async function getAllUsers() {
     getAllUsers,
     createUser,
     getUserByEmail,
-    validateAndGetUser
+    validateAndGetUser,
+    getUserById
   }

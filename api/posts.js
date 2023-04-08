@@ -5,25 +5,28 @@ const {
   getAllPosts,
   createPost,
   editPost,
-  deletePost, 
+  deletePost,
   getCommentsByPostId,
   addMessageToComment,
-  getAllComments
+  getAllComments,
+  getAllPostsAndUsers
 } = require("../db/models/posts");
 
 router.get("/", async (req, res, next) => {
   try {
     const posts = await getAllPosts();
+    console.log('posts :>> ', posts);
     res.send(posts);
   } catch (err) {
     next(err);
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/:userId", async (req, res, next) => {
   try {
     const { gameTitle, description } = req.body;
-    const createdPost = await createPost({ gameTitle, description });
+    const userId = req.params.userId
+    const createdPost = await createPost( {user_id: userId, gameTitle, description });
     res.send(createdPost);
   } catch ({ name, message }) {
     next({ name, message });
@@ -74,6 +77,7 @@ router.delete("/:postId", async (req, res, next) => {
       const postId = req.params.postId;
       const { message } = req.body
       const userMessage = await addMessageToComment(postId, message);
+      console.log('userMessage :>> ', userMessage);
       res.send(userMessage)
     } catch ({name, message}) {
       next({name, message})

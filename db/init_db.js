@@ -9,6 +9,7 @@ async function dropTables() {
         await client.query(`
             DROP TABLE IF EXISTS comments;
             DROP TABLE IF EXISTS posts;
+            DROP TABLE IF EXISTS direct_messages;
             DROP TABLE IF EXISTS users;
         `)
         console.log("Finished dropping tables!")
@@ -31,14 +32,23 @@ async function createTables() {
 
             CREATE TABLE posts(
                 id SERIAL PRIMARY KEY,
+                user_id INT REFERENCES users(id),
                 "gameTitle" varchar(255) NOT NULL,
-                description varchar(255)
+                description text
             );
 
             CREATE TABLE comments(
               id SERIAL PRIMARY KEY,
               "postId" INTEGER REFERENCES posts(id),
               message text NOT NULL
+            );
+
+            CREATE TABLE direct_messages(
+              id SERIAL PRIMARY KEY,
+              sender_id INT NOT NULL,
+              recipient_id INT NOT NULL,
+              message_text TEXT NOT NULL,
+              sent_time TIMESTAMP DEFAULT NOW()
             );
 
         `)
@@ -97,29 +107,30 @@ async function populateInitialData() {
         password: "maxyspassword"
 
       }
-    ]
+    ];
 
     const posts = [
       {
-        gameTitle: "Counter Strike",
-        description: "Looking to play ranked!"
+        user_id: 1,
+        gameTitle: "Counter-Strike",
+        description: "Ranked?"
       },
       {
-        gameTitle: "Destiny 2",
-        description: "Looking to raid!"
+        user_id: 2,
+        gameTitle: "Destiny",
+        description: "Looking to Raid",
       }
     ]
 
-    const createPosts = await Promise.all(posts.map(createPost))
+    const createdUsers = await Promise.all(users.map(createUser))
 
-    const createdUsers = await Promise.all(users.map(createUser));
-    
-    console.log(("Users being created"));
-    const allUsers = await getAllUsers();
-    console.log("Posts being created");
-    const allPosts = await getAllPosts();
-    console.log(allUsers);
-    console.log(allPosts);
+    const createPosts = await Promise.all(posts.map(createPost))
+    console.log('createdUsers :>> ', createdUsers);
+    console.log('createPosts :>> ', createPosts);
+    const allUsers = await getAllUsers()
+    const allPosts = await getAllPosts()
+    console.log('getAllUsers :>> ', allUsers);
+    console.log('getAllPosts :>> ', allPosts);
   } catch (err) {
     console.log(err)
   }
