@@ -9,6 +9,7 @@ async function dropTables() {
         await client.query(`
             DROP TABLE IF EXISTS comments;
             DROP TABLE IF EXISTS posts;
+            DROP TABLE IF EXISTS direct_messages;
             DROP TABLE IF EXISTS users;
         `)
         console.log("Finished dropping tables!")
@@ -31,14 +32,23 @@ async function createTables() {
 
             CREATE TABLE posts(
                 id SERIAL PRIMARY KEY,
+                user_id INT REFERENCES users(id),
                 "gameTitle" varchar(255) NOT NULL,
-                description varchar(255)
+                description text
             );
 
             CREATE TABLE comments(
               id SERIAL PRIMARY KEY,
               "postId" INTEGER REFERENCES posts(id),
               message text NOT NULL
+            );
+
+            CREATE TABLE direct_messages(
+              id SERIAL PRIMARY KEY,
+              sender_id INT NOT NULL,
+              recipient_id INT NOT NULL,
+              message_text TEXT NOT NULL,
+              sent_time TIMESTAMP DEFAULT NOW()
             );
 
         `)
@@ -101,25 +111,27 @@ async function populateInitialData() {
 
     const posts = [
       {
+        user_id: 1,
         gameTitle: "Counter Strike",
         description: "Looking to play ranked!"
       },
       {
+        user_id: 1,
         gameTitle: "Destiny 2",
         description: "Looking to raid!"
       }
     ]
 
     const createPosts = await Promise.all(posts.map(createPost))
-
+    console.log('createPosts :>> ', createPosts);
     const createdUsers = await Promise.all(users.map(createUser));
-    
-    console.log(("Users being created"));
-    const allUsers = await getAllUsers();
-    console.log("Posts being created");
-    const allPosts = await getAllPosts();
-    console.log(allUsers);
-    console.log(allPosts);
+    console.log('createdUsers :>> ', createdUsers);
+    // console.log(("Users being created"));
+    // const allUsers = await getAllUsers();
+    // console.log("Posts being created");
+    // const allPosts = await getAllPosts();
+    // console.log("ALL USERS ==> ", allUsers);
+    // console.log("ALL POSTS ==> ", allPosts);
   } catch (err) {
     console.log(err)
   }

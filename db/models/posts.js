@@ -12,17 +12,29 @@ async function getAllPosts() {
   
 }
 
-async function createPost({ gameTitle, description }) {
+async function getAllPostsAndUsers() {
+  try {
+    const { rows } = await client.query(`
+      SELECT posts.*, users.* FROM posts
+      JOIN users ON users.id = posts.user_id
+    `)
+    return rows
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function createPost( userId, gameTitle, description ) {
   try {
     const {
       rows: [post],
     } = await client.query(
       `
-          INSERT INTO posts ("gameTitle", description)
-          VALUES ($1, $2)
+          INSERT INTO posts(user_id, "gameTitle", description)
+          VALUES ($1, $2, $3)
           RETURNING *;
       `,
-      [gameTitle, description]
+      [userId, gameTitle, description]
     );
   
     return post;
@@ -116,5 +128,6 @@ module.exports = {
   deletePost,
   getCommentsByPostId,
   addMessageToComment,
-  getAllComments
+  getAllComments, 
+  getAllPostsAndUsers
 };
