@@ -7,7 +7,8 @@ const {
   editPost,
   deletePost, 
   getCommentsByPostId,
-  addMessageToComment
+  addMessageToComment,
+  getAllComments
 } = require("../db/models/posts");
 
 router.get("/", async (req, res, next) => {
@@ -48,6 +49,15 @@ router.delete("/:postId", async (req, res, next) => {
       next({ name, message });
     }
   });
+
+  router.get("/comments", async (req, res, next) => {
+    try {
+        const comments = await getAllComments();
+        res.send(comments)
+    } catch (err) {
+      console.log(err);
+    }
+  })
 
   router.get("/comments/:postId", async (req, res, next) => {
     try {

@@ -102,24 +102,12 @@ async function addMessageToComment(postId, message) {
   
 }
 
-// async function getCommentsByPostId(postId) {
-//   try {
-//     const { rows } = await client.query(`
-//     SELECT posts.*, comments.* FROM posts
-//     JOIN comments 
-//     ON posts.id = comments."postId"
-//     WHERE comments."postId" = $1
-//     RETURNING *;
-//   `, [postId])
-//     console.log(rows);
-//   return rows;
-//   } catch (err) {
-//     console.log(err);
-//   }
-  
-// }
-
-
+async function getAllComments() {
+  const { rows } = await client.query(`
+    SELECT * FROM comments
+  `)
+  return rows;
+}
 
 module.exports = {
   getAllPosts,
@@ -127,5 +115,6 @@ module.exports = {
   editPost,
   deletePost,
   getCommentsByPostId,
-  addMessageToComment
+  addMessageToComment,
+  getAllComments
 };
