@@ -112,20 +112,21 @@ async function populateInitialData() {
     const posts = [
       {
         user_id: 1,
-        gameTitle: "Counter Strike",
-        description: "Looking to play ranked!"
+        gameTitle: "Counter-Strike",
+        description: "Ranked?"
       },
       {
-        user_id: 1,
-        gameTitle: "Destiny 2",
-        description: "Looking to raid!"
+        user_id: 2,
+        gameTitle: "Destiny",
+        description: "Looking to Raid",
       }
     ]
 
+    const createdUsers = await Promise.all(users.map(createUser))
+
     const createPosts = await Promise.all(posts.map(createPost))
-    console.log('createPosts :>> ', createPosts);
-    const createdUsers = await Promise.all(users.map(createUser));
     console.log('createdUsers :>> ', createdUsers);
+    console.log('createPosts :>> ', createPosts);
     // console.log(("Users being created"));
     // const allUsers = await getAllUsers();
     // console.log("Posts being created");
