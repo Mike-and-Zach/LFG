@@ -6,17 +6,17 @@ const Post = ({posts}) => {
     const [showTextBox, setShowTextBox] = useState(false)
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
-
     const dateNow = new Date();
     const year = dateNow.getFullYear();
     const month = dateNow.getMonth() + 1; // add 1 because getMonth() returns zero-based month
     const day = dateNow.getDate();
     const date = `${month}-${day}-${year}`
-
     const timeNow = new Date();
     const hours = timeNow.getHours();
     const minutes = timeNow.getMinutes();
     const time = `${hours}:${minutes}`
+
+    console.log('posts :>> ', posts);
 function convertMilitaryToStandardTime(militaryTime) {
     // Extract hours and minutes from militaryTime
     const hours = parseInt(militaryTime.substring(0, 2));
@@ -50,7 +50,6 @@ function convertMilitaryToStandardTime(militaryTime) {
                 path: "/posts/comments"
             })
             setAllComments(data)
-            console.log('data :>> ', data);
         } catch (err) {
             console.log(err);
         }
@@ -64,7 +63,7 @@ function convertMilitaryToStandardTime(militaryTime) {
                 await callApi({
                 method: "POST",
                 path: `/posts/comments/${postId}`,
-                body: { message: comment}
+                body: {message: comment}
             })
         } catch (err) {
             console.log(err);
@@ -77,6 +76,7 @@ function convertMilitaryToStandardTime(militaryTime) {
             {posts.slice(0).reverse().map(post => {
                 return (
                     <div key={post.id}>
+                        <h4>user: {post.username}</h4>
                         <h4>Game:</h4>
                         <p>{post.gameTitle}</p>
                         <h4>Description:</h4>

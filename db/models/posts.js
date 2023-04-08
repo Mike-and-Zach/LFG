@@ -24,7 +24,7 @@ async function getAllPostsAndUsers() {
   }
 }
 
-async function createPost( userId, gameTitle, description ) {
+async function createPost( {user_id, gameTitle, description} ) {
   try {
     const {
       rows: [post],
@@ -34,7 +34,7 @@ async function createPost( userId, gameTitle, description ) {
           VALUES ($1, $2, $3)
           RETURNING *;
       `,
-      [userId, gameTitle, description]
+      [user_id, gameTitle, description]
     );
   
     return post;

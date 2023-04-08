@@ -5,8 +5,6 @@ const jwt = require("jsonwebtoken")
 const { createUser, getAllUsers, getUserByEmail, validateAndGetUser } = require("../db/models/user");
 
 router.post("/register", async (req, res, next) => {
-    console.log("process.env ==> ", process.env.JWT_SECRET);
-    console.log("req.body ==> ", req.body);
     try {
         const userExists = await getUserByEmail(req.body.email);
         if (userExists) {
@@ -70,8 +68,7 @@ router.post("/login", async (req, res, next) => {
             res.send({
                 message: "You're logged in",
                 token,
-                user
-            })
+                user })
         }
     } catch ({name, message}) {
         next({name, message})

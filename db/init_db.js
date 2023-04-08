@@ -107,7 +107,7 @@ async function populateInitialData() {
         password: "maxyspassword"
 
       }
-    ]
+    ];
 
     const posts = [
       {
@@ -127,12 +127,10 @@ async function populateInitialData() {
     const createPosts = await Promise.all(posts.map(createPost))
     console.log('createdUsers :>> ', createdUsers);
     console.log('createPosts :>> ', createPosts);
-    // console.log(("Users being created"));
-    // const allUsers = await getAllUsers();
-    // console.log("Posts being created");
-    // const allPosts = await getAllPosts();
-    // console.log("ALL USERS ==> ", allUsers);
-    // console.log("ALL POSTS ==> ", allPosts);
+    const allUsers = await getAllUsers()
+    const allPosts = await getAllPosts()
+    console.log('getAllUsers :>> ', allUsers);
+    console.log('getAllPosts :>> ', allPosts);
   } catch (err) {
     console.log(err)
   }
