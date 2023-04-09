@@ -40,7 +40,7 @@ const Posts = ({token}) => {
 
     const makePost = () => {
         return (
-            <div>
+            <div className="create-post">
                 <form>
                     <label htmlFor="gameTitle">Choose your game: </label> <br />
                     <select name="games" id="gameTitle" onChange={e => {setGameTitle(e.target.value)}}>
@@ -57,23 +57,21 @@ const Posts = ({token}) => {
                     </select> <br />
                     <label htmlFor="description">Description: </label> <br />
                     <input type="text" id="description" onChange={e => {setDescription(e.target.value)}}/> <br /> <br />
+                    <button onClick={() => setShowMakePost(false)}>Close</button>
                     <input type="submit" value="Create Post!" onClick={() => handleMakePost()}/>
                 </form>
             </div>
         )
     }
 
-    const makePostButton = () => {
-        return (
-            <button onClick={() => setShowMakePost(!showMakePost)}>Make Post</button>
-        )
-    }
-
     return (
-        <div>
-            <h1>Posts</h1>
+        <div className="posts">
+            <div className="create-post-btn-and-header">
+            <p className="posts-header">Posts</p> <br />
             {showMakePost && makePost()}
-            {!showMakePost && makePostButton()}
+            {!showMakePost && <button className="create-post-btn" onClick={() => setShowMakePost(!showMakePost)}>Create Post</button>}
+            </div>
+            
             <div>
                 {<Post posts={posts} token={token}/>}
             </div>

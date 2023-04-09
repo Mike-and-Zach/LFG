@@ -34,6 +34,8 @@ const postsRouter = require("./posts")
 router.use("/posts", postsRouter)
 const directMessage = require("./inbox")
 router.use("/direct_message", directMessage)
+const comments = require("./comments");
+router.use("/comments", comments);
 
 
 module.exports = router

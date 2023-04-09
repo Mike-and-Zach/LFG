@@ -83,18 +83,6 @@ async function createTables() {
 //   } 
 // }
 
-// async function createUser({username, email, password}) {
-//   // const hashedPassword = await bcrypt.hash(password, 10);
-
-//   const { rows: [user] } = await client.query(`
-//       INSERT INTO users (username, email, password)
-//       VALUES ($1, $2, $3)
-//       RETURNING *;
-//   `, [username, email, password])
-//   delete user.password;
-//   return user;
-// }
-
 async function populateInitialData() {
   try {
     const users = [

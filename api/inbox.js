@@ -6,7 +6,7 @@ router.post("/:senderId/:recipientId", async (req, res, next) => {
     try {
         const senderId = req.params.senderId;
         const recipientId = req.params.recipientId;
-        const {message} = req.body
+        const { message } = req.body
         const directMessage = await sendDirectMessage(senderId, recipientId, message)
         res.send(directMessage)
     } catch (err) {

@@ -6,9 +6,6 @@ const {
   createPost,
   editPost,
   deletePost,
-  getCommentsByPostId,
-  addMessageToComment,
-  getAllComments,
   getAllPostsAndUsers
 } = require("../db/models/posts");
 
@@ -53,35 +50,6 @@ router.delete("/:postId", async (req, res, next) => {
     }
   });
 
-  router.get("/comments", async (req, res, next) => {
-    try {
-        const comments = await getAllComments();
-        res.send(comments)
-    } catch (err) {
-      console.log(err);
-    }
-  })
-
-  router.get("/comments/:postId", async (req, res, next) => {
-    try {
-      const postId = req.params.postId
-      const postComments = await getCommentsByPostId(postId)
-      res.send(postComments)
-    } catch ({name, message}) {
-        next({name, message})
-    }
-  })
-
-  router.post("/comments/:postId", async (req, res, next) => {
-    try {
-      const postId = req.params.postId;
-      const { username_comment, message } = req.body;
-      const userMessage = await addMessageToComment(postId, username_comment, message);
-      console.log('userMessage :>> ', userMessage);
-      res.send(userMessage)
-    } catch ({name, message}) {
-      next({name, message})
-    }
-  })
+  
 
 module.exports = router;

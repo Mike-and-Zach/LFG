@@ -3,7 +3,7 @@ import { callApi } from "../api/utils";
 import moment from "moment"
 
 const Post = ({posts, token}) => {
-    const [showTextBox, setShowTextBox] = useState(false)
+
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
     const dateNow = new Date();
@@ -49,7 +49,7 @@ function convertMilitaryToStandardTime(militaryTime) {
     const fetchAllComments = async () => {
         try {
             const data = await callApi({
-                path: "/posts/comments"
+                path: "/comments"
             })
             setAllComments(data)
         } catch (err) {
@@ -65,7 +65,7 @@ function convertMilitaryToStandardTime(militaryTime) {
         try {
                 await callApi({
                 method: "POST",
-                path: `/posts/comments/${postId}`,
+                path: `/comments/${postId}`,
                 body: {username_comment: username, message: comment}
             })
         } catch (err) {
@@ -78,8 +78,9 @@ function convertMilitaryToStandardTime(militaryTime) {
         <div>
             {posts.slice(0).reverse().map(post => {
                 return (
-                    <div key={post.id}>
+                    <div key={post.id} className="post">
                         <h4>user: {post.username_of_post}</h4>
+                        <button>Message User</button>
                         <h4>Game:</h4>
                         <p>{post.gameTitle}</p>
                         <h4>Description:</h4>
@@ -94,11 +95,10 @@ function convertMilitaryToStandardTime(militaryTime) {
                                 </div>
                             )
                         }))}
-                        {showTextBox && 
                         <form>
                             <input type="text" onChange={e => {setComment(e.target.value)}}/> <br />
                             <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)}/>
-                        </form>} <br />
+                        </form> <br />
                         <button onClick={() => setShowTextBox(!showTextBox)}>Comment</button>
                         <hr />
                     </div>
@@ -109,3 +109,4 @@ function convertMilitaryToStandardTime(militaryTime) {
 }
 
 export default Post
+
