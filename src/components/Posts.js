@@ -1,7 +1,7 @@
 import { callApi } from "../api/utils"
 import { useState, useEffect } from "react"
 import Post from "./Post"
-const Posts = () => {
+const Posts = ({token}) => {
     const [posts, setPosts ] = useState([]);
     const [showMakePost, setShowMakePost] = useState(false);
     const [gameTitle, setGameTitle] = useState("");
@@ -17,6 +17,8 @@ const Posts = () => {
         }
     }
 
+    const username = localStorage.getItem("username")
+
     useEffect(() => {
         fetchPosts()
     }, [])
@@ -27,7 +29,7 @@ const Posts = () => {
             const data = await callApi({
                 method: "POST",
                 path: `/posts/${userId}`,
-                body: {gameTitle, description}
+                body: {username_of_post: username, gameTitle, description}
             })
             console.log('makePostData :>> ', data);
         } catch (err) {
@@ -73,7 +75,7 @@ const Posts = () => {
             {showMakePost && makePost()}
             {!showMakePost && makePostButton()}
             <div>
-                {<Post posts={posts}/>}
+                {<Post posts={posts} token={token}/>}
             </div>
         </div>
     )

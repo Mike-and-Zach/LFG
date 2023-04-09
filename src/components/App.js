@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 const App = () => {
-    const [token, setToken] = useState(window.localStorage.getItem("token") || "");
+    const [token, setToken] = useState(localStorage.getItem("token") || "");
     console.log("token ==>", token);
     const navigate = useNavigate();
     useEffect(() => {
-        window.localStorage.setItem("token", token)
+        localStorage.setItem("token", token)
     }, [])
 
     
@@ -22,9 +22,9 @@ const App = () => {
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
          <Link to="/login" onClick={() => {
-            window.localStorage.removeItem("token");
-            window.localStorage.removeItem("username");
-            window.localStorage.removeItem("userId");
+            localStorage.removeItem("token");
+            localStorage.removeItem("username");
+            localStorage.removeItem("userId");
             navigate("/login")
             swal({
                 text: "Thank you for visiting!"
@@ -33,7 +33,7 @@ const App = () => {
        }}>Logout</Link>
         
        <Routes>
-        <Route path="/posts" element={<Posts />}></Route>
+        <Route path="/posts" element={<Posts token={token}/>}></Route>
         <Route path="/register" element={<Register token={token} setToken={setToken} />}></Route>
         <Route path="/login" element={<Login setToken={setToken}/>}></Route>
        </Routes>

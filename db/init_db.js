@@ -33,6 +33,7 @@ async function createTables() {
             CREATE TABLE posts(
                 id SERIAL PRIMARY KEY,
                 user_id INT REFERENCES users(id),
+                username_of_post varchar(255) REFERENCES users(username),
                 "gameTitle" varchar(255) NOT NULL,
                 description text
             );
@@ -40,6 +41,7 @@ async function createTables() {
             CREATE TABLE comments(
               id SERIAL PRIMARY KEY,
               "postId" INTEGER REFERENCES posts(id),
+              username_comment varchar(255) REFERENCES users(username),
               message text NOT NULL
             );
 
@@ -112,11 +114,13 @@ async function populateInitialData() {
     const posts = [
       {
         user_id: 1,
+        username_of_post: "johndoe",
         gameTitle: "Counter-Strike",
         description: "Ranked?"
       },
       {
         user_id: 2,
+        username_of_post: "maxy",
         gameTitle: "Destiny",
         description: "Looking to Raid",
       }

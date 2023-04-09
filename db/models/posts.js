@@ -24,17 +24,17 @@ async function getAllPostsAndUsers() {
   }
 }
 
-async function createPost( {user_id, gameTitle, description} ) {
+async function createPost( {user_id, username_of_post, gameTitle, description} ) {
   try {
     const {
       rows: [post],
     } = await client.query(
       `
-          INSERT INTO posts(user_id, "gameTitle", description)
-          VALUES ($1, $2, $3)
+          INSERT INTO posts(user_id, username_of_post, "gameTitle", description)
+          VALUES ($1, $2, $3, $4)
           RETURNING *;
       `,
-      [user_id, gameTitle, description]
+      [user_id, username_of_post, gameTitle, description]
     );
   
     return post;
@@ -99,13 +99,13 @@ async function getCommentsByPostId(postId) {
   }
 }
 
-async function addMessageToComment(postId, message) {
+async function addMessageToComment(postId, username_comment, message) {
   try {
     const { rows: [userComment] } = await client.query(`
-    INSERT INTO comments("postId", message)
-    VALUES($1, $2)
+    INSERT INTO comments("postId", username_comment, message)
+    VALUES($1, $2, $3)
     RETURNING *;
-  `, [postId, message])
+  `, [postId, username_comment, message])
     console.log('userComment :>> ', userComment);
   return userComment
   } catch (err) {

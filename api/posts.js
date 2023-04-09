@@ -24,9 +24,9 @@ router.get("/", async (req, res, next) => {
 
 router.post("/:userId", async (req, res, next) => {
   try {
-    const { gameTitle, description } = req.body;
+    const { username_of_post, gameTitle, description } = req.body;
     const userId = req.params.userId
-    const createdPost = await createPost( {user_id: userId, gameTitle, description });
+    const createdPost = await createPost( {user_id: userId, username_of_post, gameTitle, description });
     res.send(createdPost);
   } catch ({ name, message }) {
     next({ name, message });
@@ -75,8 +75,8 @@ router.delete("/:postId", async (req, res, next) => {
   router.post("/comments/:postId", async (req, res, next) => {
     try {
       const postId = req.params.postId;
-      const { message } = req.body
-      const userMessage = await addMessageToComment(postId, message);
+      const { username_comment, message } = req.body;
+      const userMessage = await addMessageToComment(postId, username_comment, message);
       console.log('userMessage :>> ', userMessage);
       res.send(userMessage)
     } catch ({name, message}) {

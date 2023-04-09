@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { callApi } from "../api/utils";
 import moment from "moment"
 
-const Post = ({posts}) => {
+const Post = ({posts, token}) => {
     const [showTextBox, setShowTextBox] = useState(false)
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
@@ -16,7 +16,9 @@ const Post = ({posts}) => {
     const minutes = timeNow.getMinutes();
     const time = `${hours}:${minutes}`
 
-    console.log('posts :>> ', posts);
+    const username = localStorage.getItem("username");
+    console.log('username :>> ', username);
+
 function convertMilitaryToStandardTime(militaryTime) {
     // Extract hours and minutes from militaryTime
     const hours = parseInt(militaryTime.substring(0, 2));
@@ -59,11 +61,12 @@ function convertMilitaryToStandardTime(militaryTime) {
     }, [])
 
     const handleCommentSubmit = async (postId) => {
+        console.log('postId :>> ', postId);
         try {
                 await callApi({
                 method: "POST",
                 path: `/posts/comments/${postId}`,
-                body: {message: comment}
+                body: {username_comment: username, message: comment}
             })
         } catch (err) {
             console.log(err);
@@ -76,7 +79,7 @@ function convertMilitaryToStandardTime(militaryTime) {
             {posts.slice(0).reverse().map(post => {
                 return (
                     <div key={post.id}>
-                        <h4>user: {post.username}</h4>
+                        <h4>user: {post.username_of_post}</h4>
                         <h4>Game:</h4>
                         <p>{post.gameTitle}</p>
                         <h4>Description:</h4>
@@ -85,6 +88,7 @@ function convertMilitaryToStandardTime(militaryTime) {
                         {allComments.filter(comment => comment.postId === post.id).reverse().map((comment => {
                             return (
                                 <div key={comment.id}>
+                                    <p>user: {comment.username_comment}</p>
                                     <p>{comment.message}</p>
                                     <span>{moment().format('MMMM Do YYYY, h:mm:ss a')}</span>
                                 </div>
