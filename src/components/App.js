@@ -36,6 +36,7 @@ const App = () => {
                         localStorage.removeItem("token");
                         localStorage.removeItem("username");
                         localStorage.removeItem("userId");
+                        setToken("")
                     navigate("/login")
                     swal({
                         text: "Thank you for visiting!"
@@ -45,10 +46,10 @@ const App = () => {
             </div>
         </div>
        <Routes>
-        <Route path="/posts" element={<Posts token={token}/>}></Route>
+        <Route path="/posts" element={<Posts token={token} />}></Route>
         <Route path="/register" element={<Register token={token} setToken={setToken} />}></Route>
-        <Route path="/login" element={<Login setToken={setToken}/>}></Route>
-        <Route path="/inbox" element={<Inbox />}></Route>
+        <Route path="/login" element={<Login setToken={setToken} />}></Route>
+        <Route path="/inbox" element={<Inbox token={token}/>}></Route>
        </Routes>
     </div>
     )

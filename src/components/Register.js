@@ -24,7 +24,7 @@ const Register = ({ setToken }) => {
                 console.log('RegisterData :>> ', data);
                 window.localStorage.setItem("username", data.user.username);
                 window.localStorage.setItem("userId", data.user.id);
-                // window.localStorage.setItem("token", data.token);
+                window.localStorage.setItem("token", data.token);
                 setToken(data.token)
                 navigate("/posts")
             } else {

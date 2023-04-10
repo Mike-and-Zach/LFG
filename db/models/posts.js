@@ -16,7 +16,7 @@ async function getAllPostsAndUsers() {
   try {
     const { rows } = await client.query(`
       SELECT posts.*, users.* FROM posts
-      JOIN users ON users.id = posts.user_id
+      JOIN users ON users.id = posts."userId"
     `)
     return rows
   } catch (err) {
@@ -24,17 +24,17 @@ async function getAllPostsAndUsers() {
   }
 }
 
-async function createPost( {user_id, username_of_post, gameTitle, description} ) {
+async function createPost( {userId, username_of_post, gameTitle, description} ) {
   try {
     const {
       rows: [post],
     } = await client.query(
       `
-          INSERT INTO posts(user_id, username_of_post, "gameTitle", description)
+          INSERT INTO posts("userId", username_of_post, "gameTitle", description)
           VALUES ($1, $2, $3, $4)
           RETURNING *;
       `,
-      [user_id, username_of_post, gameTitle, description]
+      [userId, username_of_post, gameTitle, description]
     );
   
     return post;

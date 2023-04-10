@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { callApi } from "../api/utils";
 import moment from "moment"
 
-const Post = ({posts, setPosts, token, forceUpdate}) => {
+const Post = ({posts, setPosts, token}) => {
 
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
@@ -17,7 +17,9 @@ const Post = ({posts, setPosts, token, forceUpdate}) => {
     const time = `${hours}:${minutes}`
 
     const username = localStorage.getItem("username");
-    console.log('username :>> ', username);
+    const userId = localStorage.getItem("userId")
+    console.log('userId :>> ', userId);
+    console.log('posts :>> ', posts);
 
 function convertMilitaryToStandardTime(militaryTime) {
     // Extract hours and minutes from militaryTime
@@ -120,7 +122,7 @@ function convertMilitaryToStandardTime(militaryTime) {
                             <input type="text" onChange={e => {setComment(e.target.value)}}/> <br />
                             <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)} className="add-comment-btn"/>
                         </form> <br />
-                        <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)}>DELETE POST</button>
+                        {post.userId == userId && <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)}>DELETE POST</button>}
                         <hr />
                     </div>
                 )
