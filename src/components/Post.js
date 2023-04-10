@@ -6,6 +6,8 @@ const Post = ({posts, setPosts, token}) => {
 
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
+    const [showMessageForm, setShowMessageForm] = useState(false)
+    const [directMessage, setDirectMessage] = useState("");
     const dateNow = new Date();
     const year = dateNow.getFullYear();
     const month = dateNow.getMonth() + 1; // add 1 because getMonth() returns zero-based month
@@ -18,7 +20,6 @@ const Post = ({posts, setPosts, token}) => {
 
     const username = localStorage.getItem("username");
     const userId = localStorage.getItem("userId")
-    console.log('userId :>> ', userId);
     console.log('posts :>> ', posts);
 
 function convertMilitaryToStandardTime(militaryTime) {
@@ -87,17 +88,27 @@ function convertMilitaryToStandardTime(militaryTime) {
             console.log(err);
         }
     }
+
+    const sendDirectMessage = async (recipientId, recipientUsername) => {
+        try {
+            const data = callApi({
+                method: "POST",
+                path: `/direct_message/${recipientId}`,
+                body: {message_text: directMessage, recipient_username: recipientUsername},
+                token
+            })
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
     
     return (
         <div>
             {posts.slice(0).reverse().map(post => {
                 return (
                     <div key={post.id} className="post">
-                        <div className="created-post-user">
-                            <h4 className="post-headers">Posted By: </h4>
-                            <p className="user-of-post">{post.username_of_post}</p>
-                        </div>
-                        <button className="message-user-btn">Message User</button>
+                        
                         <div className="game-title-container">
                             <h4>Game:</h4>
                             <p className="game-title">{post.gameTitle}</p>
@@ -122,7 +133,20 @@ function convertMilitaryToStandardTime(militaryTime) {
                             <input type="text" onChange={e => {setComment(e.target.value)}}/> <br />
                             <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)} className="add-comment-btn"/>
                         </form> <br />
-                        {post.userId == userId && <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)}>DELETE POST</button>}
+                        <div className="created-post-user">
+                            <h4 className="post-headers">Posted By: </h4>
+                            <p className="user-of-post">{post.username_of_post}</p>
+                        </div>
+                        <div>
+                            {showMessageForm && <form>
+                                <input type="text" onChange={e => setDirectMessage(e.target.value)}/>
+                                <input type="submit" value="send" onClick={() => {sendDirectMessage(post.userId, post["username_of_post"])}}/>
+                            </form>}
+                        </div>
+                        {post.userId != userId && <button className="message-user-btn" onClick={() => setShowMessageForm(!showMessageForm)}>Message User</button>}
+                        <div className="delete-post-btn-container">
+                            {post.userId == userId && <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)}>DELETE POST</button>}
+                        </div>
                         <hr />
                     </div>
                 )

@@ -257,3 +257,10 @@ select {
 .delete-post-btn {
     width: 15vh;
 }
+.delete-post-btn-container {
+    /* padding-bottom: 40px; */
+}
+
+hr {
+    margin-top: 40px;
+}

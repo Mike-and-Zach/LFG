@@ -4,13 +4,12 @@ import { callApi } from "../api/utils";
 
 const Inbox = ({token}) => {
     const [userInbox, setUserInbox] = useState([]);
-    const userId = localStorage.getItem("userId")
 
     console.log('userInbox :>> ', userInbox);
     const fetchUserInbox = async () => {
         try {
             const data = await callApi({
-                path:`/direct_message/user_inbox/${userId}`,
+                path:"/direct_message/user_inbox",
                 token
             })
             setUserInbox(data)
@@ -27,7 +26,10 @@ const Inbox = ({token}) => {
             <h3>Messages:</h3>
             {userInbox.map(message => {
                 return (
-                    <div></div>
+                    <div key={message.id}>
+                        <p>Sender: {message["sender_username"]}</p>
+                        <p>{message["message_text"]}</p>
+                    </div>
                 )
             })}
             <hr />

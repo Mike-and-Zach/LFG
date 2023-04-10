@@ -7,8 +7,8 @@ router.get("/user_inbox", async (req, res, next) => {
         const userId = req.user.id;
         const inbox = await getUserInboxById(userId)
         res.send(inbox)
-    } catch (err) {
-        next(console.log(err))
+    } catch ({name, message}) {
+        next({name, message})
     }
 })
 
@@ -17,12 +17,11 @@ router.post("/:recipientId", async (req, res, next) => {
         const {recipientId} = req.params
         const senderId = req.user.id
         const sender_username = req.user.username
-        console.log('senderId :>> ', typeof(senderId));
         const { message_text, recipient_username } = req.body
         const directMessage = await sendDirectMessage(senderId, sender_username, recipient_username, recipientId, message_text)
         res.send(directMessage)
-    } catch (err) {
-        next(console.log(err))
+    } catch ({name, message}) {
+        next(console.log({name, message}))
         
     }
 })
