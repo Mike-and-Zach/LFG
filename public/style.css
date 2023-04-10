@@ -16,6 +16,7 @@
     justify-content: space-between;
     padding-bottom: 20px;
     background-color: rgba(73, 67, 67, 0.513);
+    border-bottom: 3px solid white;
 }
 
 .navbar {
@@ -55,6 +56,7 @@ a {
     color: white;
     padding: 4px;
     border-radius: 5px;
+    border: 1px solid white;
 }
 
 .navbar-links {
@@ -116,6 +118,11 @@ span {
     padding-left: 20px;
 }
 
+.post {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
 .create-post-btn-and-header {
     display: flex;
     flex-direction: column;
@@ -126,9 +133,127 @@ span {
     align-self: center;
     width: 15vh;
     height: 5vh;
+    background-color: rgb(18, 107, 18);
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+.create-post-btn:hover {
+    background-color: rgba(9, 118, 34, 0.531);
+    cursor: pointer;
 }
 
 .create-post {
     display: flex;
     justify-content: center;
+    padding-bottom: 20px;
+}
+
+select {
+    width: 100%;
+    padding: 5px;
+}
+
+.close-btn {
+    color: white;
+    background-color: red;
+    padding: 4px;
+    border-radius: 5px;
+    margin-right: 5vh;
+    width: 7vh;
+    cursor: pointer;
+}
+
+.description-text {
+    padding: 10px;
+    height: 60px;
+    width: 100%;
+}
+
+.submit-post-btn {
+    background-color: green;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    width: 10vh;
+    cursor: pointer;
+    border: 1px solid white
+}
+
+.message-user-btn {
+    background-color: green;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    width: 15vh;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+.created-post-user {
+    display: flex;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.user-of-post {
+    padding-left: 15px;
+    color: red;
+}
+
+.game-title-container {
+    display: flex;
+    padding-top: 25px;
+    padding-bottom: 10px;
+}
+
+.game-title {
+    padding-left: 10px;
+    color: red;
+}
+
+.game-description {
+    width: 30%;
+    margin-top: 15px;
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 15px;
+    color: red;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.comments-container {
+    padding-bottom: 10px;
+}
+
+.comment-user {
+    padding-bottom: 4px;
+}
+
+.comment-time {
+    padding-bottom: 20px;
+    font-size: 10px;
+}
+
+.comments-header {
+    padding-bottom: 10px;
+}
+
+.ind-comment-container {
+    padding-bottom: 10px;
+}
+
+.add-comment-btn {
+    background-color: green;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid white
+}
+
+.delete-post-btn {
+    width: 15vh;
 }

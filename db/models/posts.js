@@ -41,17 +41,20 @@ async function createPost( {user_id, username_of_post, gameTitle, description} )
   } catch (err) {
     console.log(err);
   }
-  
 }
+
+
 
 async function deletePost(id) {
   try {
     const {
-      rows: [post], // you dont need to make these variabes if you arnt using them
+      rows: post, // you dont need to make these variabes if you arnt using them
     } = await client.query(`
       DELETE FROM posts
-      WHERE id=${id};
-      `);
+      WHERE id= $1
+      RETURNING *;
+      `, [id]);
+      return post
   } catch (err) {
     console.log(err);
   }

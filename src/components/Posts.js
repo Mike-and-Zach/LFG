@@ -42,7 +42,7 @@ const Posts = ({token}) => {
         return (
             <div className="create-post">
                 <form>
-                    <label htmlFor="gameTitle">Choose your game: </label> <br />
+                    <label htmlFor="gameTitle"></label> <br />
                     <select name="games" id="gameTitle" onChange={e => {setGameTitle(e.target.value)}}>
                         <option disabled selected value>-- Choose a game --</option>
                         <option value="COD">COD</option>
@@ -51,14 +51,14 @@ const Posts = ({token}) => {
                         <option value="Counter-Strike 2">Counter-Strike 2</option>
                         <option value="Destiny">Destiny</option>
                         <option value="Valorant">Valorant</option>
-                        <option value="RB6">RB6</option>
+                        <option value="Rainbow Six Siege">RB6</option>
                         <option value="GTA6">GTA6</option>
                         <option value="League of Legends">League of Legends</option>
                     </select> <br />
                     <label htmlFor="description">Description: </label> <br />
-                    <input type="text" id="description" onChange={e => {setDescription(e.target.value)}}/> <br /> <br />
-                    <button onClick={() => setShowMakePost(false)}>Close</button>
-                    <input type="submit" value="Create Post!" onClick={() => handleMakePost()}/>
+                    <input type="text" id="description" className="description-text" onChange={e => {setDescription(e.target.value)}}/> <br /> <br />
+                    <button onClick={() => setShowMakePost(false)} className="close-btn">Close</button>
+                    <input type="submit" value="Sumbit" onClick={() => handleMakePost()} className="submit-post-btn"/>
                 </form>
             </div>
         )
@@ -69,11 +69,11 @@ const Posts = ({token}) => {
             <div className="create-post-btn-and-header">
             <p className="posts-header">Posts</p> <br />
             {showMakePost && makePost()}
-            {!showMakePost && <button className="create-post-btn" onClick={() => setShowMakePost(!showMakePost)}>Create Post</button>}
+            <button className="create-post-btn" onClick={() => setShowMakePost(!showMakePost)}>Create Post</button>
             </div>
             
             <div>
-                {<Post posts={posts} token={token}/>}
+                {<Post posts={posts} setPosts={setPosts} token={token} />}
             </div>
         </div>
     )

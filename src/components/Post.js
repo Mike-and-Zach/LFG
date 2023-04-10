@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { callApi } from "../api/utils";
 import moment from "moment"
 
-const Post = ({posts, token}) => {
+const Post = ({posts, setPosts, token, forceUpdate}) => {
 
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
@@ -72,34 +72,55 @@ function convertMilitaryToStandardTime(militaryTime) {
             console.log(err);
         }
     }
-    
 
+    const handleDeletePost = async (postId) => {
+        try {
+            const data = callApi({
+                method: "DELETE",
+                path: `/posts/${postId}`
+            })
+
+            setPosts(prev => prev.filter(post => postId !== post.id))
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    
     return (
         <div>
             {posts.slice(0).reverse().map(post => {
                 return (
                     <div key={post.id} className="post">
-                        <h4>user: {post.username_of_post}</h4>
-                        <button>Message User</button>
-                        <h4>Game:</h4>
-                        <p>{post.gameTitle}</p>
-                        <h4>Description:</h4>
-                        <p>{post.description}</p>
-                        <h4>Comments:</h4>
-                        {allComments.filter(comment => comment.postId === post.id).reverse().map((comment => {
-                            return (
-                                <div key={comment.id}>
-                                    <p>user: {comment.username_comment}</p>
-                                    <p>{comment.message}</p>
-                                    <span>{moment().format('MMMM Do YYYY, h:mm:ss a')}</span>
-                                </div>
-                            )
-                        }))}
+                        <div className="created-post-user">
+                            <h4 className="post-headers">Posted By: </h4>
+                            <p className="user-of-post">{post.username_of_post}</p>
+                        </div>
+                        <button className="message-user-btn">Message User</button>
+                        <div className="game-title-container">
+                            <h4>Game:</h4>
+                            <p className="game-title">{post.gameTitle}</p>
+                        </div>
+                        <div className="description-container">
+                            <h4>Description:</h4>
+                            <p className="game-description">{post.description}</p>
+                        </div>
+                        <div className="comments-container">
+                            <h4 className="comments-header">Comments:</h4>
+                            {allComments.filter(comment => comment.postId === post.id).reverse().map((comment => {
+                                return (
+                                    <div key={comment.id} className="ind-comment-container">
+                                        <p className="comment-user">{comment.username_comment}</p>
+                                        <p className="comment-message">- {comment.message}</p>
+                                        <span className="comment-time">{moment().format('MMMM Do YYYY, h:mm a')}</span>
+                                    </div>
+                                )
+                            }))}
+                        </div>
                         <form>
                             <input type="text" onChange={e => {setComment(e.target.value)}}/> <br />
-                            <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)}/>
+                            <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)} className="add-comment-btn"/>
                         </form> <br />
-                        <button onClick={() => setShowTextBox(!showTextBox)}>Comment</button>
+                        <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)}>DELETE POST</button>
                         <hr />
                     </div>
                 )

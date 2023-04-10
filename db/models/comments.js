@@ -35,8 +35,18 @@ async function getCommentsByPostId(postId) {
     return rows;
   }
 
+  async function deleteComment(commentId) {
+    const { rows: [comment] } = await client.query(`
+      DELETE FROM comments
+      WHERE id = $1
+      RETURNING *;
+    `,[commentId])
+    return comment
+  }
+
   module.exports = {
     getAllComments,
     addMessageToComment,
-    getCommentsByPostId
+    getCommentsByPostId,
+    deleteComment
   }

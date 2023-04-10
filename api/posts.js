@@ -5,9 +5,9 @@ const {
   getAllPosts,
   createPost,
   editPost,
-  deletePost,
-  getAllPostsAndUsers
+  deletePost
 } = require("../db/models/posts");
+const { getAllComments, deleteComment } = require("../db/models/comments");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -33,6 +33,13 @@ router.post("/:userId", async (req, res, next) => {
 router.delete("/:postId", async (req, res, next) => {
     try {
       const postId = req.params.postId;
+      // const deletedPost = await deletePost(postId);
+      const allComments = await getAllComments();
+      
+      const postComments = allComments.filter(comment => comment.postId == postId);
+      Promise.all(postComments.map(async comment => {
+        return await deleteComment(comment.id)
+      }))
       const deletedPost = await deletePost(postId);
       res.send(deletedPost);
     } catch ({ name, message }) {
