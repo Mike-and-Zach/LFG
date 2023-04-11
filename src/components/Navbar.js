@@ -1,6 +1,7 @@
 import { useNavigate, Link} from "react-router-dom";
 
-const Navbar = ({setToken, username}) => {
+const Navbar = ({setToken}) => {
+    const username = localStorage.getItem("username")
     const navigate = useNavigate();
     return (
     <div className="navbar-container">

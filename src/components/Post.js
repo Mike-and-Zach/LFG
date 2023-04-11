@@ -118,7 +118,6 @@ function convertMilitaryToStandardTime(militaryTime) {
                             <p className="game-title">{post.gameTitle}</p>
                         </div>
                         <div className="description-container">
-                            <h4>Description:</h4>
                             <p className="game-description">{post.description}</p>
                         </div>
                         <div className="comments-container">
@@ -126,9 +125,11 @@ function convertMilitaryToStandardTime(militaryTime) {
                             {allComments.filter(comment => comment.postId === post.id).reverse().map((comment => {
                                 return (
                                     <div key={comment.id} className="ind-comment-container">
-                                        <p className="comment-user">{comment.username_comment}</p>
-                                        <p className="comment-message">- {comment.message}</p>
-                                        <span className="comment-time">{moment().format('MMMM Do YYYY, h:mm a')}</span>
+                                        <p className="comment-message">{comment.message}</p>
+                                        <div className="comment-username-and-time">
+                                            <p className="comment-user">- {comment.username_comment}</p>
+                                            <span className="comment-time">{moment().format('MMMM Do YYYY, h:mm a')}</span>
+                                        </div>
                                     </div>
                                 )
                             }))}

@@ -13,7 +13,6 @@ import Sidebar from "./Sidebar";
 const App = () => {
     const [token, setToken] = useState(localStorage.getItem("token") || "");
     console.log("token ==>", token);
-    const username = localStorage.getItem("username")
     const navigate = useNavigate();
     useEffect(() => {
         localStorage.setItem("token", token)
@@ -23,17 +22,26 @@ const App = () => {
 
     return (
     <div className="app-container">
-        <Navbar setToken={setToken} username={username}/>
-        <Sidebar />
-       <Routes>
+        <Navbar /*setToken={setToken} username={username}*//>
+        <div className="whole">
+        <Sidebar /> 
+        <Routes>
             <Route path="/posts" element={<Posts token={token} />}></Route>
             <Route path="/register" element={<Register token={token} setToken={setToken} />}></Route>
             <Route path="/login" element={<Login setToken={setToken} />}></Route>
             <Route path="/inbox" element={<Inbox token={token}/>}></Route>
-       </Routes>
+        </Routes>
+        
+        </div>
+        
+       
     </div>
+
+    
     )
+    
 }
+
 
 
 export default App;
