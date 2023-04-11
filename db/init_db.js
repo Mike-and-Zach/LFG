@@ -32,21 +32,27 @@ async function createTables() {
 
             CREATE TABLE posts(
                 id SERIAL PRIMARY KEY,
-                user_id INT REFERENCES users(id),
+                "userId" INT REFERENCES users(id) NOT NULL,
+                username_of_post varchar(255) REFERENCES users(username),
                 "gameTitle" varchar(255) NOT NULL,
-                description text
+                description text,
+                sent_time TIMESTAMP DEFAULT NOW()
             );
 
             CREATE TABLE comments(
               id SERIAL PRIMARY KEY,
-              "postId" INTEGER REFERENCES posts(id),
-              message text NOT NULL
+              "postId" INTEGER REFERENCES posts(id) NOT NULL,
+              username_comment varchar(255) REFERENCES users(username),
+              message text NOT NULL,
+              sent_time TIMESTAMP DEFAULT NOW()
             );
 
             CREATE TABLE direct_messages(
               id SERIAL PRIMARY KEY,
-              sender_id INT NOT NULL,
-              recipient_id INT NOT NULL,
+              sender_id INT REFERENCES users(id) NOT NULL,
+              sender_username varchar(255) REFERENCES users(username) NOT NULL,
+              recipient_username varchar(255) REFERENCES users(username) NOT NULL,
+              recipient_id INT REFERENCES users(id) NOT NULL,
               message_text TEXT NOT NULL,
               sent_time TIMESTAMP DEFAULT NOW()
             );
@@ -81,18 +87,6 @@ async function createTables() {
 //   } 
 // }
 
-// async function createUser({username, email, password}) {
-//   // const hashedPassword = await bcrypt.hash(password, 10);
-
-//   const { rows: [user] } = await client.query(`
-//       INSERT INTO users (username, email, password)
-//       VALUES ($1, $2, $3)
-//       RETURNING *;
-//   `, [username, email, password])
-//   delete user.password;
-//   return user;
-// }
-
 async function populateInitialData() {
   try {
     const users = [
@@ -111,12 +105,14 @@ async function populateInitialData() {
 
     const posts = [
       {
-        user_id: 1,
+        userId: 1,
+        username_of_post: "johndoe",
         gameTitle: "Counter-Strike",
         description: "Ranked?"
       },
       {
-        user_id: 2,
+        userId: 2,
+        username_of_post: "maxy",
         gameTitle: "Destiny",
         description: "Looking to Raid",
       }

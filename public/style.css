@@ -1,0 +1,299 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    height: 100vh;
+    width: 100%;
+}
+
+ .app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(41, 37, 38, 0.973);
+} 
+
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    background-color: rgba(73, 67, 67, 0.513);
+    border-bottom: 3px solid white;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    text-decoration: none;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+a {
+    text-decoration: none;
+}
+
+.logout-btn {
+    color: white;
+    background-color: red;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    background-color: rgba(83, 10, 10, 0.421);
+}
+
+.single-links {
+    color: white;
+}
+
+.single-links:visited {
+    color: white;
+}
+
+.register-btn {
+    background-color: green;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.navbar-links {
+    padding-left: 15px;
+}
+
+.navbar-group1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.link-container {
+    padding-top: 5px;
+    padding-right: 5px;
+}
+
+.header {
+    font-size: 40px;
+    padding-left: 20px;
+}
+
+img {
+    height: 60px
+}
+
+h1 {
+    color: white;
+}
+
+h4 {
+    color: white
+}
+
+p {
+    color: white
+}
+
+span {
+    color: white
+}
+
+.posts-header {
+    align-self: center;
+    border-bottom: 2px solid white;
+    font-size: 35px;
+}
+
+.posts-header-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5px;
+}
+
+.posts {
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
+.create-post-btn-and-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.create-post-btn {
+    align-self: center;
+    width: 15vh;
+    height: 5vh;
+    background-color: rgb(18, 107, 18);
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+.create-post-btn:hover {
+    background-color: rgba(9, 118, 34, 0.531);
+    cursor: pointer;
+}
+
+.create-post {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+select {
+    width: 100%;
+    padding: 5px;
+}
+
+.close-btn {
+    color: white;
+    background-color: red;
+    padding: 4px;
+    border-radius: 5px;
+    margin-right: 5vh;
+    width: 7vh;
+    cursor: pointer;
+}
+
+.description-text {
+    padding: 10px;
+    height: 60px;
+    width: 100%;
+    resize: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.submit-post-btn {
+    background-color: green;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    width: 10vh;
+    cursor: pointer;
+    border: 1px solid white
+}
+
+.message-user-btn {
+    background-color: green;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    width: 15vh;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+.created-post-user {
+    display: flex;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.user-of-post {
+    padding-left: 15px;
+    color: red;
+}
+
+.game-title-container {
+    display: flex;
+    padding-top: 25px;
+    padding-bottom: 10px;
+}
+
+.game-title {
+    padding-left: 10px;
+    color: red;
+}
+
+.game-description {
+    width: 20%;
+    margin-top: 10px;
+    /* background-color: white; */
+    padding: 5px;
+    margin-bottom: 15px;
+    color: red;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+}
+
+.comments-container {
+    padding-bottom: 10px;
+}
+
+.comment-user {
+    padding-bottom: 4px;
+}
+
+.comment-time {
+    padding-bottom: 20px;
+    font-size: 10px;
+}
+
+.comments-header {
+    padding-bottom: 10px;
+}
+
+.ind-comment-container {
+    padding-bottom: 10px;
+}
+
+.add-comment-btn {
+    background-color: green;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid white
+}
+
+.delete-post-btn {
+    background-color: red;
+    color: black;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid white
+}
+/* .delete-post-btn-container {
+    display: flex;
+    justify-content: space-between;
+} */
+
+hr {
+    margin-top: 40px;
+}
+
+.edit-post-form {
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.edit-post-btn {
+    background-color: yellow;
+    color: black;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid white;
+    margin-right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}

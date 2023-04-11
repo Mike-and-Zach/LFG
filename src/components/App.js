@@ -3,39 +3,33 @@ import { Route, Routes, Link} from "react-router-dom"
 import Posts from "./Posts";
 import Register from "./Register";
 import Login from "./Login";
+import Inbox from "./Inbox";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
+
 
 const App = () => {
-    const [token, setToken] = useState(window.localStorage.getItem("token") || "");
+    const [token, setToken] = useState(localStorage.getItem("token") || "");
     console.log("token ==>", token);
+    const username = localStorage.getItem("username")
     const navigate = useNavigate();
     useEffect(() => {
-        window.localStorage.setItem("token", token)
-    }, [])
+        localStorage.setItem("token", token)
+    }, [token])
 
     
 
     return (
-    <div>
-        <Link to="/posts">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-         <Link to="/login" onClick={() => {
-            window.localStorage.removeItem("token");
-            window.localStorage.removeItem("username");
-            window.localStorage.removeItem("userId");
-            navigate("/login")
-            swal({
-                text: "Thank you for visiting!"
-            })
-            // window.location.reload(false)
-       }}>Logout</Link>
-        
+    <div className="app-container">
+        <Navbar setToken={setToken} username={username}/>
+        <Sidebar />
        <Routes>
-        <Route path="/posts" element={<Posts />}></Route>
-        <Route path="/register" element={<Register token={token} setToken={setToken} />}></Route>
-        <Route path="/login" element={<Login setToken={setToken}/>}></Route>
+            <Route path="/posts" element={<Posts token={token} />}></Route>
+            <Route path="/register" element={<Register token={token} setToken={setToken} />}></Route>
+            <Route path="/login" element={<Login setToken={setToken} />}></Route>
+            <Route path="/inbox" element={<Inbox token={token}/>}></Route>
        </Routes>
     </div>
     )

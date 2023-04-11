@@ -9,12 +9,12 @@ async function getUserInboxById(userId) {
     return rows
 }
 
-async function sendDirectMessage(senderId, recipientId, messageText) {
+async function sendDirectMessage(senderId, senderUsername, recipientUsername, recipientId, messageText) {
     const { rows: [message] } = await client.query(`
-        INSERT INTO direct_messages(sender_id, recipient_id, message_text)
-        VALUES($1, $2, $3)
+        INSERT INTO direct_messages(sender_id, sender_username, recipient_username, recipient_id, message_text)
+        VALUES($1, $2, $3, $4, $5)
         RETURNING *;
-    `, [senderId, recipientId, messageText])
+    `, [senderId, senderUsername, recipientUsername, recipientId, messageText])
 
     return message
 }

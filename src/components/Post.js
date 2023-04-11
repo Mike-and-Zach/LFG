@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { callApi } from "../api/utils";
 import moment from "moment"
+import EditPost from "./EditPost";
 
-const Post = ({posts}) => {
-    const [showTextBox, setShowTextBox] = useState(false)
+const Post = ({posts, setPosts, token, description}) => {
+    console.log("description ==>>>>", description);
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
+    const [showMessageForm, setShowMessageForm] = useState(false)
+    const [directMessage, setDirectMessage] = useState("");
+    const [showEditForm, setShowEditForm] = useState(false);
+
+
     const dateNow = new Date();
     const year = dateNow.getFullYear();
     const month = dateNow.getMonth() + 1; // add 1 because getMonth() returns zero-based month
@@ -16,7 +22,10 @@ const Post = ({posts}) => {
     const minutes = timeNow.getMinutes();
     const time = `${hours}:${minutes}`
 
-    console.log('posts :>> ', posts);
+    const username = localStorage.getItem("username");
+    const userId = localStorage.getItem("userId")
+
+
 function convertMilitaryToStandardTime(militaryTime) {
     // Extract hours and minutes from militaryTime
     const hours = parseInt(militaryTime.substring(0, 2));
@@ -47,7 +56,7 @@ function convertMilitaryToStandardTime(militaryTime) {
     const fetchAllComments = async () => {
         try {
             const data = await callApi({
-                path: "/posts/comments"
+                path: "/comments"
             })
             setAllComments(data)
         } catch (err) {
@@ -59,43 +68,91 @@ function convertMilitaryToStandardTime(militaryTime) {
     }, [])
 
     const handleCommentSubmit = async (postId) => {
+        console.log('postId :>> ', postId);
         try {
                 await callApi({
                 method: "POST",
-                path: `/posts/comments/${postId}`,
-                body: {message: comment}
+                path: `/comments/${postId}`,
+                body: {username_comment: username, message: comment}
             })
         } catch (err) {
             console.log(err);
         }
     }
-    
 
+    const handleDeletePost = async (postId) => {
+        try {
+            const data = callApi({
+                method: "DELETE",
+                path: `/posts/${postId}`
+            })
+
+            setPosts(prev => prev.filter(post => postId !== post.id))
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const sendDirectMessage = async (recipientId, recipientUsername) => {
+        try {
+            const data = callApi({
+                method: "POST",
+                path: `/direct_message/${recipientId}`,
+                body: {message_text: directMessage, recipient_username: recipientUsername},
+                token
+            })
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    
     return (
         <div>
             {posts.slice(0).reverse().map(post => {
                 return (
-                    <div key={post.id}>
-                        <h4>user: {post.username}</h4>
-                        <h4>Game:</h4>
-                        <p>{post.gameTitle}</p>
-                        <h4>Description:</h4>
-                        <p>{post.description}</p>
-                        <h4>Comments:</h4>
-                        {allComments.filter(comment => comment.postId === post.id).reverse().map((comment => {
-                            return (
-                                <div key={comment.id}>
-                                    <p>{comment.message}</p>
-                                    <span>{moment().format('MMMM Do YYYY, h:mm:ss a')}</span>
-                                </div>
-                            )
-                        }))}
-                        {showTextBox && 
+                    <div key={post.id} className="post">
+                        
+                        <div className="game-title-container">
+                            <h4>Game:</h4>
+                            <p className="game-title">{post.gameTitle}</p>
+                        </div>
+                        <div className="description-container">
+                            <h4>Description:</h4>
+                            <p className="game-description">{post.description}</p>
+                        </div>
+                        <div className="comments-container">
+                            <h4 className="comments-header">Comments:</h4>
+                            {allComments.filter(comment => comment.postId === post.id).reverse().map((comment => {
+                                return (
+                                    <div key={comment.id} className="ind-comment-container">
+                                        <p className="comment-user">{comment.username_comment}</p>
+                                        <p className="comment-message">- {comment.message}</p>
+                                        <span className="comment-time">{moment().format('MMMM Do YYYY, h:mm a')}</span>
+                                    </div>
+                                )
+                            }))}
+                        </div>
                         <form>
-                            <input type="text" onChange={e => {setComment(e.target.value)}}/> <br />
-                            <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)}/>
-                        </form>} <br />
-                        <button onClick={() => setShowTextBox(!showTextBox)}>Comment</button>
+                            <textarea type="text" onChange={e => {setComment(e.target.value)}}></textarea> <br />
+                            <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)} className="add-comment-btn"/>
+                        </form> <br />
+                        <div className="created-post-user">
+                            <h4 className="post-headers">Posted By: </h4>
+                            <p className="user-of-post">{post.username_of_post}</p>
+                        </div>
+                        <div>
+                            {showMessageForm && <form>
+                                <input type="text" onChange={e => setDirectMessage(e.target.value)}/>
+                                <input type="submit" value="send" onClick={() => {sendDirectMessage(post.userId, post["username_of_post"])}}/>
+                            </form>}
+                        </div>
+                        {post.userId != userId && <button className="message-user-btn" onClick={() => setShowMessageForm(!showMessageForm)}>Message User</button>}
+                        <div className="delete-post-btn-container">
+                            {showEditForm && <EditPost postId={post.id} />}
+                            <button className="edit-post-btn" onClick={() => setShowEditForm(!showEditForm)}>edit post</button>
+                            {post.userId == userId && <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)}>DELETE POST</button>}
+                        </div>
                         <hr />
                     </div>
                 )
@@ -105,3 +162,4 @@ function convertMilitaryToStandardTime(militaryTime) {
 }
 
 export default Post
+

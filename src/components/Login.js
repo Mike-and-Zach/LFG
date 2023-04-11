@@ -18,8 +18,8 @@ const Login = ({token, setToken}) => {
                 path: "/users/login"
             })
             setToken(data.token)
-            window.localStorage.setItem("username", data.user.username);
-            window.localStorage.setItem("userId", data.user.id);
+            localStorage.setItem("username", data.user.username);
+            localStorage.setItem("userId", data.user.id);
             navigate("/posts")
         } catch (err) {
             console.log(err);

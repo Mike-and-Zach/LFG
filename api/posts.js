@@ -6,11 +6,9 @@ const {
   createPost,
   editPost,
   deletePost,
-  getCommentsByPostId,
-  addMessageToComment,
-  getAllComments,
-  getAllPostsAndUsers
+  getPostById
 } = require("../db/models/posts");
+const { getAllComments, deleteComment } = require("../db/models/comments");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -22,11 +20,22 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:postId", async (req, res, next) => {
+  try {
+      const postId = req.params.postId
+      const post = await getPostById(postId);
+      res.send(post)
+  } catch ({name, message}) {
+    next({name, message})
+  }
+});
+
+
 router.post("/:userId", async (req, res, next) => {
   try {
-    const { gameTitle, description } = req.body;
+    const { username_of_post, gameTitle, description } = req.body;
     const userId = req.params.userId
-    const createdPost = await createPost( {user_id: userId, gameTitle, description });
+    const createdPost = await createPost( {userId: userId, username_of_post, gameTitle, description });
     res.send(createdPost);
   } catch ({ name, message }) {
     next({ name, message });
@@ -36,6 +45,13 @@ router.post("/:userId", async (req, res, next) => {
 router.delete("/:postId", async (req, res, next) => {
     try {
       const postId = req.params.postId;
+      // const deletedPost = await deletePost(postId);
+      const allComments = await getAllComments();
+      
+      const postComments = allComments.filter(comment => comment.postId == postId);
+      Promise.all(postComments.map(async comment => {
+        return await deleteComment(comment.id)
+      }))
       const deletedPost = await deletePost(postId);
       res.send(deletedPost);
     } catch ({ name, message }) {
@@ -53,35 +69,6 @@ router.delete("/:postId", async (req, res, next) => {
     }
   });
 
-  router.get("/comments", async (req, res, next) => {
-    try {
-        const comments = await getAllComments();
-        res.send(comments)
-    } catch (err) {
-      console.log(err);
-    }
-  })
-
-  router.get("/comments/:postId", async (req, res, next) => {
-    try {
-      const postId = req.params.postId
-      const postComments = await getCommentsByPostId(postId)
-      res.send(postComments)
-    } catch ({name, message}) {
-        next({name, message})
-    }
-  })
-
-  router.post("/comments/:postId", async (req, res, next) => {
-    try {
-      const postId = req.params.postId;
-      const { message } = req.body
-      const userMessage = await addMessageToComment(postId, message);
-      console.log('userMessage :>> ', userMessage);
-      res.send(userMessage)
-    } catch ({name, message}) {
-      next({name, message})
-    }
-  })
+  
 
 module.exports = router;

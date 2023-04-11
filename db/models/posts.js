@@ -12,11 +12,23 @@ async function getAllPosts() {
   
 }
 
+async function getPostById(postId) {
+  try {
+    const { rows: [post] } = await client.query(`
+      SELECT * FROM posts
+      WHERE id = $1
+    `, [postId])
+    return post;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function getAllPostsAndUsers() {
   try {
     const { rows } = await client.query(`
       SELECT posts.*, users.* FROM posts
-      JOIN users ON users.id = posts.user_id
+      JOIN users ON users.id = posts."userId"
     `)
     return rows
   } catch (err) {
@@ -24,34 +36,37 @@ async function getAllPostsAndUsers() {
   }
 }
 
-async function createPost( {user_id, gameTitle, description} ) {
+async function createPost( {userId, username_of_post, gameTitle, description} ) {
   try {
     const {
       rows: [post],
     } = await client.query(
       `
-          INSERT INTO posts(user_id, "gameTitle", description)
-          VALUES ($1, $2, $3)
+          INSERT INTO posts("userId", username_of_post, "gameTitle", description)
+          VALUES ($1, $2, $3, $4)
           RETURNING *;
       `,
-      [user_id, gameTitle, description]
+      [userId, username_of_post, gameTitle, description]
     );
   
     return post;
   } catch (err) {
     console.log(err);
   }
-  
 }
+
+
 
 async function deletePost(id) {
   try {
     const {
-      rows: [post], // you dont need to make these variabes if you arnt using them
+      rows: post, // you dont need to make these variabes if you arnt using them
     } = await client.query(`
       DELETE FROM posts
-      WHERE id=${id};
-      `);
+      WHERE id= $1
+      RETURNING *;
+      `, [id]);
+      return post
   } catch (err) {
     console.log(err);
   }
@@ -87,47 +102,13 @@ async function editPost({ id, ...fields }) {
   
 }
 
-async function getCommentsByPostId(postId) {
-  try {
-      const { rows } = await client.query(`
-        SELECT * FROM comments
-        WHERE "postId" = $1
-      `, [postId])
-      return rows;
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-async function addMessageToComment(postId, message) {
-  try {
-    const { rows: [userComment] } = await client.query(`
-    INSERT INTO comments("postId", message)
-    VALUES($1, $2)
-    RETURNING *;
-  `, [postId, message])
-    console.log('userComment :>> ', userComment);
-  return userComment
-  } catch (err) {
-    console.log(err);
-  }
-  
-}
-
-async function getAllComments() {
-  const { rows } = await client.query(`
-    SELECT * FROM comments
-  `)
-  return rows;
-}
 
 module.exports = {
   getAllPosts,
   createPost,
   editPost,
-  deletePost,
-  getCommentsByPostId,
-  addMessageToComment,
-  getAllComments, 
-  getAllPostsAndUsers
+  deletePost, 
+  getAllPostsAndUsers,
+  getPostById
 };
