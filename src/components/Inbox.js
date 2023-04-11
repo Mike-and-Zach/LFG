@@ -29,6 +29,7 @@ const Inbox = ({token}) => {
                     <div key={message.id}>
                         <p>Sender: {message["sender_username"]}</p>
                         <p>{message["message_text"]}</p>
+                        <p>{message["sent_time"]}</p>
                     </div>
                 )
             })}

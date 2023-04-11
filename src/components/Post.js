@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { callApi } from "../api/utils";
 import moment from "moment"
+import EditPost from "./EditPost";
 
-const Post = ({posts, setPosts, token}) => {
-
+const Post = ({posts, setPosts, token, description}) => {
+    console.log("description ==>>>>", description);
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
     const [showMessageForm, setShowMessageForm] = useState(false)
     const [directMessage, setDirectMessage] = useState("");
+    const [showEditForm, setShowEditForm] = useState(false);
+
+
     const dateNow = new Date();
     const year = dateNow.getFullYear();
     const month = dateNow.getMonth() + 1; // add 1 because getMonth() returns zero-based month
@@ -20,7 +24,7 @@ const Post = ({posts, setPosts, token}) => {
 
     const username = localStorage.getItem("username");
     const userId = localStorage.getItem("userId")
-    console.log('posts :>> ', posts);
+
 
 function convertMilitaryToStandardTime(militaryTime) {
     // Extract hours and minutes from militaryTime
@@ -130,7 +134,7 @@ function convertMilitaryToStandardTime(militaryTime) {
                             }))}
                         </div>
                         <form>
-                            <input type="text" onChange={e => {setComment(e.target.value)}}/> <br />
+                            <textarea type="text" onChange={e => {setComment(e.target.value)}}></textarea> <br />
                             <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)} className="add-comment-btn"/>
                         </form> <br />
                         <div className="created-post-user">
@@ -145,6 +149,8 @@ function convertMilitaryToStandardTime(militaryTime) {
                         </div>
                         {post.userId != userId && <button className="message-user-btn" onClick={() => setShowMessageForm(!showMessageForm)}>Message User</button>}
                         <div className="delete-post-btn-container">
+                            {showEditForm && <EditPost postId={post.id} />}
+                            <button className="edit-post-btn" onClick={() => setShowEditForm(!showEditForm)}>edit post</button>
                             {post.userId == userId && <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)}>DELETE POST</button>}
                         </div>
                         <hr />

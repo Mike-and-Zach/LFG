@@ -2,17 +2,22 @@
     box-sizing: border-box;
     margin: 0;
 }
+body {
+    height: 100vh;
+    width: 100%;
+}
 
-.app-container {
+ .app-container {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
     background-color: rgba(41, 37, 38, 0.973);
-}
+} 
 
 .navbar-container {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     padding-bottom: 20px;
     background-color: rgba(73, 67, 67, 0.513);
@@ -169,6 +174,11 @@ select {
     padding: 10px;
     height: 60px;
     width: 100%;
+    resize: none;
+}
+
+textarea {
+    resize: none;
 }
 
 .submit-post-btn {
@@ -255,12 +265,35 @@ select {
 }
 
 .delete-post-btn {
-    width: 15vh;
+    background-color: red;
+    color: black;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid white
 }
-.delete-post-btn-container {
-    /* padding-bottom: 40px; */
-}
+/* .delete-post-btn-container {
+    display: flex;
+    justify-content: space-between;
+} */
 
 hr {
     margin-top: 40px;
+}
+
+.edit-post-form {
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.edit-post-btn {
+    background-color: yellow;
+    color: black;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid white;
+    margin-right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }

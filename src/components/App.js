@@ -6,6 +6,8 @@ import Login from "./Login";
 import Inbox from "./Inbox";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 
 const App = () => {
@@ -21,35 +23,13 @@ const App = () => {
 
     return (
     <div className="app-container">
-        <div className="navbar-container">
-            <div className="navbar-group1">
-                <img src="/img/lfg-logo.jpeg"/>
-                <h2 className="header">ImLFG</h2>
-            </div>
-                <div className="link-container">
-                    <ul className="navbar">
-                        <li className="navbar-links"><Link to="/posts" className="single-links">Home</Link></li>    
-                        {username && <li className="navbar-links"><Link to="/inbox" className="single-links">Inbox</Link></li>}
-                        {!username && <li className="navbar-links"><Link to="/login" className="single-links">Login</Link></li>}
-                        {!username && <li className="navbar-links"><Link to="/register" className="register-btn">Register</Link></li>}
-                        {username && <li className="navbar-links"><Link to="/login" className="logout-btn" onClick={() => {
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("username");
-                        localStorage.removeItem("userId");
-                        setToken("")
-                    navigate("/login")
-                    swal({
-                        text: "Thank you for visiting!"
-                    })
-                    }}>Logout</Link></li>}
-                    </ul>
-            </div>
-        </div>
+        <Navbar setToken={setToken} username={username}/>
+        <Sidebar />
        <Routes>
-        <Route path="/posts" element={<Posts token={token} />}></Route>
-        <Route path="/register" element={<Register token={token} setToken={setToken} />}></Route>
-        <Route path="/login" element={<Login setToken={setToken} />}></Route>
-        <Route path="/inbox" element={<Inbox token={token}/>}></Route>
+            <Route path="/posts" element={<Posts token={token} />}></Route>
+            <Route path="/register" element={<Register token={token} setToken={setToken} />}></Route>
+            <Route path="/login" element={<Login setToken={setToken} />}></Route>
+            <Route path="/inbox" element={<Inbox token={token}/>}></Route>
        </Routes>
     </div>
     )

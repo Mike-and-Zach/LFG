@@ -5,7 +5,8 @@ const {
   getAllPosts,
   createPost,
   editPost,
-  deletePost
+  deletePost,
+  getPostById
 } = require("../db/models/posts");
 const { getAllComments, deleteComment } = require("../db/models/comments");
 
@@ -18,6 +19,17 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
+
+router.get("/:postId", async (req, res, next) => {
+  try {
+      const postId = req.params.postId
+      const post = await getPostById(postId);
+      res.send(post)
+  } catch ({name, message}) {
+    next({name, message})
+  }
+});
+
 
 router.post("/:userId", async (req, res, next) => {
   try {

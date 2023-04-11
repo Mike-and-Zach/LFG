@@ -29,9 +29,8 @@ const Posts = ({ token }) => {
             const data = await callApi({
                 method: "POST",
                 path: `/posts/${userId}`,
-                body: {username_of_post: username, gameTitle, description}
+                body: {username_of_post: username, gameTitle, description: description}
             })
-            console.log('makePostData :>> ', data);
         } catch (err) {
             console.log(err);
         }
@@ -56,7 +55,7 @@ const Posts = ({ token }) => {
                         <option value="League of Legends">League of Legends</option>
                     </select> <br />
                     <label htmlFor="description">Description: </label> <br />
-                    <input type="text" id="description" className="description-text" onChange={e => {setDescription(e.target.value)}}/> <br /> <br />
+                    <textarea id="description" className="description-text" onChange={e => setDescription(e.target.value)}> </textarea> <br /> <br />
                     <button onClick={() => setShowMakePost(false)} className="close-btn">Close</button>
                     <input type="submit" value="Sumbit" onClick={() => handleMakePost()} className="submit-post-btn"/>
                 </form>

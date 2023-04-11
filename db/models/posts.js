@@ -12,6 +12,18 @@ async function getAllPosts() {
   
 }
 
+async function getPostById(postId) {
+  try {
+    const { rows: [post] } = await client.query(`
+      SELECT * FROM posts
+      WHERE id = $1
+    `, [postId])
+    return post;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function getAllPostsAndUsers() {
   try {
     const { rows } = await client.query(`
@@ -97,5 +109,6 @@ module.exports = {
   createPost,
   editPost,
   deletePost, 
-  getAllPostsAndUsers
+  getAllPostsAndUsers,
+  getPostById
 };
