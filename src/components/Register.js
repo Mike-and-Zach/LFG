@@ -36,7 +36,7 @@ const Register = ({ setToken }) => {
     }
 
     return (
-        <div className="register-container">
+        <div className="register-container-main">
             <h1>Register</h1>
             <form>
                 <label htmlFor="username">Username:</label> <br />

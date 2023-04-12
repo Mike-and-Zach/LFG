@@ -112,30 +112,30 @@ function convertMilitaryToStandardTime(militaryTime) {
             {posts.slice(0).reverse().map(post => {
                 return (
                     <div key={post.id} className="post">
-                        
+                        <div className="game-title-and-description">
                         <div className="game-title-container">
-                            <h4>Game:</h4>
-                            <p className="game-title">{post.gameTitle}</p>
+                            <h2 className="game-title">{post.gameTitle}</h2>
                         </div>
                         <div className="description-container">
                             <p className="game-description">{post.description}</p>
                         </div>
+                        </div>
                         <div className="comments-container">
-                            <h4 className="comments-header">Comments:</h4>
+                            <h4 className="comments-header">Comments</h4>
                             {allComments.filter(comment => comment.postId === post.id).reverse().map((comment => {
                                 return (
                                     <div key={comment.id} className="ind-comment-container">
-                                        <p className="comment-message">{comment.message}</p>
                                         <div className="comment-username-and-time">
-                                            <p className="comment-user">- {comment.username_comment}</p>
+                                            <p className="comment-user">{comment.username_comment}</p>
                                             <span className="comment-time">{moment().format('MMMM Do YYYY, h:mm a')}</span>
                                         </div>
+                                        <p className="comment-message">{comment.message}</p>
                                     </div>
                                 )
                             }))}
                         </div>
                         <form>
-                            <textarea type="text" onChange={e => {setComment(e.target.value)}}></textarea> <br />
+                            <textarea type="text" placeholder="Comment..." onChange={e => {setComment(e.target.value)}}></textarea> <br />
                             <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)} className="add-comment-btn"/>
                         </form> <br />
                         <div className="created-post-user">
@@ -151,7 +151,7 @@ function convertMilitaryToStandardTime(militaryTime) {
                         {post.userId != userId && <button className="message-user-btn" onClick={() => setShowMessageForm(!showMessageForm)}>Message User</button>}
                         <div className="delete-post-btn-container">
                             {showEditForm && <EditPost postId={post.id} />}
-                            <button className="edit-post-btn" onClick={() => setShowEditForm(!showEditForm)}>edit post</button>
+                            {post.userId == userId && <button className="edit-post-btn" onClick={() => setShowEditForm(!showEditForm)}>edit post</button>}
                             {post.userId == userId && <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)}>DELETE POST</button>}
                         </div>
                         <hr />

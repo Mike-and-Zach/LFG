@@ -25,12 +25,20 @@ body {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    border-bottom: 1px solid rgb(212, 212, 212);
 } 
 
 .register-container {
-    display: flex;
-    flex-direction: row;
-    height: 100;
+    color: white;
+    background-color: green;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.register-container:hover {
+    background-color: rgb(0, 80, 5);
+    transition: 400ms;
 }
 
  .navbar {
@@ -44,29 +52,31 @@ body {
 a {
     text-decoration: none;
     padding: 5px;
+    padding-left: 0;
+}
+
+.logout-container {
+    color: white;
+    background-color: red;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-right: 5px;
+} 
+.logout-container:hover {
+    background-color: rgb(160, 14, 14);
+    transition: 400ms;
 }
 
 .logout-btn {
     color: white;
-    background-color: red;
-    padding: 4px;
-    border-radius: 5px;
-} 
-
-.single-links {
-    color: white;
 }
 
 .single-links:visited {
-    color: white;
+    color: white
 }
 
 .register-btn {
-    background-color: green;
     color: white;
-    padding: 4px;
-    border-radius: 5px;
-    border: 1px solid white;
 }
 
 .navbar-links {
@@ -85,12 +95,14 @@ a {
 }
 
 .link-container {
-   padding: 5px;
+    display: flex;
+    justify-content: center;
 }
 
 .header {
     font-size: 35px;
     padding-left: 20px;
+    padding-right: 20px;
     color: white
 }
 
@@ -103,13 +115,13 @@ a {
 .posts {
     margin-top: 20px;
     width: 100%;
-    margin-left: 30px;
 }
 
 .post {
     display: flex;
     flex-direction: column;
-    padding-top: 15px;
+    padding-top: 25px;
+    padding-left: 20px;
 }
 .create-post-btn-and-header {
     display: flex;
@@ -121,8 +133,8 @@ a {
     align-self: center;
     width: 15vh;
     height: 5vh;
-    background-color: white;
-    color: black;
+    background-color: #202124;
+    color: white;
     padding: 4px;
     border-radius: 5px;
     border: 1px solid white;
@@ -142,19 +154,20 @@ a {
 }
 
 .close-btn {
-    color: white;
-    background-color: red;
-    padding: 4px;
+    color: red;
+    background-color: #202124;
+    padding: 6px;
     border-radius: 5px;
-    margin-right: 5vh;
-    width: 7vh;
+    margin-right: 5vw;
+    width: 7vw;
     cursor: pointer;
-    border: none;
+    border: 1px solid whitesmoke;
 }
 
 .close-btn:hover {
     transition: 400ms;
-    background-color: rgb(160, 14, 14);
+    color: white;
+    background-color: rgba(159, 0, 0, 0.582);
     transform: translateY(2px);
 }
 
@@ -163,6 +176,7 @@ a {
     height: 90px;
     width: 100%;
     resize: none;
+    margin-top: 10px;
 }
 
 textarea {
@@ -170,8 +184,8 @@ textarea {
 }
 
 .submit-post-btn {
-    background-color: whitesmoke;
-    color: black;
+    background-color: #202124;
+    color: white;
     padding: 4px;
     border-radius: 5px;
     width: 8vw;
@@ -180,7 +194,7 @@ textarea {
 }
 
 .submit-post-btn:hover{
-    background-color: lightgrey;
+    background-color: rgba(196, 197, 196, 0.531);
     transition: 500ms;
     transform: translateY(2px);
 }
@@ -198,6 +212,7 @@ textarea {
 .message-user-btn:hover {
     background-color: lightgrey;
     transition: 500ms;
+    transform: translateX(2px);
 }
 
 .created-post-user {
@@ -213,65 +228,80 @@ textarea {
 
 .game-title-container {
     display: flex;
-    padding-top: 25px;
+    flex-direction: row;
+    align-items: center;
 }
 
 .game-title {
-    padding-left: 10px;
-    color: red;
+    font-size: 40px;
+    color: rgb(212, 212, 212);
+    border-bottom: 2px solid white;
 }
 
 .game-description {
-    width: 20%;
     margin-top: 10px;
     padding: 5px;
-    margin-bottom: 10px;
-    color: white;
-    border-radius: 10px;
+    font-size: 20px;
 }
 
 .comments-container {
     padding-bottom: 10px;
 }
 
+.comments-container p {
+    font-size: 12px;
+}
+
 .comment-user {
     padding-bottom: 4px;
+    font-weight: bold;
 }
 
 .comment-time {
     font-size: 8px;
-    padding-left: 10px;
+    padding-left: 5px;
     justify-content: end;
 }
 
 .comments-header {
     padding-bottom: 10px;
+    font-size: 15px;
 }
 
 .ind-comment-container {
     padding-bottom: 10px;
+    padding-left: 20px;
 }
 
 .add-comment-btn {
-    background-color: green;
+    background-color: #202124;
     color: white;
-    padding: 4px;
+    padding: 6px;
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid white
 }
 
+.add-comment-btn:hover {
+    background-color: rgba(196, 197, 196, 0.531);
+    transition: 400ms;
+    transform: translateX(2px);
+}
+
 .delete-post-btn {
-    background-color: red;
-    color: black;
-    padding: 4px;
+    background-color: #202124;
+    color: red;
+    padding: 7px;
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid white
 }
-.delete-post-btn-container {
-    display: flex;
-    justify-content: space-between;
+
+.delete-post-btn:hover {
+    background-color: rgba(159, 0, 0, 0.582);
+    color: white;
+    transition: 400ms;
+    transform: translateX(2px);
 }
 
 hr {
@@ -284,8 +314,8 @@ hr {
 }
 
 .edit-post-btn {
-    background-color: yellow;
-    color: black;
+    background-color: #202124;
+    color: yellow;
     padding: 4px;
     border-radius: 5px;
     cursor: pointer;
@@ -295,11 +325,18 @@ hr {
     padding-right: 20px;
 }
 
+.edit-post-btn:hover {
+    background-color: rgb(114, 116, 0);
+    color: white;
+    transition: 400ms;
+    transform: translateX(2px);
+}
+
 .sidebar-container {
     width: 22vw;
     height: 100vh;
     position: left;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(212, 212, 212);
     position: -webkit-sticky;
     position: sticky;
     top: 70px;
@@ -329,7 +366,7 @@ img {
 }
 
 .sidebar-name:hover {
-    background-color: lightgrey;
+    background-color: rgb(229, 229, 229);
     transition: 400ms;
     box-shadow: 5px 5px 8px rgb(151, 151, 151);
     transform: translateY(4px);
@@ -348,4 +385,77 @@ img {
 
 .comment-message {
     padding-bottom: 10px;
+    padding-left: 15px;
+    width: 50%;
+    font-weight: bolder;
+}
+
+#gameTitle {
+    width: 100%;
+}
+
+option {
+    text-align-last: center;
+}
+
+.game-header {
+    font-size: 30px;
+    padding-bottom: 3px;
+}
+
+.login-container, .register-container, .inbox-container, .home-container, .logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container:hover, .inbox-container:hover, .home-container:hover {
+    background-color: rgb(78, 78, 78);
+    transition: 400ms;
+    border-radius: 10px;
+}
+
+.game-title-and-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.confirm-edit-post-btn {
+    background-color: #202124;
+    color: white;
+    padding: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+.confirm-edit-post-btn:hover {
+    background-color: rgba(196, 197, 196, 0.531);
+    transition: 400ms;
+    transform: translateX(2px);
+}
+
+.socials {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-top: 5px;
+}
+
+.social {
+    margin-right: 40px;
+    cursor: pointer;
+}
+
+.insta {
+    margin-left: 50px;
+}
+
+.game-title-select {
+    margin-bottom: 10px;
 }

@@ -43,7 +43,7 @@ const EditPost = ({postId}) => {
                     </select> <br />
                     <label htmlFor="description">Description: </label>
                     <textarea type="text" id="description" className="description-text" onChange={e => {setDescription(e.target.value)}}> </textarea> <br /> <br />
-                    <input type="submit" value="confirm" onClick={() => handleEditPost()}/>
+                    <input type="submit" value="confirm" className="confirm-edit-post-btn" onClick={() => handleEditPost()}/>
             </form>
         </div>
     )

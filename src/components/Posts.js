@@ -42,9 +42,9 @@ const Posts = ({ token }) => {
             <div className="create-post">
                 <form>
                     <label htmlFor="gameTitle"></label> <br />
-                    <select name="games" id="gameTitle" onChange={e => {setGameTitle(e.target.value)}}>
+                    <select name="games" id="gameTitle" className="game-title-select" onChange={e => {setGameTitle(e.target.value)}}>
                         <option disabled selected value>-- Choose a game --</option>
-                        <option value="COD">COD</option>
+                        <option value="COD">Call of Duty</option>
                         <option value="Overwatch">Overwatch</option>
                         <option value="DayZ">DayZ</option>
                         <option value="Counter-Strike 2">Counter-Strike 2</option>
@@ -54,7 +54,7 @@ const Posts = ({ token }) => {
                         <option value="GTA6">GTA6</option>
                         <option value="League of Legends">League of Legends</option>
                     </select> <br />
-                    <label htmlFor="description">Description: </label> <br />
+                    <label htmlFor="description" className="create-post-description-lable">Description: </label> <br />
                     <textarea id="description" className="description-text" onChange={e => setDescription(e.target.value)}> </textarea> <br /> <br />
                     <button onClick={() => setShowMakePost(false)} className="close-btn">Close</button>
                     <input type="submit" value="Sumbit" onClick={() => handleMakePost()} className="submit-post-btn"/>
@@ -68,9 +68,9 @@ const Posts = ({ token }) => {
             <div className="create-post-btn-and-header">
             <p className="posts-header">Posts</p> <br />
             {showMakePost && makePost()}
-            <button className="create-post-btn" onClick={() => setShowMakePost(!showMakePost)}>Create Post</button>
+            {!showMakePost && <button className="create-post-btn" onClick={() => setShowMakePost(!showMakePost)}>Create Post</button>}
             </div>
-            
+            <hr />
             <div>
                 {<Post posts={posts} setPosts={setPosts} token={token} />}
             </div>
