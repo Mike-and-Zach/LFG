@@ -2,7 +2,8 @@ import { callApi } from "../api/utils";
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import allGames from "./GameInfo";
-const Posts = ({ token, selectedGame }) => {
+
+const Posts = ({ token, setSelectedGame, selectedGame }) => {
   const [showMakePost, setShowMakePost] = useState(false);
   const [gameTitle, setGameTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -48,7 +49,7 @@ const Posts = ({ token, selectedGame }) => {
         path: `/posts/${userId}`,
         body: {
           username_of_post: username,
-          gameTitle,
+          gameTitle: selectedGame ? selectedGame : gameTitle,
           game_activity: gameActivity,
           description: description,
         },
@@ -58,46 +59,22 @@ const Posts = ({ token, selectedGame }) => {
     }
   };
 
+  const getUrl = (gameTitle) => {
+      let url = "";
+      allGames.map(game => {
+        if (game.title === gameTitle) {
+          url = game.url
+        }
+      })
+      return url
+  }
+
   const makePost = () => {
     return (
       <div className="create-post">
         <form>
           <div className="allgames-select">
             <label htmlFor="gameTitle"></label>
-            <select
-              name="games"
-              id="gameTitle"
-              className="game-title-select"
-              onChange={(e) => {
-                setGameTitle(e.target.value);
-              }}
-            >
-              {selectedGame && <option>{selectedGame}</option>}
-              {!selectedGame && <option>-- Choose a Game --</option>}
-              {selectedGame !== "Call of Duty" && (
-                <option value="Call of Duty">Call of Duty</option>
-              )}
-              {selectedGame !== "Overwatch 2" && (
-                <option value="Overwatch 2">Overwatch 2</option>
-              )}
-              {selectedGame !== "DayZ" && <option value="DayZ">DayZ</option>}
-              {selectedGame !== "Counter-Strike 2" && (
-                <option value="Counter-Strike 2">Counter-Strike 2</option>
-              )}
-              {selectedGame !== "Destiny" && (
-                <option value="Destiny">Destiny</option>
-              )}
-              {selectedGame !== "Valorant" && (
-                <option value="Valorant">Valorant</option>
-              )}
-              {selectedGame !== "Rainbow Six Siege" && (
-                <option value="Rainbow Six Siege">Rainbow Six Siege</option>
-              )}
-              {selectedGame !== "GTA6" && <option value="GTA6">GTA6</option>}
-              {selectedGame !== "League of Lengends" && (
-                <option value="League of Legends">League of Legends</option>
-              )}
-            </select>
             <br />
             <select
               name="activities"
@@ -147,15 +124,15 @@ const Posts = ({ token, selectedGame }) => {
 
   return (
     <div className="posts">
-      <div className="create-post-btn-and-header">
-        {selectedGame ? (
+      <div className="create-post-btn-and-header" style={{backgroundImage: `url(${getUrl(selectedGame)})`}}>
+        {(selectedGame) ? (
           <p className="posts-header">{selectedGame}</p>
         ) : (
           <p className="posts-header">Home</p>
         )}{" "}
         <br />
         {showMakePost && makePost()}
-        {!showMakePost && (
+        {!showMakePost && selectedGame && (
           <button
             className="create-post-btn"
             onClick={() => setShowMakePost(!showMakePost)}
@@ -165,17 +142,18 @@ const Posts = ({ token, selectedGame }) => {
         )}
       </div>
       <hr />
-      <div>
+
         {
           <Post
             posts={posts}
             setPosts={setPosts}
             token={token}
             filteredPosts={filteredPosts}
+            selectedGame={selectedGame}
             gameActivity={gameActivity}
           />
         }
-      </div>
+
     </div>
   );
 };

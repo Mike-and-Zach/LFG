@@ -3,52 +3,17 @@ import { callApi } from "../api/utils";
 import moment from "moment"
 import EditPost from "./EditPost";
 
-const Post = ({posts, setPosts, token, filteredPosts}) => {
+
+const Post = ({posts, setPosts, token, filteredPosts, selectedGame}) => {
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
     const [showMessageForm, setShowMessageForm] = useState(false)
     const [directMessage, setDirectMessage] = useState("");
     const [showEditForm, setShowEditForm] = useState(false);
-    const dateNow = new Date();
-    const year = dateNow.getFullYear();
-    const month = dateNow.getMonth() + 1; // add 1 because getMonth() returns zero-based month
-    const day = dateNow.getDate();
-    const date = `${month}-${day}-${year}`
-    const timeNow = new Date();
-    const hours = timeNow.getHours();
-    const minutes = timeNow.getMinutes();
-    const time = `${hours}:${minutes}`
-
     const username = localStorage.getItem("username");
-    const userId = localStorage.getItem("userId")
+    const userId = localStorage.getItem("userId");
+    const timeNow = moment();
 
-
-function convertMilitaryToStandardTime(militaryTime) {
-    // Extract hours and minutes from militaryTime
-    const hours = parseInt(militaryTime.substring(0, 2));
-    const minutes = militaryTime.substring(2);
-  
-    // Convert hours to standard time
-    let standardHours = hours % 12;
-    if (standardHours === 0) {
-      standardHours = 12;
-    }
-  
-    // Add leading zero to minutes if needed
-    if (minutes.length === 1) {
-      minutes = "0" + minutes;
-    }
-  
-    // Determine whether it's AM or PM
-    const meridiem = hours < 12 ? "AM" : "PM";
-  
-    // Return standard time string
-    return `${standardHours}:${minutes} ${meridiem}`;
-  }
-  
-  // Example usage
-  const militaryTime = "16:30";
-  const standardTime = convertMilitaryToStandardTime(militaryTime);
   
     const fetchAllComments = async () => {
         try {
@@ -118,9 +83,10 @@ function convertMilitaryToStandardTime(militaryTime) {
                         <div className="game-title-and-description">
                         <div className="game-title-container">
                             <h2 className="game-title">{post.username_of_post}</h2>
-                            <p className="post-time-sent">{post.sent_time}</p>
+                            {!selectedGame && <p className="post-game-title">{post.gameTitle}</p>}
+                            <p className="post-time-sent">Posted {timeNow.diff(post.sent_time, "minutes")} mins ago</p>
                         </div>
-                        <p>{post["game_activity"]}</p>
+                        <p className="game-activity">{post["game_activity"]}</p>
                         <div className="description-container">
                             <p className="game-description">Description: {post.description}</p>
                         </div>
@@ -132,7 +98,7 @@ function convertMilitaryToStandardTime(militaryTime) {
                                     <div key={comment.id} className="ind-comment-container">
                                         <div className="comment-username-and-time">
                                             <p className="comment-user">{comment.username_comment}</p>
-                                            <span className="comment-time">{comment.sent_time}</span>
+                                            <span className="comment-time">{timeNow.diff(comment.sent_time, "minutes")} mins ago</span>
                                         </div>
                                         <p className="comment-message">{comment.message}</p>
                                     </div>
@@ -159,10 +125,12 @@ function convertMilitaryToStandardTime(militaryTime) {
                             {post.userId == userId && <button className="edit-post-btn" onClick={() => setShowEditForm(!showEditForm)}>edit post</button>}
                             {post.userId == userId && <button className="delete-post-btn" onClick={() => handleDeletePost(post.id)}>DELETE POST</button>}
                         </div>
-                        <hr />
+                        
                     </div>
+                   
                 )
             })}
+             <hr />
         </div>
     )
 }

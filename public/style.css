@@ -113,20 +113,24 @@ a {
 }
 
 .posts {
-    margin-top: 20px;
     width: 100%;
 }
 
 .post {
     display: flex;
     flex-direction: column;
-    padding-top: 25px;
-    padding-left: 20px;
+    padding: 25px;
+    padding-bottom: 25px;
 }
 .create-post-btn-and-header {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* background-image: url("img/CS_Background.jpeg"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 
 .create-post-btn {
@@ -278,9 +282,8 @@ textarea:focus {
 }
 
 .game-description {
-    margin-top: 10px;
-    padding: 5px;
-    font-size: 20px;
+    padding: 10px 0px;
+    font-size: 15px;
 }
 
 .comments-container {
@@ -293,8 +296,7 @@ textarea:focus {
 
 .comment-time {
     font-size: 12px;
-    padding-left: 5px;
-    justify-content: flex-end;
+    padding-left: 10px;
 }
 
 .comments-header {
@@ -337,10 +339,6 @@ textarea:focus {
     transform: translateX(2px);
 }
 
-hr {
-    margin-top: 40px;
-}
-
 .edit-post-form {
     display: flex;
     padding-bottom: 20px;
@@ -369,7 +367,7 @@ hr {
     width: 22vw;
     height: 100vh;
     position: left;
-    background-color: rgb(183, 183, 183);
+    background-color: rgb(203, 203, 203);
     position: -webkit-sticky;
     position: sticky;
     top: 70px;
@@ -384,7 +382,8 @@ img {
 
 .whole {
     display: flex;
-    background-color: #202124
+    background-color: #202124;
+    width: 100%;
 }
 
 .sidebar-name {
@@ -413,7 +412,7 @@ img {
 
 .comment-username-and-time {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     font-size: 30px;
     padding-bottom: 10px;
 }
@@ -436,13 +435,13 @@ option {
     padding-bottom: 3px;
 }
 
-.login-container, .register-container, .inbox-container, .home-container, .logout-container {
+.login-container, .register-container, .inbox-navbar-container, .home-container, .logout-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-container:hover, .inbox-container:hover, .home-container:hover {
+.login-container:hover, .inbox-navbar-container:hover, .home-container:hover {
     background-color: rgb(78, 78, 78);
     transition: 400ms;
     border-radius: 10px;
@@ -453,7 +452,6 @@ option {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-bottom: 20px;
 }
 
 .confirm-edit-post-btn {
@@ -593,4 +591,37 @@ input[type="text"], input[type="password"] {
     display: flex;
     justify-content: center;
     padding: 20px;
+}
+
+.post-game-title {
+    font-size: 25px;
+}
+
+.game-activity {
+    padding: 10px 0px;
+}
+
+.inbox-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 15px;
+}
+
+.inbox-header {
+    font-size: 35px;
+    padding-bottom: 15px;
+}
+
+.inbox-inner {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inbox-user-and-sent-time {
+    display: flex;
+    align-items: center;
+    color: green;
 }
