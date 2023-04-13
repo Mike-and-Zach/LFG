@@ -89,7 +89,7 @@ a {
     align-items: center;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 20px;
+    padding-left: 7px;
     padding-right: 20px;
 
 }
@@ -172,7 +172,7 @@ a {
 }
 
 .description-text {
-    padding: 5px;
+    padding: 15px;
     height: 90px;
     width: 100%;
     resize: none;
@@ -181,6 +181,23 @@ a {
 
 textarea {
     resize: none;
+    background-color: #202124;
+    border: 1px solid white;
+    color: white;
+    text-align: left;
+    padding: 5px 5px 0px 5px;
+    border-radius: 10px;
+}
+
+.comment-textfield {
+}
+
+.add-comment-btn-container {
+    padding-top: 10px;
+}
+
+textarea:focus {
+    border: 2px solid red;
 }
 
 .submit-post-btn {
@@ -200,8 +217,8 @@ textarea {
 }
 
 .message-user-btn {
-    background-color: white;
-    color: black;
+    background-color: #202124;
+    color: white;
     padding: 4px;
     border-radius: 5px;
     width: 15vh;
@@ -210,8 +227,29 @@ textarea {
 }
 
 .message-user-btn:hover {
-    background-color: lightgrey;
+    background-color: rgba(196, 197, 196, 0.531);
     transition: 500ms;
+    transform: translateX(2px);
+}
+
+.send-message-btn-container {
+    padding-left: 120px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.send-message-btn {
+    background-color: #202124;
+    color: white;
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.send-message-btn:hover {
+    background-color: rgba(196, 197, 196, 0.531);
+    transition: 400ms;
     transform: translateX(2px);
 }
 
@@ -229,7 +267,8 @@ textarea {
 .game-title-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .game-title {
@@ -248,19 +287,14 @@ textarea {
     padding-bottom: 10px;
 }
 
-.comments-container p {
-    font-size: 12px;
-}
-
 .comment-user {
-    padding-bottom: 4px;
-    font-weight: bold;
+    font-size: 25px;
 }
 
 .comment-time {
-    font-size: 8px;
+    font-size: 12px;
     padding-left: 5px;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .comments-header {
@@ -270,7 +304,6 @@ textarea {
 
 .ind-comment-container {
     padding-bottom: 10px;
-    padding-left: 20px;
 }
 
 .add-comment-btn {
@@ -336,7 +369,7 @@ hr {
     width: 22vw;
     height: 100vh;
     position: left;
-    background-color: rgb(212, 212, 212);
+    background-color: rgb(183, 183, 183);
     position: -webkit-sticky;
     position: sticky;
     top: 70px;
@@ -380,14 +413,14 @@ img {
 
 .comment-username-and-time {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    font-size: 30px;
+    padding-bottom: 10px;
 }
 
 .comment-message {
     padding-bottom: 10px;
-    padding-left: 15px;
     width: 50%;
-    font-weight: bolder;
 }
 
 #gameTitle {
@@ -419,7 +452,7 @@ option {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding-bottom: 20px;
 }
 
@@ -458,4 +491,106 @@ option {
 
 .game-title-select {
     margin-bottom: 10px;
+}
+
+.user-login-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.login-header-page {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.post-time-sent {
+    padding-left: 10px;
+    font-size: 20px;
+    align-self: flex-start;
+}
+
+.input-login {
+    padding: 10px;
+    font-size: 15px;
+    align-items: center;
+    background-color: #202124;
+}
+
+.login-label-container {
+    margin: 10px 10px 10px 0px;
+}
+
+input[type="text"], input[type="password"] {
+    background-color: #202124;
+    color: white;
+    border-radius: 15px;
+    padding: 15px;
+    border: 1px solid white;
+}
+
+.login-btn-form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-btn-form {
+    background-color: #202124;
+    padding: 10px 25px;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.login-btn-form:hover {
+    background-color: rgb(78, 78, 78);
+    transition: 400ms;
+    transform: translateY(3px);
+}
+
+.post:nth-child(even) {
+    background-color: #202124;
+}
+
+.post:nth-child(odd) {
+    background-color: #333333a5;
+}
+
+.register-container-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.register-header-main {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.register-submit-btn {
+    background-color: #202124;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.register-submit-btn:hover {
+    background-color: rgb(0, 106, 7);
+    transition: 400ms;
+    transform: translateY(3px);
+}
+
+.register-submit-btn-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }

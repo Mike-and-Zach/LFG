@@ -36,17 +36,17 @@ async function getAllPostsAndUsers() {
   }
 }
 
-async function createPost( {userId, username_of_post, gameTitle, description} ) {
+async function createPost( {userId, username_of_post, gameTitle, game_activity, description} ) {
   try {
     const {
       rows: [post],
     } = await client.query(
       `
-          INSERT INTO posts("userId", username_of_post, "gameTitle", description)
-          VALUES ($1, $2, $3, $4)
+          INSERT INTO posts("userId", username_of_post, "gameTitle", game_activity, description)
+          VALUES ($1, $2, $3, $4, $5)
           RETURNING *;
       `,
-      [userId, username_of_post, gameTitle, description]
+      [userId, username_of_post, gameTitle, game_activity, description]
     );
   
     return post;
@@ -102,6 +102,18 @@ async function editPost({ id, ...fields }) {
   
 }
 
+async function getPostsByGameTitle(title) {
+  try {
+      const { rows } = await client.query(`
+        SELECT * FROM posts
+        WHERE "gameTitle" = $1
+      `,[title]);
+      return rows;
+  } catch (err) {
+      console.log(err);
+  }
+}
+
 
 
 module.exports = {
@@ -110,5 +122,6 @@ module.exports = {
   editPost,
   deletePost, 
   getAllPostsAndUsers,
-  getPostById
+  getPostById,
+  getPostsByGameTitle
 };

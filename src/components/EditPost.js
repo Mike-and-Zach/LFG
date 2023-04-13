@@ -32,7 +32,7 @@ const EditPost = ({postId}) => {
                     <select name="games" id="gameTitle" onChange={e => {setGameTitle(e.target.value)}}>
                         <option>-- Choose a game --</option>
                         <option value="COD">COD</option>
-                        <option value="Overwatch">Overwatch</option>
+                        <option value="Overwatch 2">Overwatch</option>
                         <option value="DayZ">DayZ</option>
                         <option value="Counter-Strike 2">Counter-Strike 2</option>
                         <option value="Destiny">Destiny</option>

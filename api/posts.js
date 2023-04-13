@@ -6,7 +6,8 @@ const {
   createPost,
   editPost,
   deletePost,
-  getPostById
+  getPostById,
+  getPostsByGameTitle
 } = require("../db/models/posts");
 const { getAllComments, deleteComment } = require("../db/models/comments");
 
@@ -33,9 +34,9 @@ router.get("/:postId", async (req, res, next) => {
 
 router.post("/:userId", async (req, res, next) => {
   try {
-    const { username_of_post, gameTitle, description } = req.body;
+    const { username_of_post, gameTitle, game_activity, description } = req.body;
     const userId = req.params.userId
-    const createdPost = await createPost( {userId: userId, username_of_post, gameTitle, description });
+    const createdPost = await createPost( {userId: userId, username_of_post, gameTitle, game_activity, description });
     res.send(createdPost);
   } catch ({ name, message }) {
     next({ name, message });
@@ -45,9 +46,7 @@ router.post("/:userId", async (req, res, next) => {
 router.delete("/:postId", async (req, res, next) => {
     try {
       const postId = req.params.postId;
-      // const deletedPost = await deletePost(postId);
       const allComments = await getAllComments();
-      
       const postComments = allComments.filter(comment => comment.postId == postId);
       Promise.all(postComments.map(async comment => {
         return await deleteComment(comment.id)
@@ -68,6 +67,16 @@ router.delete("/:postId", async (req, res, next) => {
       next({ name, message });
     }
   });
+
+  router.get("/gameTitle/:gameTitle", async (req, res, next) => {
+    try {
+      const title = req.params.gameTitle
+      const posts = await getPostsByGameTitle(title)
+      res.send(posts)
+    } catch ({name, message}) {
+      next({name, message})
+    }
+  })
 
   
 

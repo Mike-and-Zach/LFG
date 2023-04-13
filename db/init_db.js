@@ -35,6 +35,7 @@ async function createTables() {
                 "userId" INT REFERENCES users(id) NOT NULL,
                 username_of_post varchar(255) REFERENCES users(username),
                 "gameTitle" varchar(255) NOT NULL,
+                game_activity varchar(255) NOT NULL,
                 description text,
                 sent_time TIMESTAMP DEFAULT NOW()
             );
@@ -56,7 +57,6 @@ async function createTables() {
               message_text TEXT NOT NULL,
               sent_time TIMESTAMP DEFAULT NOW()
             );
-
         `)
         console.log("Finished building tables!")
     } catch (err) {
@@ -91,31 +91,80 @@ async function populateInitialData() {
   try {
     const users = [
       {
-        username: "johndoe",
+        username: "Johndoe",
         email: "johnsemail@email.com",
         password: "mrjohn"
       },
       {
-        username: "maxy",
+        username: "Maxy",
         email: "maxysemail@email.com",
         password: "maxyspassword"
 
+      },
+      {
+        username: "Duke",
+        email: "duke@email.com",
+        password: "password"
       }
     ];
 
     const posts = [
       {
         userId: 1,
-        username_of_post: "johndoe",
-        gameTitle: "Counter-Strike",
-        description: "Ranked?"
+        username_of_post: "Johndoe",
+        gameTitle: "Counter-Strike 2",
+        game_activity: "Face it",
+        description: "I have mic and im plat 3"
       },
       {
         userId: 2,
-        username_of_post: "maxy",
+        username_of_post: "Maxy",
         gameTitle: "Destiny",
-        description: "Looking to Raid",
-      }
+        game_activity: "Raids",
+        description: "High level looking to Raid"
+      },
+      {
+        userId: 3,
+        username_of_post: "Duke",
+        gameTitle: "Call of Duty",
+        game_activity: "Warzone",
+        description: "50 K/D (not cheating)"
+      },
+      {
+        userId: 3,
+        username_of_post: "Duke",
+        gameTitle: "Valorant",
+        game_activity: "Spike Rush",
+        description: "No mic just want to chill"
+      },
+      {
+        userId: 2,
+        username_of_post: "Maxy",
+        gameTitle: "Rainbow Six Siege",
+        game_activity: "Unranked",
+        description: "Looking to play some causals"
+      },
+      {
+        userId: 1,
+        username_of_post: "Johndoe",
+        gameTitle: "DayZ",
+        game_activity: "Role Play",
+        description: "Anyone want to make a RP server?"
+      },
+      {
+        userId: 1,
+        username_of_post: "Johndoe",
+        gameTitle: "League of Legends",
+        game_activity: "Ranked",
+        description: "Im better than you (not toxic)"
+      },
+      {
+        userId: 3,
+        username_of_post: "Duke",
+        gameTitle: "Overwatch 2",
+        game_activity: "Ranked",
+        description: "Top 500 gamer.. who wants a carry?"
+      },
     ]
 
     const createdUsers = await Promise.all(users.map(createUser))

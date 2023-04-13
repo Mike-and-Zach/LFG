@@ -1,43 +1,73 @@
 import { useState } from "react";
-import { callApi } from "../api/utils"
+import { callApi } from "../api/utils";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({token, setToken}) => {
-    
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    console.log('email, password :>> ', email, password);
-    const navigate = useNavigate();
-    console.log('token :>> ', token);
-    const handleLogin = async (e) => {
-        e.preventDefault()
-        try {
-            const data = await callApi({
-                method: "POST",
-                body: {email, password},
-                path: "/users/login"
-            })
-            setToken(data.token)
-            localStorage.setItem("username", data.user.username);
-            localStorage.setItem("userId", data.user.id);
-            navigate("/posts")
-        } catch (err) {
-            console.log(err);
-        }
+const Login = ({ token, setToken }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await callApi({
+        method: "POST",
+        body: { email, password },
+        path: "/users/login",
+      });
+      setToken(data.token);
+      localStorage.setItem("username", data.user.username);
+      localStorage.setItem("userId", data.user.id);
+      navigate("/posts");
+    } catch (err) {
+      console.log(err);
     }
+  };
 
-    return (
-        <div>
-            <h1>Login</h1>
-            <form>
-                <label htmlFor="username">Email:</label> <br />
-                <input type="text" id="username" onChange={e => setEmail(e.target.value)}/> <br />
-                <label htmlFor="password">password:</label> <br />
-                <input type="password" id="password" onChange={e => setPassword(e.target.value)} /> <br /> <br />
-                <input type="submit" value="Login" onClick={handleLogin}/>
-            </form>
-        </div>
-    )
-}
+  return (
+    <div className="user-login-container">
+      <div className="user-login-inner">
+        <h1 className="login-header-page">Login</h1>
+        <form>
+          <div className="login-label-container">
+            <label htmlFor="username" className="login-label">
+              Email:
+            </label>{" "}
+            <br />
+          </div>
+          <input
+            type="text"
+            placeholder="Username"
+            id="username"
+            className="input-login"
+            onChange={(e) => setEmail(e.target.value)}
+          />{" "}
+          <br />
+          <div className="login-label-container">
+            <label htmlFor="password" className="login-label">
+              Password:
+            </label>{" "}
+            <br />
+          </div>
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            className="input-login"
+            onChange={(e) => setPassword(e.target.value)}
+          />{" "}
+          <br /> <br />
+          <div className="login-btn-form-container">
+            <input
+              type="submit"
+              value="Login"
+              className="login-btn-form"
+              onClick={handleLogin}
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
-export default Login
+export default Login;

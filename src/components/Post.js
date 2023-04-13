@@ -3,15 +3,12 @@ import { callApi } from "../api/utils";
 import moment from "moment"
 import EditPost from "./EditPost";
 
-const Post = ({posts, setPosts, token, description}) => {
-    console.log("description ==>>>>", description);
+const Post = ({posts, setPosts, token, filteredPosts}) => {
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
     const [showMessageForm, setShowMessageForm] = useState(false)
     const [directMessage, setDirectMessage] = useState("");
     const [showEditForm, setShowEditForm] = useState(false);
-
-
     const dateNow = new Date();
     const year = dateNow.getFullYear();
     const month = dateNow.getMonth() + 1; // add 1 because getMonth() returns zero-based month
@@ -68,7 +65,6 @@ function convertMilitaryToStandardTime(militaryTime) {
     }, [])
 
     const handleCommentSubmit = async (postId) => {
-        console.log('postId :>> ', postId);
         try {
                 await callApi({
                 method: "POST",
@@ -106,18 +102,27 @@ function convertMilitaryToStandardTime(militaryTime) {
             console.log(err);
         }
     }
-    
+    const postsAreFiltered = () => {
+        if (filteredPosts.toString()) {
+            return filteredPosts;
+        } else {
+            return posts;
+        }
+    }
+
     return (
         <div>
-            {posts.slice(0).reverse().map(post => {
+            {postsAreFiltered().slice(0).reverse().map(post => {
                 return (
                     <div key={post.id} className="post">
                         <div className="game-title-and-description">
                         <div className="game-title-container">
-                            <h2 className="game-title">{post.gameTitle}</h2>
+                            <h2 className="game-title">{post.username_of_post}</h2>
+                            <p className="post-time-sent">{post.sent_time}</p>
                         </div>
+                        <p>{post["game_activity"]}</p>
                         <div className="description-container">
-                            <p className="game-description">{post.description}</p>
+                            <p className="game-description">Description: {post.description}</p>
                         </div>
                         </div>
                         <div className="comments-container">
@@ -127,7 +132,7 @@ function convertMilitaryToStandardTime(militaryTime) {
                                     <div key={comment.id} className="ind-comment-container">
                                         <div className="comment-username-and-time">
                                             <p className="comment-user">{comment.username_comment}</p>
-                                            <span className="comment-time">{moment().format('MMMM Do YYYY, h:mm a')}</span>
+                                            <span className="comment-time">{comment.sent_time}</span>
                                         </div>
                                         <p className="comment-message">{comment.message}</p>
                                     </div>
@@ -135,17 +140,17 @@ function convertMilitaryToStandardTime(militaryTime) {
                             }))}
                         </div>
                         <form>
-                            <textarea type="text" placeholder="Comment..." onChange={e => {setComment(e.target.value)}}></textarea> <br />
-                            <input type="submit" value="Add Comment" onClick={() => handleCommentSubmit(post.id)} className="add-comment-btn"/>
+                            <textarea type="text" className="comment-textfield" placeholder="Comment..." onChange={e => {setComment(e.target.value)}}></textarea> <br />
+                            <div className="add-comment-btn-container">
+                                <input type="submit" value="Comment" onClick={() => handleCommentSubmit(post.id)} className="add-comment-btn"/>
+                            </div>
                         </form> <br />
-                        <div className="created-post-user">
-                            <h4 className="post-headers">Posted By: </h4>
-                            <p className="user-of-post">{post.username_of_post}</p>
-                        </div>
                         <div>
                             {showMessageForm && <form>
-                                <input type="text" onChange={e => setDirectMessage(e.target.value)}/>
-                                <input type="submit" value="send" onClick={() => {sendDirectMessage(post.userId, post["username_of_post"])}}/>
+                                <input type="text" placeholder="Message" onChange={e => setDirectMessage(e.target.value)}/>
+                                <div className="send-message-btn-container">
+                                    <input type="submit" value="send" className="send-message-btn" onClick={() => {sendDirectMessage(post.userId, post["username_of_post"])}}/>
+                                </div>
                             </form>}
                         </div>
                         {post.userId != userId && <button className="message-user-btn" onClick={() => setShowMessageForm(!showMessageForm)}>Message User</button>}
