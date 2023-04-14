@@ -32,7 +32,6 @@ const Login = ({ token, setToken }) => {
             <label htmlFor="username" className="login-label">
               Email:
             </label>{" "}
-            <br />
           </div>
           <input
             type="text"
@@ -41,12 +40,11 @@ const Login = ({ token, setToken }) => {
             className="input-login"
             onChange={(e) => setEmail(e.target.value)}
           />{" "}
-          <br />
           <div className="login-label-container">
             <label htmlFor="password" className="login-label">
               Password:
             </label>{" "}
-            <br />
+
           </div>
           <input
             type="password"
@@ -55,7 +53,6 @@ const Login = ({ token, setToken }) => {
             className="input-login"
             onChange={(e) => setPassword(e.target.value)}
           />{" "}
-          <br /> <br />
           <div className="login-btn-form-container">
             <input
               type="submit"

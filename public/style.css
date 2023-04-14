@@ -2,17 +2,18 @@
     box-sizing: border-box;
     margin: 0;
     padding:0;
-    font-family: 'Anton', sans-serif;
-
+    font-family: 'Source Code Pro', monospace;
 }
 
-body {
-    height: 100vh;
+/* body {
+    height: 100;
     width: 100%;
-}
+} */
 
   .app-container {
     display: flex;
+    max-width: 100%;
+    max-height: 100%;
     flex-direction: column;
     color: white;
  }  
@@ -113,20 +114,25 @@ a {
 }
 
 .posts {
-    margin-top: 20px;
     width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .post {
     display: flex;
     flex-direction: column;
-    padding-top: 25px;
-    padding-left: 20px;
+    padding: 25px;
+    padding-bottom: 25px;
 }
 .create-post-btn-and-header {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 
 .create-post-btn {
@@ -149,8 +155,9 @@ a {
 
 .create-post {
     display: flex;
-    justify-content: center;
-    padding-bottom: 20px;
+    padding: 20px 0px 10px 0px;
+    align-self: center;
+    width: 30%;
 }
 
 .close-btn {
@@ -189,12 +196,6 @@ textarea {
     border-radius: 10px;
 }
 
-.comment-textfield {
-}
-
-.add-comment-btn-container {
-    padding-top: 10px;
-}
 
 textarea:focus {
     border: 2px solid red;
@@ -278,9 +279,8 @@ textarea:focus {
 }
 
 .game-description {
-    margin-top: 10px;
-    padding: 5px;
-    font-size: 20px;
+    padding: 10px 0px;
+    font-size: 15px;
 }
 
 .comments-container {
@@ -293,8 +293,7 @@ textarea:focus {
 
 .comment-time {
     font-size: 12px;
-    padding-left: 5px;
-    justify-content: flex-end;
+    padding-left: 10px;
 }
 
 .comments-header {
@@ -312,13 +311,19 @@ textarea:focus {
     padding: 6px;
     border-radius: 5px;
     cursor: pointer;
-    border: 1px solid white
+    border: none;
 }
 
 .add-comment-btn:hover {
     background-color: rgba(196, 197, 196, 0.531);
     transition: 400ms;
     transform: translateX(2px);
+}
+
+.comment-submit-btn-container {
+    position: absolute;
+    top: 7px;
+    left: 180px
 }
 
 .delete-post-btn {
@@ -337,12 +342,10 @@ textarea:focus {
     transform: translateX(2px);
 }
 
-hr {
-    margin-top: 40px;
-}
-
 .edit-post-form {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     padding-bottom: 20px;
 }
 
@@ -369,7 +372,7 @@ hr {
     width: 22vw;
     height: 100vh;
     position: left;
-    background-color: rgb(183, 183, 183);
+    background-color: rgb(203, 203, 203);
     position: -webkit-sticky;
     position: sticky;
     top: 70px;
@@ -384,10 +387,11 @@ img {
 
 .whole {
     display: flex;
-    background-color: #202124
+    background-color: #202124;
+    width: 100%;
 }
 
-.sidebar-name {
+.sidebar-link-name {
     cursor: pointer;
     width: 60%;
     color: black;
@@ -398,7 +402,7 @@ img {
     border-radius: 10px;
 }
 
-.sidebar-name:hover {
+.sidebar-link-name:hover {
     background-color: rgb(229, 229, 229);
     transition: 400ms;
     box-shadow: 5px 5px 8px rgb(151, 151, 151);
@@ -413,7 +417,7 @@ img {
 
 .comment-username-and-time {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     font-size: 30px;
     padding-bottom: 10px;
 }
@@ -436,13 +440,13 @@ option {
     padding-bottom: 3px;
 }
 
-.login-container, .register-container, .inbox-container, .home-container, .logout-container {
+.login-container, .register-container, .inbox-navbar-container, .home-container, .logout-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-container:hover, .inbox-container:hover, .home-container:hover {
+.login-container:hover, .inbox-navbar-container:hover, .home-container:hover {
     background-color: rgb(78, 78, 78);
     transition: 400ms;
     border-radius: 10px;
@@ -453,7 +457,6 @@ option {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-bottom: 20px;
 }
 
 .confirm-edit-post-btn {
@@ -491,6 +494,9 @@ option {
 
 .game-title-select {
     margin-bottom: 10px;
+    padding: 10px;
+    background-color: #202124;
+    color: white;
 }
 
 .user-login-container {
@@ -553,12 +559,12 @@ input[type="text"], input[type="password"] {
 }
 
 .post:nth-child(even) {
-    background-color: #202124;
+    background-color: #333333a5;
 }
 
 .post:nth-child(odd) {
     background-color: #333333a5;
-}
+} 
 
 .register-container-main {
     display: flex;
@@ -593,4 +599,107 @@ input[type="text"], input[type="password"] {
     display: flex;
     justify-content: center;
     padding: 20px;
+}
+
+.post-game-title {
+    font-size: 25px;
+    padding-bottom: 15px;
+    align-self: center;
+}
+
+.game-activity {
+    padding: 10px 0px;
+}
+
+.inbox-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.inbox-header {
+    font-size: 35px;
+    padding-bottom: 15px;
+}
+
+.inbox-inner {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #333333a5;
+    width: 100%;
+}
+
+.inbox-user-and-time {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.system-selection {
+    display: flex;
+    flex-direction: column;
+}
+
+.ind-system-selection {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.system-label {
+    padding-left: 10px;
+}
+
+.system-header {
+    padding-bottom: 10px;
+}
+
+.allgames-select {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.post-user-and-img {
+    display: flex;
+    align-items: center;
+}
+
+.game-title {
+    padding-right: 10px;
+}
+
+.system-logo {
+    height: 30px;
+}
+
+.sender-username {
+    font-size: 25px;
+}
+
+.inbox-sent-time {
+    padding-left: 10px;
+    font-size: 10px;
+    font-weight: 100%;
+}
+
+hr {
+    height: 5px;
+    background-color: white;
+    margin-top: 40px;
+}
+
+.edit-post-submit-btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment-text-and-btn {
+    position: relative;
+}
+.comment-textfield {
+    padding: 10px;
+    padding-right: 35px;
 }

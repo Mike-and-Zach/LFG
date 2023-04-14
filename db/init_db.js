@@ -7,6 +7,7 @@ async function dropTables() {
     try {
         console.log("Starting to drop tables...")
         await client.query(`
+            DROP TABLE IF EXISTS game_activities;
             DROP TABLE IF EXISTS comments;
             DROP TABLE IF EXISTS posts;
             DROP TABLE IF EXISTS direct_messages;
@@ -37,6 +38,7 @@ async function createTables() {
                 "gameTitle" varchar(255) NOT NULL,
                 game_activity varchar(255) NOT NULL,
                 description text,
+                system varchar(255) NOT NULL,
                 sent_time TIMESTAMP DEFAULT NOW()
             );
 
@@ -57,6 +59,8 @@ async function createTables() {
               message_text TEXT NOT NULL,
               sent_time TIMESTAMP DEFAULT NOW()
             );
+
+            
         `)
         console.log("Finished building tables!")
     } catch (err) {
@@ -64,6 +68,12 @@ async function createTables() {
         throw err;
     }
 }
+
+// CREATE TABLE game_activities(
+//   id SERIAL PRIMARY KEY,
+//   game_title varchar(255) REFERENCES posts("gameTitle") NOT NULL,
+//   activity_name text NOT NULL
+// );
 
 // inside db/seed.js
 
@@ -114,61 +124,192 @@ async function populateInitialData() {
         username_of_post: "Johndoe",
         gameTitle: "Counter-Strike 2",
         game_activity: "Face it",
-        description: "I have mic and im plat 3"
+        description: "I have mic and im plat 3",
+        system: "Playstation"
       },
       {
         userId: 2,
         username_of_post: "Maxy",
         gameTitle: "Destiny",
         game_activity: "Raids",
-        description: "High level looking to Raid"
+        description: "High level looking to Raid",
+        system: "Xbox"
       },
       {
         userId: 3,
         username_of_post: "Duke",
         gameTitle: "Call of Duty",
         game_activity: "Warzone",
-        description: "50 K/D (not cheating)"
+        description: "50 K/D (not cheating)",
+        system: "PC"
       },
       {
         userId: 3,
         username_of_post: "Duke",
         gameTitle: "Valorant",
         game_activity: "Spike Rush",
-        description: "No mic just want to chill"
+        description: "No mic just want to chill",
+        system: "PC"
       },
       {
         userId: 2,
         username_of_post: "Maxy",
         gameTitle: "Rainbow Six Siege",
         game_activity: "Unranked",
-        description: "Looking to play some causals"
+        description: "Looking to play some causals",
+        system: "Xbox"
       },
       {
         userId: 1,
         username_of_post: "Johndoe",
         gameTitle: "DayZ",
         game_activity: "Role Play",
-        description: "Anyone want to make a RP server?"
+        description: "Anyone want to make a RP server?",
+        system: "Playstation"
       },
       {
         userId: 1,
         username_of_post: "Johndoe",
         gameTitle: "League of Legends",
         game_activity: "Ranked",
-        description: "Im better than you (not toxic)"
+        description: "Im better than you (not toxic)",
+        system: "Playstation"
       },
       {
         userId: 3,
         username_of_post: "Duke",
         gameTitle: "Overwatch 2",
         game_activity: "Ranked",
-        description: "Top 500 gamer.. who wants a carry?"
+        description: "Top 500 gamer.. who wants a carry?",
+        system: "PC"
       },
     ]
 
-    const createdUsers = await Promise.all(users.map(createUser))
+    const gameActivities = [
+      {
+        game_title: "Call of Duty",
+        activity_name: "Warzone"
+      },
+      {
+        game_title: "Call of Duty",
+        activity_name: "DMZ"
+      },
+      {
+        game_title: "Call of Duty",
+        activity_name: "Multiplayer"
+      },
+      {
+        game_title: "Call of Duty",
+        activity_name: "Spec Ops"
+      },
+      {
+        game_title: "Call of Duty",
+        activity_name: "Co op"
+      },
+      {
+        game_title: "Overwatch 2",
+        activity_name: "Ranked"
+      },
+      {
+        game_title: "Overwatch 2",
+        activity_name: "Casual"
+      },
+      {
+        game_title: "Overwatch 2",
+        activity_name: "Arcade"
+      },
+      {
+        game_title: "Overwatch 2",
+        activity_name: "Custom Games"
+      },
+      {
+        game_title: "DayZ",
+        activity_name: "Role Playing"
+      },
+      {
+        game_title: "DayZ",
+        activity_name: "PvP"
+      },
+      {
+        game_title: "DayZ",
+        activity_name: "PvE"
+      },
+      {
+        game_title: "DayZ",
+        activity_name: "Survival"
+      },
+      {
+        game_title: "DayZ",
+        activity_name: "Vanilla"
+      },
+      {
+        game_title: "DayZ",
+        activity_name: "Modded"
+      },
+      {
+        game_title: "Counter-Strike 2",
+        activity_name: "Faceit"
+      },
+      {
+        game_title: "Counter-Strike 2",
+        activity_name: "Ranked"
+      },
+      {
+        game_title: "Counter-Strike 2",
+        activity_name: "Community Servers"
+      },
+      {
+        game_title: "Counter-Strike 2",
+        activity_name: "Danger Zone"
+      },
+      {
+        game_title: "Valorant",
+        activity_name: "Rated"
+      },
+      {
+        game_title: "Valorant",
+        activity_name: "Unrated"
+      },
+      {
+        game_title: "Valorant",
+        activity_name: "Spike Rush"
+      },
+      {
+        game_title: "Valorant",
+        activity_name: "Swift Play"
+      },
+      {
+        game_title: "Destiny",
+        activity_name: "Raids"
+      },
+      {
+        game_title: "Destiny",
+        activity_name: "Crucibal"
+      },
+      {
+        game_title: "Rainbow Six Siege",
+        activity_name: "Ranked"
+      },
+      {
+        game_title: "Rainbow Six Siege",
+        activity_name: "Casual"
+      },
+      {
+        game_title: "League of Legends",
+        activity_name: "Ranked"
+      },
+      {
+        game_title: "League of Legends",
+        activity_name: "Casual"
+      },
+      {
+        game_title: "League of Legends",
+        activity_name: "Aram"
+      },
+      
+    ]
 
+    const createdUsers = await Promise.all(users.map(createUser))
     const createPosts = await Promise.all(posts.map(createPost))
     console.log('createdUsers :>> ', createdUsers);
     console.log('createPosts :>> ', createPosts);

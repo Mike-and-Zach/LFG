@@ -1,5 +1,6 @@
 
 import allGames from "./GameInfo"
+import { Link } from "react-router-dom"
 
 const Sidebar = ({setSelectedGame}) => {
 
@@ -8,7 +9,7 @@ const Sidebar = ({setSelectedGame}) => {
                     <h1 className="sidebar-header">Games</h1>
                     {allGames.map((game, i) => {
                         return (
-                            <p key={i} className="sidebar-name" onClick={() => setSelectedGame(game.title)}>{game.title}</p>
+                           <Link to="/posts" key={i} className="sidebar-link-name" onClick={() => setSelectedGame(game.title)}>{game.title}</Link> 
                         )
                     })}
             </div>

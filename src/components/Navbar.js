@@ -11,8 +11,10 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 const Navbar = ({ setToken }) => {
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
-  const handleReloadPage = () => {
+  const handleReloadHomePage = () => {
     navigate("/posts");
+    window.location.reload()
+    
   };
 
   return (
@@ -35,7 +37,7 @@ const Navbar = ({ setToken }) => {
                 to="/posts"
                 className="single-links"
                 id="home"
-                onClick={handleReloadPage}
+                onClick={handleReloadHomePage}
               >
                 Home
               </Link>
@@ -43,7 +45,7 @@ const Navbar = ({ setToken }) => {
           </li>
           {username && (
             <li className="navbar-links">
-              <div className="inbox-container">
+              <div className="inbox-navbar-container">
                 <MailIcon fontSize="small" sx={{ fontSize: 18 }} />
                 <Link to="/inbox" className="single-links">
                   Inbox

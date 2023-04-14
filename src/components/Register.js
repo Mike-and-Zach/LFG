@@ -42,45 +42,41 @@ const Register = ({ setToken }) => {
         <h1 className="register-header-main">Register</h1>
         <form>
           <div className="login-label-container">
-            <label htmlFor="username">Username:</label> <br />
+            <label htmlFor="username">Username:</label>
           </div>
           <input
             type="text"
             placeholder="Username"
             id="username"
             onChange={(e) => setUsername(e.target.value)}
-          />{" "}
-          <br />
+          />
           <div className="login-label-container">
-            <label htmlFor="email">Email:</label> <br />
+            <label htmlFor="email">Email:</label>
           </div>
           <input
             type="text"
             placeholder="Email"
             id="email"
             onChange={(e) => setEmail(e.target.value)}
-          />{" "}
-          <br />
+          />
           <div className="login-label-container">
-            <label htmlFor="password">Password:</label> <br />
+            <label htmlFor="password">Password:</label>
           </div>
           <input
             type="password"
             placeholder="Password"
             id="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
-          />{" "}
-          <br />
+          />
           <div className="login-label-container">
-            <label htmlFor="password">Confirm Password:</label> <br />
+            <label htmlFor="password">Confirm Password:</label>
           </div>
           <input
             type="password"
             placeholder="Confirm Password"
             id="password"
             onChange={(e) => setPassword(e.target.value)}
-          />{" "}
-          <br />
+          />
           <div className="register-submit-btn-container">
             <input
               type="submit"

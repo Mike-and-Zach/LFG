@@ -34,9 +34,9 @@ router.get("/:postId", async (req, res, next) => {
 
 router.post("/:userId", async (req, res, next) => {
   try {
-    const { username_of_post, gameTitle, game_activity, description } = req.body;
+    const { username_of_post, gameTitle, game_activity, description, system } = req.body;
     const userId = req.params.userId
-    const createdPost = await createPost( {userId: userId, username_of_post, gameTitle, game_activity, description });
+    const createdPost = await createPost( {userId, username_of_post, gameTitle, game_activity, description, system });
     res.send(createdPost);
   } catch ({ name, message }) {
     next({ name, message });

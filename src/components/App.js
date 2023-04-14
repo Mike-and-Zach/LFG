@@ -26,7 +26,7 @@ const App = () => {
         <Routes>
           <Route
             path="/posts"
-            element={<Posts token={token} selectedGame={selectedGame} />}
+            element={<Posts token={token} selectedGame={selectedGame} setSelectedGame={setSelectedGame}/>}
           ></Route>
           <Route
             path="/register"
