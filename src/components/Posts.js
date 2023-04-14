@@ -79,7 +79,6 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
         <form>
           <div className="allgames-select">
             <label htmlFor="gameTitle"></label>
-            <br />
             <select
               name="activities"
               id="activities"
@@ -119,14 +118,13 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
           >
             Description:{" "}
           </label>{" "}
-          <br />
           <textarea
             id="description"
             className="description-text"
+            placeholder="Description..."
             onChange={(e) => setDescription(e.target.value)}
           >
           </textarea>
-          <br /> <br />
           <button onClick={() => setShowMakePost(false)} className="close-btn">
             Close
           </button>
@@ -149,7 +147,6 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
         ) : (
           <p className="posts-header">Home</p>
         )}{" "}
-        <br />
         {showMakePost && makePost()}
         {!showMakePost && selectedGame && (
           <button

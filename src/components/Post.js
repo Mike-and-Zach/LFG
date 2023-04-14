@@ -5,6 +5,7 @@ import EditPost from "./EditPost";
 import xboxLogo from "./game-img/Xbox_logo.png";
 import psLogo from "./game-img/Playstation_icon.png";
 import pcLogo from "./game-img/Pc_logo3.png";
+import SendIcon from '@mui/icons-material/Send';
 
 const Post = ({
   posts,
@@ -12,13 +13,12 @@ const Post = ({
   token,
   filteredPosts,
   selectedGame,
-  setSelectedGame
+  setSelectedGame,
 }) => {
   const [comment, setComment] = useState("");
   const [allComments, setAllComments] = useState([]);
   const [showMessageForm, setShowMessageForm] = useState(false);
   const [directMessage, setDirectMessage] = useState("");
-  const [showEditForm, setShowEditForm] = useState(false);
   const username = localStorage.getItem("username");
   const userId = localStorage.getItem("userId");
   const timeNow = moment();
@@ -103,15 +103,16 @@ const Post = ({
         .map((post) => {
           return (
             <div key={post.id} className="post">
+              {!selectedGame && (
+                <p className="post-game-title">{post.gameTitle}</p>
+              )}
               <div className="game-title-and-description">
                 <div className="game-title-container">
                   <div className="post-user-and-img">
                     <h2 className="game-title">{post.username_of_post}</h2>
                     <p>{chooseSystem(post.system)}</p>
                   </div>
-                  {!selectedGame && (
-                    <p className="post-game-title">{post.gameTitle}</p>
-                  )}
+
                   <p className="post-time-sent">
                     Posted {timeNow.diff(post.sent_time, "minutes")} mins ago
                   </p>
@@ -145,26 +146,26 @@ const Post = ({
                     );
                   })}
               </div>
-              <form>
-                <textarea
-                  type="text"
-                  className="comment-textfield"
-                  placeholder="Comment..."
-                  onChange={(e) => {
-                    setComment(e.target.value);
-                  }}
-                ></textarea>{" "}
-                <br />
-                <div className="add-comment-btn-container">
-                  <input
-                    type="submit"
-                    value="Comment"
-                    onClick={() => handleCommentSubmit(post.id)}
-                    className="add-comment-btn"
-                  />
-                </div>
-              </form>{" "}
-              <br />
+              <div className="comment-text-and-btn">
+                <form>
+                  <textarea
+                    type="text"
+                    className="comment-textfield"
+                    placeholder="Comment..."
+                    onChange={(e) => {
+                      setComment(e.target.value);
+                    }}
+                  ></textarea>
+
+                    <div className="comment-submit-btn-container">
+                    <button
+                      type="submit"
+                      onClick={() => handleCommentSubmit(post.id)}
+                      className="add-comment-btn"
+                    ><SendIcon sx={{ fontSize: 20 }}/></button>
+                    </div>
+                </form>
+              </div>
               <div>
                 {showMessageForm && (
                   <form>
@@ -198,15 +199,8 @@ const Post = ({
                 </button>
               )}
               <div className="delete-post-btn-container">
-                {showEditForm && <EditPost postId={post.id  }/>}
-                {post.userId == userId && (
-                  <button
-                    className="edit-post-btn"
-                    onClick={() => setShowEditForm(!showEditForm)}
-                  >
-                    edit post
-                  </button>
-                )}
+                {<EditPost postId={post.id} postUserId={post.userId} />}
+
                 {post.userId == userId && (
                   <button
                     className="delete-post-btn"
@@ -220,7 +214,6 @@ const Post = ({
             </div>
           );
         })}
-
     </div>
   );
 };

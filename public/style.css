@@ -3,17 +3,17 @@
     margin: 0;
     padding:0;
     font-family: 'Source Code Pro', monospace;
-
-
 }
 
-body {
-    height: 100vh;
+/* body {
+    height: 100;
     width: 100%;
-}
+} */
 
   .app-container {
     display: flex;
+    max-width: 100%;
+    max-height: 100%;
     flex-direction: column;
     color: white;
  }  
@@ -155,8 +155,9 @@ a {
 
 .create-post {
     display: flex;
-    justify-content: center;
-    padding-bottom: 20px;
+    padding: 20px 0px 10px 0px;
+    align-self: center;
+    width: 30%;
 }
 
 .close-btn {
@@ -195,12 +196,6 @@ textarea {
     border-radius: 10px;
 }
 
-.comment-textfield {
-}
-
-.add-comment-btn-container {
-    padding-top: 10px;
-}
 
 textarea:focus {
     border: 2px solid red;
@@ -316,13 +311,19 @@ textarea:focus {
     padding: 6px;
     border-radius: 5px;
     cursor: pointer;
-    border: 1px solid white
+    border: none;
 }
 
 .add-comment-btn:hover {
     background-color: rgba(196, 197, 196, 0.531);
     transition: 400ms;
     transform: translateX(2px);
+}
+
+.comment-submit-btn-container {
+    position: absolute;
+    top: 7px;
+    left: 180px
 }
 
 .delete-post-btn {
@@ -343,6 +344,8 @@ textarea:focus {
 
 .edit-post-form {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     padding-bottom: 20px;
 }
 
@@ -600,6 +603,8 @@ input[type="text"], input[type="password"] {
 
 .post-game-title {
     font-size: 25px;
+    padding-bottom: 15px;
+    align-self: center;
 }
 
 .game-activity {
@@ -684,4 +689,17 @@ hr {
     height: 5px;
     background-color: white;
     margin-top: 40px;
+}
+
+.edit-post-submit-btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment-text-and-btn {
+    position: relative;
+}
+.comment-textfield {
+    padding: 10px;
+    padding-right: 35px;
 }

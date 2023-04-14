@@ -2,13 +2,15 @@ import { useState } from "react";
 import { callApi } from "../api/utils";
 import allGames from "./GameInfo";
 
-const EditPost = ({postId}) => {
+const EditPost = ({postId, postUserId}) => {
     const [editGameTitle, setEditGameTitle] = useState("")
     const [editDescription, setEditDescription] = useState("");
     const [editGameActivity, setEditGameActivity] = useState("")
     const [editUserSystem, setEditUserSystem] = useState("");
     const [editSelectedGame, setEditSelectedGame] = useState("");
-    console.log('postId :>> ', postId);
+    const [showEditForm, setShowEditForm] = useState(false);
+
+    const userId = localStorage.getItem("userId");
 
     const handleEditPost = async () => {
         console.log('description :>> ', description);
@@ -33,10 +35,10 @@ const EditPost = ({postId}) => {
 
     return (
         <div className="edit-post-form">
+            {showEditForm && <div>
              <form>
           <div className="allgames-select">
             <label htmlFor="gameTitle"></label>
-            <br />
             <p>Game</p>
             <select
               name="activities"
@@ -91,32 +93,30 @@ const EditPost = ({postId}) => {
           >
             Description:{" "}
           </label>{" "}
-          <br />
           <textarea
             id="description"
             className="description-text"
             onChange={(e) => setEditDescription(e.target.value)}
           >
           </textarea>
-          <br /> <br />
-          <button onClick={() => setShowMakePost(false)} className="close-btn">
-            Close
-          </button>
+          <div className="edit-post-submit-btn-container">
           <input
             type="submit"
-            value="Submit"
+            value="Confirm"
             onClick={() => handleEditPost()}
             className="submit-post-btn"
           />
+          </div>
         </form>
-        {postUserId == userId && (
+        </div>}
+
                   <button
                     className="edit-post-btn"
                     onClick={() => setShowEditForm(!showEditForm)}
                   >
                     edit post
                   </button>
-                )}
+
         </div>
     )
 }
