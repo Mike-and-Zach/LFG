@@ -12,8 +12,9 @@ const Navbar = ({ setToken }) => {
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
   const handleReloadHomePage = () => {
-    window.location.reload()
     navigate("/posts");
+    window.location.reload()
+    
   };
 
   return (

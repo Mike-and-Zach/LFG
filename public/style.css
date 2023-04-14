@@ -2,7 +2,8 @@
     box-sizing: border-box;
     margin: 0;
     padding:0;
-    font-family: 'Anton', sans-serif;
+    font-family: 'Source Code Pro', monospace;
+
 
 }
 
@@ -114,6 +115,10 @@ a {
 
 .posts {
     width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .post {
@@ -126,9 +131,6 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* background-image: url("img/CS_Background.jpeg"); */
-    background-repeat: no-repeat;
-    background-size: cover;
     padding-top: 10px;
     padding-bottom: 20px;
 }
@@ -386,7 +388,7 @@ img {
     width: 100%;
 }
 
-.sidebar-name {
+.sidebar-link-name {
     cursor: pointer;
     width: 60%;
     color: black;
@@ -397,7 +399,7 @@ img {
     border-radius: 10px;
 }
 
-.sidebar-name:hover {
+.sidebar-link-name:hover {
     background-color: rgb(229, 229, 229);
     transition: 400ms;
     box-shadow: 5px 5px 8px rgb(151, 151, 151);
@@ -489,6 +491,9 @@ option {
 
 .game-title-select {
     margin-bottom: 10px;
+    padding: 10px;
+    background-color: #202124;
+    color: white;
 }
 
 .user-login-container {
@@ -551,12 +556,12 @@ input[type="text"], input[type="password"] {
 }
 
 .post:nth-child(even) {
-    background-color: #202124;
+    background-color: #333333a5;
 }
 
 .post:nth-child(odd) {
     background-color: #333333a5;
-}
+} 
 
 .register-container-main {
     display: flex;
@@ -604,9 +609,9 @@ input[type="text"], input[type="password"] {
 .inbox-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
     padding-top: 20px;
-    padding-left: 15px;
 }
 
 .inbox-header {
@@ -618,10 +623,65 @@ input[type="text"], input[type="password"] {
     padding: 10px;
     display: flex;
     flex-direction: column;
+    background-color: #333333a5;
+    width: 100%;
 }
 
-.inbox-user-and-sent-time {
+.inbox-user-and-time {
     display: flex;
     align-items: center;
-    color: green;
+    padding-bottom: 10px;
+}
+
+.system-selection {
+    display: flex;
+    flex-direction: column;
+}
+
+.ind-system-selection {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.system-label {
+    padding-left: 10px;
+}
+
+.system-header {
+    padding-bottom: 10px;
+}
+
+.allgames-select {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.post-user-and-img {
+    display: flex;
+    align-items: center;
+}
+
+.game-title {
+    padding-right: 10px;
+}
+
+.system-logo {
+    height: 30px;
+}
+
+.sender-username {
+    font-size: 25px;
+}
+
+.inbox-sent-time {
+    padding-left: 10px;
+    font-size: 10px;
+    font-weight: 100%;
+}
+
+hr {
+    height: 5px;
+    background-color: white;
+    margin-top: 40px;
 }

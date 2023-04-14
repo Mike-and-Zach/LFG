@@ -2,14 +2,17 @@ import { callApi } from "../api/utils";
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import allGames from "./GameInfo";
+import defaultBackground from "./game-img/default_background.png"
 
-const Posts = ({ token, setSelectedGame, selectedGame }) => {
+const Posts = ({ token, selectedGame, setSelectedGame }) => {
   const [showMakePost, setShowMakePost] = useState(false);
   const [gameTitle, setGameTitle] = useState("");
   const [description, setDescription] = useState("");
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [gameActivity, setGameActivity] = useState("");
+  const [userSystem, setUserSystem] = useState("");
+  console.log('userSystem :>> ', userSystem);
 
   const fetchPosts = async () => {
     try {
@@ -52,6 +55,7 @@ const Posts = ({ token, setSelectedGame, selectedGame }) => {
           gameTitle: selectedGame ? selectedGame : gameTitle,
           game_activity: gameActivity,
           description: description,
+          system: userSystem
         },
       });
     } catch (err) {
@@ -60,11 +64,11 @@ const Posts = ({ token, setSelectedGame, selectedGame }) => {
   };
 
   const getUrl = (gameTitle) => {
-      let url = "";
+      let url = defaultBackground
       allGames.map(game => {
-        if (game.title === gameTitle) {
+        if (game.title == gameTitle) {
           url = game.url
-        }
+        } 
       })
       return url
   }
@@ -84,7 +88,7 @@ const Posts = ({ token, setSelectedGame, selectedGame }) => {
                 setGameActivity(e.target.value);
               }}
             >
-              {allGames.map((game, i) => {
+              {allGames.map((game) => {
                 if (game.title === selectedGame) {
                   return game.activities.map((activity, index) => {
                     return <option key={index} value={activity}>{activity}</option>;
@@ -92,6 +96,22 @@ const Posts = ({ token, setSelectedGame, selectedGame }) => {
                 }
               })}
             </select>
+            <div className="system-selection">
+              <p className="system-header">System: </p>
+                <div className="ind-system-selection">
+                <input type="radio" id="xbox" name="system" value="Xbox" onChange={e => {setUserSystem(e.target.value)}}/>
+                <label htmlFor="xbox" className="system-label">Xbox</label>
+                </div>
+                <div className="ind-system-selection">
+                <input type="radio" id="playstation" name="system" value="Playstation" onChange={e => {setUserSystem(e.target.value)}}/>
+                <label htmlFor="xbox" className="system-label">Playstation</label>
+                </div>
+                <div className="ind-system-selection">
+                <input type="radio" id="pc" name="system" value="PC" onChange={e => {setUserSystem(e.target.value)}}/>
+                <label htmlFor="xbox" className="system-label">PC</label>
+                </div>
+            </div>
+            
           </div>
           <label
             htmlFor="description"
@@ -105,8 +125,7 @@ const Posts = ({ token, setSelectedGame, selectedGame }) => {
             className="description-text"
             onChange={(e) => setDescription(e.target.value)}
           >
-            {" "}
-          </textarea>{" "}
+          </textarea>
           <br /> <br />
           <button onClick={() => setShowMakePost(false)} className="close-btn">
             Close
@@ -123,8 +142,8 @@ const Posts = ({ token, setSelectedGame, selectedGame }) => {
   };
 
   return (
-    <div className="posts">
-      <div className="create-post-btn-and-header" style={{backgroundImage: `url(${getUrl(selectedGame)})`}}>
+    <div className="posts" style={{backgroundImage: `url(${getUrl(selectedGame)})`}}>
+      <div className="create-post-btn-and-header">
         {(selectedGame) ? (
           <p className="posts-header">{selectedGame}</p>
         ) : (
@@ -151,6 +170,8 @@ const Posts = ({ token, setSelectedGame, selectedGame }) => {
             filteredPosts={filteredPosts}
             selectedGame={selectedGame}
             gameActivity={gameActivity}
+            userSystem={userSystem}
+            setSelectedGame={setSelectedGame}
           />
         }
 

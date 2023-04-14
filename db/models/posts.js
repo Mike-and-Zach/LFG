@@ -36,17 +36,17 @@ async function getAllPostsAndUsers() {
   }
 }
 
-async function createPost( {userId, username_of_post, gameTitle, game_activity, description} ) {
+async function createPost( {userId, username_of_post, gameTitle, game_activity, description, system} ) {
   try {
     const {
       rows: [post],
     } = await client.query(
       `
-          INSERT INTO posts("userId", username_of_post, "gameTitle", game_activity, description)
-          VALUES ($1, $2, $3, $4, $5)
+          INSERT INTO posts("userId", username_of_post, "gameTitle", game_activity, description, system)
+          VALUES ($1, $2, $3, $4, $5, $6)
           RETURNING *;
       `,
-      [userId, username_of_post, gameTitle, game_activity, description]
+      [userId, username_of_post, gameTitle, game_activity, description, system]
     );
   
     return post;

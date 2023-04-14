@@ -38,6 +38,7 @@ async function createTables() {
                 "gameTitle" varchar(255) NOT NULL,
                 game_activity varchar(255) NOT NULL,
                 description text,
+                system varchar(255) NOT NULL,
                 sent_time TIMESTAMP DEFAULT NOW()
             );
 
@@ -123,56 +124,64 @@ async function populateInitialData() {
         username_of_post: "Johndoe",
         gameTitle: "Counter-Strike 2",
         game_activity: "Face it",
-        description: "I have mic and im plat 3"
+        description: "I have mic and im plat 3",
+        system: "Playstation"
       },
       {
         userId: 2,
         username_of_post: "Maxy",
         gameTitle: "Destiny",
         game_activity: "Raids",
-        description: "High level looking to Raid"
+        description: "High level looking to Raid",
+        system: "Xbox"
       },
       {
         userId: 3,
         username_of_post: "Duke",
         gameTitle: "Call of Duty",
         game_activity: "Warzone",
-        description: "50 K/D (not cheating)"
+        description: "50 K/D (not cheating)",
+        system: "PC"
       },
       {
         userId: 3,
         username_of_post: "Duke",
         gameTitle: "Valorant",
         game_activity: "Spike Rush",
-        description: "No mic just want to chill"
+        description: "No mic just want to chill",
+        system: "PC"
       },
       {
         userId: 2,
         username_of_post: "Maxy",
         gameTitle: "Rainbow Six Siege",
         game_activity: "Unranked",
-        description: "Looking to play some causals"
+        description: "Looking to play some causals",
+        system: "Xbox"
       },
       {
         userId: 1,
         username_of_post: "Johndoe",
         gameTitle: "DayZ",
         game_activity: "Role Play",
-        description: "Anyone want to make a RP server?"
+        description: "Anyone want to make a RP server?",
+        system: "Playstation"
       },
       {
         userId: 1,
         username_of_post: "Johndoe",
         gameTitle: "League of Legends",
         game_activity: "Ranked",
-        description: "Im better than you (not toxic)"
+        description: "Im better than you (not toxic)",
+        system: "Playstation"
       },
       {
         userId: 3,
         username_of_post: "Duke",
         gameTitle: "Overwatch 2",
         game_activity: "Ranked",
-        description: "Top 500 gamer.. who wants a carry?"
+        description: "Top 500 gamer.. who wants a carry?",
+        system: "PC"
       },
     ]
 

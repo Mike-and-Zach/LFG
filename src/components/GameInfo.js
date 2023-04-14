@@ -1,11 +1,11 @@
-import cs_img from "./game-img/CS_Background.jpeg"
+import cs_img from "./game-img/Counter-Strike_background.png"
 import cod_img from "./game-img/Call_of_Duty_background.jpg"
-import overwatch_img from "./game-img/Overwatch_background.jpeg"
+import overwatch_img from "./game-img/Overwatch_background2.png"
 import dayZ_img from "./game-img/dayz_background.jpeg"
-import valorant_img from "./game-img/Valorant_background.jpeg"
-import destiny_img from "./game-img/Destiny_background.jpeg"
+import valorant_img from "./game-img/valorant_background2.png"
+import destiny_img from "./game-img/Destiny_background2.jpg"
 import rb6_img from "./game-img/RB6_background.png"
-import lol_img from "./game-img/LoL_background.jpeg"
+import lol_img from "./game-img/LoL_background.png"
 
     
     const allGames = [
