@@ -2,9 +2,10 @@ import { useState } from "react";
 import { callApi } from "../api/utils";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ token, setToken }) => {
+const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,6 +20,7 @@ const Login = ({ token, setToken }) => {
       localStorage.setItem("userId", data.user.id);
       navigate("/posts");
     } catch (err) {
+      setLoginError(err)
       console.log(err);
     }
   };
@@ -27,7 +29,7 @@ const Login = ({ token, setToken }) => {
     <div className="user-login-container">
       <div className="user-login-inner">
         <h1 className="login-header-page">Login</h1>
-        <form>
+        <form className="login-form">
           <div className="login-label-container">
             <label htmlFor="username" className="login-label">
               Email:
@@ -62,6 +64,9 @@ const Login = ({ token, setToken }) => {
             />
           </div>
         </form>
+
+            <p className="login-error">{loginError}</p>
+
       </div>
     </div>
   );

@@ -19,10 +19,12 @@ const Navbar = ({ setToken }) => {
 
   return (
     <div className="navbar-container">
+      <Link to="/posts" onClick={handleReloadHomePage}>
       <div className="navbar-group1">
         <img src="/img/lfg-logo.jpeg" />
         <h2 className="header">ImLFG</h2>
       </div>
+      </Link>
       <div className="socials">
         <InstagramIcon className="social" id="insta" fontSize="large" />
         <FacebookIcon className="social" fontSize="large" />

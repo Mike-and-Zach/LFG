@@ -10,28 +10,31 @@ const Register = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [registerError, setRegisterError] = useState("");
+  console.log('registerError :>> ', registerError);
 
   const navigate = useNavigate();
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
     try {
-      if (password === confirmPassword) {
+      if (password !== confirmPassword) {
+        setRegisterError("Passwords do not match!")
+      } else {
         const data = await callApi({
           method: "POST",
           path: "/users/register",
           body: { username, email, password },
         });
-        console.log("RegisterData :>> ", data);
         window.localStorage.setItem("username", data.user.username);
         window.localStorage.setItem("userId", data.user.id);
         window.localStorage.setItem("token", data.token);
         setToken(data.token);
+        
         navigate("/posts");
-      } else {
-        console.log("error");
       }
     } catch (err) {
+      setRegisterError(err)
       console.log(err);
     }
   };
@@ -85,6 +88,7 @@ const Register = ({ setToken }) => {
               onClick={(e) => handleCreateUser(e)}
             />
           </div>
+          <p>{registerError}</p>
         </form>
       </div>
     </div>

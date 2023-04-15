@@ -1,0 +1,64 @@
+import { useState } from "react";
+import { callApi } from "../api/utils";
+
+const MessageForm= ({postUserId, postUsername, token}) => {
+
+  const [showMessageForm, setShowMessageForm] = useState(false);
+  const [directMessage, setDirectMessage] = useState("");
+  const userId = localStorage.getItem("userId");
+
+  console.log('token :>> ', token);
+  const sendDirectMessage = async (recipientId, recipientUsername) => {
+    try {
+      const data = callApi({
+        method: "POST",
+        path: `/direct_message/${recipientId}`,
+        body: {
+          message_text: directMessage,
+          recipient_username: recipientUsername,
+        },
+        token,
+      });
+      console.log('data :>> ', data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
+    return (
+        <div>
+        {showMessageForm && (
+          <form className="message-form">
+            <textarea
+              type="text"
+              placeholder="Message"
+              onChange={(e) => setDirectMessage(e.target.value)}
+            ></textarea>
+            <div className="send-message-btn-container">
+              <input
+                type="submit"
+                value="send"
+                className="send-message-btn"
+                onClick={() => sendDirectMessage(postUserId, postUsername)}
+              />
+            </div>
+          </form>
+        )}
+        {postUserId != userId && (
+          <div className="message-user-btn-container">
+        <button
+          className="message-user-btn"
+          onClick={() => setShowMessageForm(!showMessageForm)}
+        >
+          Message User
+        </button>
+        </div>
+      )}
+      </div>
+      
+      
+    )
+}
+
+export default MessageForm

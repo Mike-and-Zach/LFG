@@ -2,15 +2,22 @@ const express = require('express');
 const router = express.Router();
 const jwt = require("jsonwebtoken")
 
-const { createUser, getAllUsers, getUserByEmail, validateAndGetUser } = require("../db/models/user");
+const { createUser, getAllUsers, getUserByEmail, validateAndGetUser, getUserByUsername } = require("../db/models/user");
 
 router.post("/register", async (req, res, next) => {
     try {
-        const userExists = await getUserByEmail(req.body.email);
-        if (userExists) {
+        const userEmailExists = await getUserByEmail(req.body.email);
+        if (userEmailExists) {
             next({
                 name: "Error signing up",
                 message: "that email is already in use"
+            });
+        }
+        const usernameExists = await getUserByUsername(req.body.username);
+        if (usernameExists) {
+            next({
+                name: "Error signing up",
+                message: "That username is already in use"
             });
         }
         if (req.body.password.length < 8) {
@@ -20,7 +27,6 @@ router.post("/register", async (req, res, next) => {
             })
         }
         const user = await createUser(req.body);
-        console.log("user ==> ", user);
         if (user) {
             const token = jwt.sign({
                 id:user.id,
