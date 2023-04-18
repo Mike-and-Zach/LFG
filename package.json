@@ -29,7 +29,8 @@
     "server:dev": "nodemon index.js",
     "client:dev": "react-scripts start",
     "client:build": "react-scripts build",
-    "start:dev": "concurrently \"npm run client:build\" \"npm run client:dev\" \"npm run server:dev\""
+    "start:dev": "concurrently \"npm run client:build\" \"npm run client:dev\" \"npm run server:dev\"",
+    "start:dev:strict": "npm run client:build && npm run server:dev" 
   },
   "browserslist": {
     "production": [
