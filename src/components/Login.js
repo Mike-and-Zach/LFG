@@ -19,6 +19,7 @@ const Login = ({ setToken }) => {
       localStorage.setItem("username", data.user.username);
       localStorage.setItem("userId", data.user.id);
       navigate("/posts");
+      console.log('data :>> ', data);
     } catch (err) {
       setLoginError(err)
       console.log(err);
@@ -55,6 +56,7 @@ const Login = ({ setToken }) => {
             className="input-login"
             onChange={(e) => setPassword(e.target.value)}
           />{" "}
+          <p className="login-error">{loginError}</p>
           <div className="login-btn-form-container">
             <input
               type="submit"
@@ -65,9 +67,9 @@ const Login = ({ setToken }) => {
           </div>
         </form>
 
-            <p className="login-error">{loginError}</p>
 
       </div>
+
     </div>
   );
 };

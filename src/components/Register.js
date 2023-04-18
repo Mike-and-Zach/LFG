@@ -43,7 +43,7 @@ const Register = ({ setToken }) => {
     <div className="register-container-main">
       <div className="user-register-inner">
         <h1 className="register-header-main">Register</h1>
-        <form>
+        <form className="register-form">
           <div className="login-label-container">
             <label htmlFor="username">Username:</label>
           </div>
@@ -80,6 +80,7 @@ const Register = ({ setToken }) => {
             id="password"
             onChange={(e) => setPassword(e.target.value)}
           />
+          <p className="register-error">{registerError}</p>
           <div className="register-submit-btn-container">
             <input
               type="submit"
@@ -88,10 +89,11 @@ const Register = ({ setToken }) => {
               onClick={(e) => handleCreateUser(e)}
             />
           </div>
-          <p>{registerError}</p>
         </form>
       </div>
+      
     </div>
+    
   );
 };
 

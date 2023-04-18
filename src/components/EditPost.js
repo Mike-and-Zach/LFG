@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { callApi } from "../api/utils";
 import allGames from "./GameInfo";
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
+import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 
 const EditPost = ({ postId, postUserId }) => {
   const [editGameTitle, setEditGameTitle] = useState("");
@@ -9,12 +11,17 @@ const EditPost = ({ postId, postUserId }) => {
   const [editUserSystem, setEditUserSystem] = useState("");
   const [editSelectedGame, setEditSelectedGame] = useState("");
   const [showEditForm, setShowEditForm] = useState(false);
+  const [editError, setEditError] = useState("");
+  console.log('editSelectedGame :>> ', editSelectedGame);
 
   const userId = localStorage.getItem("userId");
 
   const handleEditPost = async () => {
     console.log("description :>> ", description);
     try {
+      // if (!editGameTitle || !editDescription || !editGameActivity || !editUserSystem) {
+      //   setEditError("")
+      // }
       const data = await callApi({
         method: "PATCH",
         path: `/posts/${postId}`,
@@ -36,11 +43,11 @@ const EditPost = ({ postId, postUserId }) => {
   return (
     <div className="edit-post-form">
       {showEditForm && (
-        <div>
+        <div className="edit-post-form-inner">
           <form>
             <div className="allgames-select">
               <label htmlFor="gameTitle"></label>
-              <p>Game</p>
+              <p className="system-header">Game</p>
               <select
                 name="activities"
                 id="activities"
@@ -55,10 +62,11 @@ const EditPost = ({ postId, postUserId }) => {
                     <option key={i} value={game.title}>
                       {game.title}
                     </option>
+
                   );
                 })}
               </select>
-              <p>Activity</p>
+              <p className="system-header">Activity</p>
               <select
                 name="activities"
                 id="activities"
@@ -80,50 +88,52 @@ const EditPost = ({ postId, postUserId }) => {
                 })}
               </select>
               <div className="system-selection">
-                <p className="system-header">System: </p>
-                <div className="ind-system-selection">
-                  <input
-                    type="radio"
-                    id="xbox"
-                    name="system"
-                    value="Xbox"
-                    onChange={(e) => {
-                      setEditUserSystem(e.target.value);
-                    }}
-                  />
-                  <label htmlFor="xbox" className="system-label">
-                    Xbox
-                  </label>
-                </div>
-                <div className="ind-system-selection">
-                  <input
-                    type="radio"
-                    id="playstation"
-                    name="system"
-                    value="Playstation"
-                    onChange={(e) => {
-                      setEditUserSystem(e.target.value);
-                    }}
-                  />
-                  <label htmlFor="xbox" className="system-label">
-                    Playstation
-                  </label>
-                </div>
-                <div className="ind-system-selection">
-                  <input
-                    type="radio"
-                    id="pc"
-                    name="system"
-                    value="PC"
-                    onChange={(e) => {
-                      setEditUserSystem(e.target.value);
-                    }}
-                  />
-                  <label htmlFor="xbox" className="system-label">
-                    PC
-                  </label>
-                </div>
-              </div>
+              <p className="system-header">System</p>
+
+                <input
+                  type="radio"
+                  id="xbox"
+                  name="system"
+                  value="Xbox"
+                  className="game-activity-radio"
+                  onChange={(e) => {
+                    setEditUserSystem(e.target.value);
+                  }}
+                />
+                <label htmlFor="xbox" className="system-label">
+                  Xbox
+                </label>
+
+
+                <input
+                  type="radio"
+                  id="playstation"
+                  name="system"
+                  value="Playstation"
+                  className="game-activity-radio"
+                  onChange={(e) => {
+                    setEditUserSystem(e.target.value);
+                  }}
+                />
+                <label htmlFor="playstation" className="system-label">
+                  Playstation
+                </label>
+
+
+                <input
+                  type="radio"
+                  id="pc"
+                  name="system"
+                  value="PC"
+                  className="game-activity-radio"
+                  onChange={(e) => {
+                    setEditUserSystem(e.target.value);
+                  }}
+                />
+                <label htmlFor="pc" className="system-label">
+                  PC
+                </label>
+            </div>
             </div>
             <label
               htmlFor="description"
@@ -145,6 +155,7 @@ const EditPost = ({ postId, postUserId }) => {
               />
             </div>
           </form>
+          <p className="arrow-right"><ArrowRightOutlinedIcon sx={{fontSize: 45}}/></p>
         </div>
       )}
 
@@ -152,7 +163,7 @@ const EditPost = ({ postId, postUserId }) => {
         className="edit-post-btn"
         onClick={() => setShowEditForm(!showEditForm)}
       >
-        edit post
+        <EditNoteOutlinedIcon />
       </button>}
     </div>
   );
