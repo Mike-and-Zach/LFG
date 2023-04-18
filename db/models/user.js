@@ -45,14 +45,14 @@ async function getAllUsers() {
     return user
   }
 
-  async function validateAndGetUser({email, password}) {
+  async function validateAndGetUser(email, password) {
     const user = await getUserByEmail(email);
     console.log('validateddduser :>> ', user);
     if(!user) {
       throw new Error("Incorrect email or password")
     }
     const hashedPassword = user.password;
-    const isValid = bcrypt.compare(await bcrypt.hash(password, 10), hashedPassword);
+    const isValid = await bcrypt.compare(password, hashedPassword);
     if (isValid) {
       delete user.password;
       return user;
@@ -64,7 +64,6 @@ async function getAllUsers() {
       SELECT * FROM users
       WHERE username = $1
     `, [username]);
-
     return user;
   }
 
