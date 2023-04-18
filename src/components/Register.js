@@ -72,12 +72,12 @@ const Register = ({ setToken }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <div className="login-label-container">
-            <label htmlFor="password">Confirm Password:</label>
+            <label htmlFor="password-confirm">Confirm Password:</label>
           </div>
           <input
             type="password"
             placeholder="Confirm Password"
-            id="password"
+            id="password-confirm"
             onChange={(e) => setPassword(e.target.value)}
           />
           <p className="register-error">{registerError}</p>
@@ -91,7 +91,6 @@ const Register = ({ setToken }) => {
           </div>
         </form>
       </div>
-      
     </div>
     
   );
