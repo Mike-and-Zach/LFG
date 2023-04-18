@@ -19,7 +19,7 @@
 }
 
 .navbar-container {
-    z-index: 1;
+    z-index: 2;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -208,7 +208,8 @@ textarea:focus {
     outline: white;
     border: 1px solid #d5d5d5;
     box-shadow: 2px 2px 2px rgba(139, 139, 139, 0.437);
-    transition: 150ms;
+    transition: 300ms;
+    transform: translateX(3px);
 }
 
 .submit-post-btn {
@@ -244,8 +245,8 @@ textarea:focus {
 }
 
 .send-message-btn-container {
-    padding-left: 120px;
-    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
     padding-bottom: 10px;
 }
 
@@ -356,21 +357,27 @@ textarea:focus {
 
 .edit-post-form {
     display: flex;
+    position: absolute;
+    top: 33px;
+    right: 0px;
+    z-index: 1;
     flex-direction: column;
     align-items: center;
     padding-bottom: 20px;
 }
 
+.edit-post-form-inner {
+    background-color: #202124a5;
+    position: absolute;
+    right: 40px;
+}
+
 .edit-post-btn {
-    background-color: #202124;
+    background-color: #20212400;
     color: yellow;
-    padding: 4px;
-    border-radius: 5px;
     cursor: pointer;
-    border: 1px solid white;
-    margin-right: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    border: none;
+    border-radius: 5px;
 }
 
 .edit-post-btn:hover {
@@ -400,7 +407,6 @@ img {
 .whole {
     display: flex;
     background-color: #202124;
-    justify-content: space-around;
     width: 100%;
 }
 
@@ -517,11 +523,12 @@ option {
     color: white;
 }
 
-/* .user-login-container {
-    display: flex;
+.user-login-container {
+    position: absolute;
+    right: 30%;
     padding-top: 20px;
-    align-items: center;
-} */
+    width: 20%;
+}
 
 .login-header-page {
     display: flex;
@@ -561,7 +568,8 @@ input[type="password"] {
 .login-btn-form-container {
     display: flex;
     justify-content: center;
-    padding-top: 40px;
+    padding-top: 20px;
+
 }
 
 .login-btn-form {
@@ -588,11 +596,10 @@ input[type="password"] {
 }
 
 .register-container-main {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
+    position: absolute;
+    right: 30%;
     padding-top: 20px;
+    width: 20%;
 }
 
 .register-header-main {
@@ -661,20 +668,25 @@ input[type="password"] {
 
 .system-selection {
     display: flex;
+    align-items: center;
     flex-direction: column;
-}
-
-.ind-system-selection {
-    padding-left: 10px;
-    padding-bottom: 10px;
+    border-radius: 10px;
 }
 
 .system-label {
-    padding-left: 10px;
+    padding: 10px;
+    width: 200px;
+    background-color: #202124d0;
+    text-align: center;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid white;
+    cursor: pointer;
 }
 
 .system-header {
     padding-bottom: 10px;
+    text-align: center;
 }
 
 .allgames-select {
@@ -735,12 +747,32 @@ hr {
 
 .message-form {
     position: absolute;
-    background-color: rgba(152, 152, 152, 0.31);
-    left: 40%;
+    background-color: #202124a5;
+    top: 128px;
+    left: 200px;
+    border-radius: 10px;
+    padding: 10px 10px  0px 10px;
+}
+
+.message-form-arrow-left {
+    position: absolute;
+    color: #202124a5;
+    top: -5px;
+    left: -29px;
 }
 
 .message-user-btn-container {
     padding-bottom: 10px;
+}
+
+.message-form textarea {
+    resize: none;
+    background-color: #202124;
+    padding: 20px;
+    text-align: start;
+    color: white;
+    border-radius: 10px;
+    line-height: 20px
 }
 
 .login-form {
@@ -748,8 +780,58 @@ hr {
     position: relative;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
 .login-error {
+    display: flex;
+    text-align: center;
+    color: red;
+    padding-top: 3px;
+}
 
+.register-error {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: red;
+    padding-top: 3px;
+}
+
+.register-form {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.create-post-error {
+    text-align: center;
+    color: red;
+    font-weight: 800;
+    font-size: 20px;
+    padding-bottom: 7px;
+}
+
+.post-submit-and-close-btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-activity-radio {
+    display: none;
+}
+
+.game-activity-radio:checked + .system-label {
+    background-color: #abaaaa;
+    transition: 400ms;
+    transform: translateX(3px);
+}
+
+.arrow-right {
+    background-color: #20212400;
+    color: #202124a5;
+    position: absolute;
+    top: -10px;
+    right: -25px;
 }

@@ -14,6 +14,7 @@ const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [selectedGame, setSelectedGame] = useState("");
 
+
   useEffect(() => {
     localStorage.setItem("token", token);
   }, [token]);
@@ -22,11 +23,11 @@ const App = () => {
     <div className="app-container">
       <Navbar setToken={setToken} />
       <div className="whole">
-        <Sidebar setSelectedGame={setSelectedGame} />
+        <Sidebar setSelectedGame={setSelectedGame} selectedGame={selectedGame}/>
         <Routes>
           <Route
             path="/posts"
-            element={<Posts token={token} selectedGame={selectedGame} setSelectedGame={setSelectedGame}/>}
+            element={<Posts token={token} selectedGame={selectedGame} />}
           ></Route>
           <Route
             path="/register"

@@ -57,17 +57,17 @@ router.post("/login", async (req, res, next) => {
         if (!email || !password) {
             next({
                 name: "Missing CredentialsError",
-                message: "Please supply both an username and a password"
+                message: "Please supply both a username and password"
             })
         }
-        const user = await validateAndGetUser({email, password})
+        const user = await validateAndGetUser(email, password);
         console.log(user);
 
         if (user) {
             const token = jwt.sign(
                 {
                     id: user.id,
-                    email: user.email
+                    email: user.email,
                 },
                 process.env.JWT_SECRET
             );
@@ -81,4 +81,4 @@ router.post("/login", async (req, res, next) => {
     }
 })
 
-module.exports = router
+module.exports = router;

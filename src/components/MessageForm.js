@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { callApi } from "../api/utils";
+import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
 
 const MessageForm= ({postUserId, postUsername, token}) => {
 
@@ -42,6 +43,8 @@ const MessageForm= ({postUserId, postUsername, token}) => {
                 className="send-message-btn"
                 onClick={() => sendDirectMessage(postUserId, postUsername)}
               />
+        <p className="message-form-arrow-left"><ArrowLeftOutlinedIcon sx={{fontSize: 50}}/></p>
+
             </div>
           </form>
         )}
@@ -53,7 +56,9 @@ const MessageForm= ({postUserId, postUsername, token}) => {
         >
           Message User
         </button>
+
         </div>
+        
       )}
       </div>
       

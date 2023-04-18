@@ -1,8 +1,10 @@
 
+import { useEffect } from "react"
 import allGames from "./GameInfo"
 import { Link } from "react-router-dom"
 
-const Sidebar = ({setSelectedGame}) => {
+const Sidebar = ({setSelectedGame, selectedGame}) => {
+
 
     return (
         <div className="sidebar-container">

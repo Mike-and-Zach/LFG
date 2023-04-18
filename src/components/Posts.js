@@ -2,11 +2,10 @@ import { callApi } from "../api/utils";
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import allGames from "./GameInfo";
-import defaultBackground from "./game-img/default_background.png";
+import defaultBackground from "./game-img/stock_gaming_background.jpeg";
 import { useNavigate } from "react-router-dom";
 
 const Posts = ({ token, selectedGame, setSelectedGame }) => {
-  const [showMakePost, setShowMakePost] = useState(false);
   const [gameTitle, setGameTitle] = useState("");
   const [description, setDescription] = useState("");
   const [posts, setPosts] = useState([]);
@@ -14,12 +13,8 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
   const [gameActivity, setGameActivity] = useState("");
   const [userSystem, setUserSystem] = useState("");
   const [createPostError, setCreatePostError] = useState("");
+  const [showMakePost, setShowMakePost] = useState(false);
   const navigate = useNavigate();
-  console.log('createPostError :>> ', createPostError);
-  console.log('gameActivity :>> ', gameActivity);
-  console.log('description :>> ', description);
-  console.log('userSystem :>> ', userSystem);
-  console.log('gameTitle :>> ', selectedGame);
 
   const fetchPosts = async () => {
     try {
@@ -46,6 +41,11 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
     }
   };
 
+  const handleCloseForm = () => {
+    setCreatePostError("");
+    setShowMakePost(false);
+  }
+
   useEffect(() => {
     fetchFilteredPosts();
   }, [selectedGame]);
@@ -53,7 +53,7 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
   const handleMakePost = async (e) => {
     e.preventDefault();
     try {
-      const userId = window.localStorage.getItem("userId");
+      const userId =  localStorage.getItem("userId");
       const username = localStorage.getItem("username");
       if (selectedGame && gameActivity && description && userSystem) {
         const data = await callApi({
@@ -61,20 +61,19 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
           path: `/posts/${userId}`,
           body: {
             username_of_post: username,
-            gameTitle: selectedGame ? selectedGame : gameTitle,
+            gameTitle: selectedGame ? selectedGame : gameTitle ,
             game_activity: gameActivity,
             description: description,
             system: userSystem,
           },
         });
         navigate("/posts");
-        window.location.reload()
+        window.location.reload();
       } else {
-        setCreatePostError("Missing Credentials")
+        setCreatePostError("Missing Credentials");
       }
-      
     } catch (err) {
-      setCreatePostError(err)
+      setCreatePostError(err);
       console.log(err);
     }
   };
@@ -117,13 +116,14 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
               })}
             </select>
             <div className="system-selection">
-              <p className="system-header">System: </p>
-              <div className="ind-system-selection">
+              <p className="system-header">System</p>
+
                 <input
                   type="radio"
                   id="xbox"
                   name="system"
                   value="Xbox"
+                  className="game-activity-radio"
                   onChange={(e) => {
                     setUserSystem(e.target.value);
                   }}
@@ -131,35 +131,36 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
                 <label htmlFor="xbox" className="system-label">
                   Xbox
                 </label>
-              </div>
-              <div className="ind-system-selection">
+
+
                 <input
                   type="radio"
                   id="playstation"
                   name="system"
                   value="Playstation"
+                  className="game-activity-radio"
                   onChange={(e) => {
                     setUserSystem(e.target.value);
                   }}
                 />
-                <label htmlFor="xbox" className="system-label">
+                <label htmlFor="playstation" className="system-label">
                   Playstation
                 </label>
-              </div>
-              <div className="ind-system-selection">
+
+
                 <input
                   type="radio"
                   id="pc"
                   name="system"
                   value="PC"
+                  className="game-activity-radio"
                   onChange={(e) => {
                     setUserSystem(e.target.value);
                   }}
                 />
-                <label htmlFor="xbox" className="system-label">
+                <label htmlFor="pc" className="system-label">
                   PC
                 </label>
-              </div>
             </div>
           </div>
           <label
@@ -174,16 +175,21 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
             placeholder="Description..."
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
-          <p>{createPostError}</p>
-          <button onClick={() => setShowMakePost(false)} className="close-btn">
-            Close
-          </button>
-          <input
-            type="submit"
-            value="Submit"
-            onClick={(e) => handleMakePost(e)}
-            className="submit-post-btn"
-          />
+          <p className="create-post-error">{createPostError}</p>
+          <div className="post-submit-and-close-btn-container">
+            <button
+              onClick={() => handleCloseForm()}
+              className="close-btn"
+            >
+              Close
+            </button>
+            <input
+              type="submit"
+              value="Submit"
+              onClick={(e) => handleMakePost(e)}
+              className="submit-post-btn"
+            />
+          </div>
         </form>
       </div>
     );
