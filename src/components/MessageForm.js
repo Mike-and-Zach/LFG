@@ -46,7 +46,7 @@ const MessageForm= ({postUserId, postUsername, token}) => {
             </div>
           </form>
         )}
-        {postUserId != userId && (
+        {postUserId != userId && token && (
           <div className="message-user-btn-container">
         <button
           className="message-user-btn"

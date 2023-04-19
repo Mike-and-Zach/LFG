@@ -2,7 +2,7 @@ import { callApi } from "../api/utils";
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import allGames from "./GameInfo";
-import defaultBackground from "./game-img/cool-gaming-desktop-neon-play-arrow-a4t24inohpaaa69e.jpg"
+import defaultBackground from "./game-img/simple-background.webp"
 import { useNavigate } from "react-router-dom";
 
 const Posts = ({ token, selectedGame, setSelectedGame }) => {
@@ -207,7 +207,7 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
           <h1 className="posts-header">{selectedGame}</h1>
         )}
         {showMakePost && makePost()}
-        {!showMakePost && selectedGame && (
+        {!showMakePost && selectedGame && token && (
           <button
             className="create-post-btn"
             onClick={() => setShowMakePost(!showMakePost)}

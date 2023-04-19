@@ -46,7 +46,7 @@ import lol_img from "./game-img/LoL_background.png"
     },
     {
         title: "League of Legends",
-        activities: ["Ranked", "Unranked", "TFT"],
+        activities: ["Ranked", "Unranked", "ARAM"],
         url: lol_img
     }
 ] 
