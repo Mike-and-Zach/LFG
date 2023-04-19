@@ -2,7 +2,7 @@ import { callApi } from "../api/utils";
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import allGames from "./GameInfo";
-import defaultBackground from "./game-img/stock_gaming_background.jpeg";
+import defaultBackground from "./game-img/cool-gaming-desktop-neon-play-arrow-a4t24inohpaaa69e.jpg"
 import { useNavigate } from "react-router-dom";
 
 const Posts = ({ token, selectedGame, setSelectedGame }) => {

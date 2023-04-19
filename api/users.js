@@ -34,7 +34,6 @@ router.post("/register", async (req, res, next) => {
             },
                 process.env.JWT_SECRET
             );
-            console.log("token ==>", token);
             res.send({
                 user,
                 message: "Thank you for signing up!",
@@ -61,8 +60,6 @@ router.post("/login", async (req, res, next) => {
             })
         }
         const user = await validateAndGetUser(email, password);
-        console.log(user);
-
         if (user) {
             const token = jwt.sign(
                 {

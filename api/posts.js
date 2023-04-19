@@ -14,7 +14,6 @@ const { getAllComments, deleteComment } = require("../db/models/comments");
 router.get("/", async (req, res, next) => {
   try {
     const posts = await getAllPosts();
-    console.log('posts :>> ', posts);
     res.send(posts);
   } catch (err) {
     next(err);
