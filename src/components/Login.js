@@ -19,7 +19,6 @@ const Login = ({ setToken }) => {
       localStorage.setItem("username", data.user.username);
       localStorage.setItem("userId", data.user.id);
       navigate("/posts");
-      console.log('data :>> ', data);
     } catch (err) {
       setLoginError(err)
       console.log(err);

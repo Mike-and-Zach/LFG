@@ -8,7 +8,6 @@ const MessageForm= ({postUserId, postUsername, token}) => {
   const [directMessage, setDirectMessage] = useState("");
   const userId = localStorage.getItem("userId");
 
-  console.log('token :>> ', token);
   const sendDirectMessage = async (recipientId, recipientUsername) => {
     try {
       const data = callApi({
@@ -20,7 +19,6 @@ const MessageForm= ({postUserId, postUsername, token}) => {
         },
         token,
       });
-      console.log('data :>> ', data);
     } catch (err) {
       console.error(err);
     }

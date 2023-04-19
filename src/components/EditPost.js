@@ -11,17 +11,13 @@ const EditPost = ({ postId, postUserId }) => {
   const [editUserSystem, setEditUserSystem] = useState("");
   const [editSelectedGame, setEditSelectedGame] = useState("");
   const [showEditForm, setShowEditForm] = useState(false);
-  const [editError, setEditError] = useState("");
-  console.log('editSelectedGame :>> ', editSelectedGame);
+
 
   const userId = localStorage.getItem("userId");
 
   const handleEditPost = async () => {
     console.log("description :>> ", description);
     try {
-      // if (!editGameTitle || !editDescription || !editGameActivity || !editUserSystem) {
-      //   setEditError("")
-      // }
       const data = await callApi({
         method: "PATCH",
         path: `/posts/${postId}`,
