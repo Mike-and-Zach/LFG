@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.477fd5d0.js",
+    "main.js": "/static/js/main.2f28e69b.js",
     "static/media/LoL_background.png": "/static/media/LoL_background.18387417dd9e1c6c0fc9.png",
     "static/media/RB6_background.png": "/static/media/RB6_background.a5802e0bbdf9a211c94e.png",
     "static/media/Destiny_background2.jpg": "/static/media/Destiny_background2.d051c92e26126f799cec.jpg",
@@ -13,9 +13,9 @@
     "static/media/simple-background.webp": "/static/media/simple-background.c266eb6af35b2cd83a4f.webp",
     "static/media/Playstation_icon.png": "/static/media/Playstation_icon.f669b358153e3dba1e2b.png",
     "index.html": "/index.html",
-    "main.477fd5d0.js.map": "/static/js/main.477fd5d0.js.map"
+    "main.2f28e69b.js.map": "/static/js/main.2f28e69b.js.map"
   },
   "entrypoints": [
-    "static/js/main.477fd5d0.js"
+    "static/js/main.2f28e69b.js"
   ]
 }

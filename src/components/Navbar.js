@@ -1,4 +1,7 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Routes, Route } from "react-router-dom";
+import Login from "./Login";
+import Inbox from "./Inbox";
+import Register from "./Register";
 import HomeIcon from "@mui/icons-material/Home";
 import MailIcon from "@mui/icons-material/Mail";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -8,7 +11,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
-const Navbar = ({ setToken }) => {
+const Navbar = ({ token, setToken }) => {
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
   const handleReloadHomePage = () => {
@@ -101,6 +104,14 @@ const Navbar = ({ setToken }) => {
           )}
         </ul>
       </div>
+      <Routes>
+          <Route path="/login" element={<Login setToken={setToken} />}></Route>
+          <Route path="/inbox" element={<Inbox token={token} />}></Route>
+          <Route
+            path="/register"
+            element={<Register token={token} setToken={setToken} />}
+          ></Route>
+        </Routes>
     </div>
   );
 };

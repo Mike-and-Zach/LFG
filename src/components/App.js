@@ -6,7 +6,7 @@ import Register from "./Register";
 import Login from "./Login";
 import Inbox from "./Inbox";
 import { useNavigate } from "react-router-dom";
-import swal from "sweetalert";
+
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
@@ -21,22 +21,11 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <Navbar setToken={setToken} />
+      <Navbar setToken={setToken} token={token}/>
       <div className="whole">
         <Sidebar setSelectedGame={setSelectedGame} selectedGame={selectedGame}/>
-        <Routes>
-          <Route
-            path="/posts"
-            element={<Posts token={token} selectedGame={selectedGame} />}
-          ></Route>
-          <Route
-            path="/register"
-            element={<Register token={token} setToken={setToken} />}
-          ></Route>
-          <Route path="/login" element={<Login setToken={setToken} />}></Route>
-          <Route path="/inbox" element={<Inbox token={token} />}></Route>
-        </Routes>
-      </div>
+        <Posts token={token} selectedGame={selectedGame}/>
+       </div>
     </div>
   );
 };

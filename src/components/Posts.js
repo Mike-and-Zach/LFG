@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Post from "./Post";
 import allGames from "./GameInfo";
 import defaultBackground from "./game-img/simple-background.webp"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Routes, Route } from "react-router-dom";
 
 const Posts = ({ token, selectedGame, setSelectedGame }) => {
   const [gameTitle, setGameTitle] = useState("");
@@ -230,6 +230,14 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
           setSelectedGame={setSelectedGame}
         />
       }
+
+      <Routes>
+          <Route
+            path="/posts"
+            element={<Posts token={token} selectedGame={selectedGame} />}
+          ></Route>
+          
+        </Routes>
     </div>
   );
 };

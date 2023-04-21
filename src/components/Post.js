@@ -118,7 +118,7 @@ const Post = ({
                 )}
               </div>
               </div>
-              <hr />
+
             </div>
           );
         })}

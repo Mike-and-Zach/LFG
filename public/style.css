@@ -6,19 +6,21 @@
 }
 
 .app-container {
-    display: flex;
-    flex-direction: column;
+    display: flex; 
+    flex-direction: column; 
+    width: 100dvw;
+    height: 100dvh;
     color: white;
 }
 
 .navbar-container {
     z-index: 2;
     display: flex;
-    flex-direction: row;
+
+    /* flex-direction: row; */
     justify-content: space-between;
     background-color: #202124;
     position: sticky;
-    top: 0;
     border-bottom: 1px solid rgb(212, 212, 212);
 }
 
@@ -35,13 +37,13 @@
     transition: 400ms;
 }
 
-.navbar {
+/* .navbar {
     display: flex;
     flex-direction: row;
     list-style: none;
     text-decoration: none;
     justify-content: space-around;
-}
+} */
 
 a {
     text-decoration: none;
@@ -92,6 +94,7 @@ a {
 .link-container {
     display: flex;
     justify-content: center;
+    background-color: #202124;
 }
 
 .header {
@@ -112,14 +115,18 @@ a {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    /* background-attachment: fixed;  */
 }
 
 .post {
     display: flex;
     flex-direction: column;
     position: relative;
+    border-bottom: 2px solid white;
+}
 
+.posts:last-child {
+    border-bottom: none;
 }
 
 .post-inner {
@@ -381,26 +388,12 @@ textarea:focus {
 }
 
 .sidebar-container {
-    width: 22vw;
-    height: 100vh;
-    position: left;
+    width: 25dvw;
+    height: auto;
     background-color: rgba(206, 206, 206, 0.762);
-    position: -webkit-sticky;
-    position: sticky;
-    top: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-img {
-    height: 50px;
-}
-
-.whole {
-    display: flex;
-    background-color: #202124;
-    width: 100%;
 }
 
 .sidebar-link-name {
@@ -412,6 +405,14 @@ img {
     margin-top: 20px;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 10px;
+}
+
+img {
+    height: 50px;
+}
+
+.whole {
+    display: flex;
 }
 
 .sidebar-link-name:hover {
@@ -492,11 +493,8 @@ option {
 }
 
 .socials {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-
     margin-top: 5px;
 }
 
@@ -827,4 +825,14 @@ hr {
     position: absolute;
     top: -10px;
     right: -25px;
+}
+
+@media (max-width: 700px) {
+    .socials {
+        display: none;
+    }
+    .sidebar-container {
+        width: 45dvw;
+        height: 100dvh;
+    }
 }

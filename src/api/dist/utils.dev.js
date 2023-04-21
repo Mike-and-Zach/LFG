@@ -4,8 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.callApi = void 0;
-// const baseUrl = "http://localhost:4000/api"
-var baseUrl = "https://imlfg.onrender.com/api";
+var baseUrl = "http://localhost:4000/api"; // const baseUrl = "https://imlfg.onrender.com/api"
 
 var callApi = function callApi(_ref) {
   var method, path, token, body, options, result, data;
