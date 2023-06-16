@@ -62,8 +62,8 @@ const Comments = ({postId}) => {
                     );
                   })}
               </div>
-              <div className="comment-text-and-btn">
-                <form>
+
+                <form className="comment-text-and-btn">
                   <textarea
                     type="text"
                     className="comment-textfield"
@@ -73,16 +73,16 @@ const Comments = ({postId}) => {
                     }}
                   ></textarea>
 
-                    <div className="comment-submit-btn-container">
+                    <div className="comment-btn-container">
                     <button
                       type="submit"
-                      onClick={() => handleCommentSubmit(postId )}
-                      className="add-comment-btn"
-                    ><SendIcon sx={{ fontSize: 20 }}/></button>
+                      onClick={() => handleCommentSubmit(postId)}
+                      className={comment.length > 0 ? "add-comment-btn-active" : "add-comment-btn-closed"}
+                    >Post</button>
                     </div>
                 </form>
               </div>
-        </div>
+
     )
 }
 

@@ -5,10 +5,16 @@
     font-family: 'Source Code Pro', monospace;
 }
 
+html {
+    width: 100dvw;
+    height: 100dvh;
+}
+
 .app-container {
     display: flex;
     flex-direction: column;
     color: white;
+    width: auto;
 }
 
 .navbar-container {
@@ -20,6 +26,8 @@
     position: sticky;
     top: 0;
     border-bottom: 1px solid rgb(212, 212, 212);
+    flex-wrap: wrap;
+
 }
 
 .register-container {
@@ -39,8 +47,6 @@
     display: flex;
     flex-direction: row;
     list-style: none;
-    text-decoration: none;
-    justify-content: space-around;
 }
 
 a {
@@ -108,11 +114,11 @@ a {
 }
 
 .posts {
-    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    flex: 1;
 }
 
 .post {
@@ -381,16 +387,36 @@ textarea:focus {
 }
 
 .sidebar-container {
+    position: relative;
     width: 22vw;
     height: 100vh;
     position: left;
-    background-color: rgba(206, 206, 206, 0.762);
+    background-color: #202124;
     position: -webkit-sticky;
     position: sticky;
-    top: 70px;
+    top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.menu-icon-sidebar {
+    position: absolute;
+    right: 2px;
+    cursor: pointer;
+}
+
+.menu-icon {
+    margin: 10px;
+    border-radius: 3px;
+    color: #ffffff;
+}
+
+.menu-icon:hover {
+    background-color: #6e6f71;
+    transition: 300ms;
+    transform: translateX(3px);
+    cursor: pointer;
 }
 
 img {
@@ -406,11 +432,11 @@ img {
 .sidebar-link-name {
     cursor: pointer;
     width: 60%;
-    color: rgb(0, 0, 0);
+    color: white;
     padding: 10px;
     text-align: center;
     margin-top: 20px;
-    border: 2px solid rgb(0, 0, 0);
+    border: 2px solid white;
     border-radius: 10px;
 }
 
@@ -424,7 +450,7 @@ img {
 .sidebar-header {
     padding-top: 10px;
     border-bottom: 2px solid black;
-    color: black
+    color: white
 }
 
 .comment-username-and-time {
@@ -501,7 +527,7 @@ option {
 }
 
 .social {
-    margin-right: 40px;
+    margin: 0px 15px 15px 15px;
     cursor: pointer;
 }
 

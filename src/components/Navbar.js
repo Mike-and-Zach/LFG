@@ -4,16 +4,14 @@ import MailIcon from "@mui/icons-material/Mail";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Navbar = ({ setToken }) => {
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
   const handleReloadHomePage = () => {
     navigate("/posts");
-    window.location.reload()
+    location.reload()
     
   };
 
@@ -25,11 +23,6 @@ const Navbar = ({ setToken }) => {
         <h2 className="header">ImLFG</h2>
       </div>
       </Link>
-      <div className="socials">
-        <InstagramIcon className="social" id="insta" fontSize="large" />
-        <FacebookIcon className="social" fontSize="large" />
-        <TwitterIcon className="social" fontSize="large" />
-      </div>
       <div className="link-container">
         <ul className="navbar">
           <li className="navbar-links">
@@ -57,14 +50,16 @@ const Navbar = ({ setToken }) => {
           )}
 
           {!username && (
+             <div className="login-container">
             <li className="navbar-links">
-              <div className="login-container">
+             
                 <LoginIcon fontSize="small" sx={{ fontSize: 20 }} />
                 <Link to="/login" className="single-links">
                   Login
                 </Link>
-              </div>
             </li>
+            </div>
+
           )}
           {!username && (
             <li className="navbar-links">
@@ -99,6 +94,10 @@ const Navbar = ({ setToken }) => {
               </div>
             </li>
           )}
+          <li className="menu-icon">
+      <MenuIcon sx={{fontSize: 30}}/>
+
+          </li>
         </ul>
       </div>
     </div>
