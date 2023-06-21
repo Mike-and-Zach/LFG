@@ -108,6 +108,7 @@ async function getPostsByGameTitle(title) {
         SELECT * FROM posts
         WHERE "gameTitle" = $1
       `,[title]);
+      console.log('rows :>> ', rows);
       return rows;
   } catch (err) {
       console.log(err);

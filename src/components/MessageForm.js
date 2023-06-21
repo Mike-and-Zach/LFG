@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { callApi } from "../api/utils";
-import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
 
 const MessageForm= ({postUserId, postUsername, token}) => {
 
-  const [showMessageForm, setShowMessageForm] = useState(false);
   const [directMessage, setDirectMessage] = useState("");
+  const [showMessageForm, setShowMessageForm] = useState(false);
   const userId = localStorage.getItem("userId");
 
-  const sendDirectMessage = async (recipientId, recipientUsername) => {
+
+  const sendDirectMessage = async ( recipientId, recipientUsername) => {
     try {
       const data = callApi({
         method: "POST",
@@ -26,38 +26,32 @@ const MessageForm= ({postUserId, postUsername, token}) => {
 
 
     return (
-        <div>
-        {showMessageForm && (
-          <form className="message-form">
+        <div className="message-container">
+           {postUserId != userId && token && <button
+                        className="message-user-btn"
+                        onClick={() => setShowMessageForm(!showMessageForm)}
+                      >
+                        Message User
+                      </button>}
+          {showMessageForm && <div className="message-form-container"><form className="message-form">
             <textarea
               type="text"
               placeholder="Message"
               onChange={(e) => setDirectMessage(e.target.value)}
             ></textarea>
-            <div className="send-message-btn-container">
-              <input
-                type="submit"
-                value="send"
-                className="send-message-btn"
-                onClick={() => sendDirectMessage(postUserId, postUsername)}
-              />
-        <p className="message-form-arrow-left"><ArrowLeftOutlinedIcon sx={{fontSize: 50}}/></p>
+            { directMessage.length > 0 &&
+               <input
+               type="submit"
+               value="send"
+               className="send-message-btn"
+               onClick={() => sendDirectMessage( postUserId, postUsername)}
+             />
+            }
 
-            </div>
-          </form>
-        )}
-        {postUserId != userId && token && (
-          <div className="message-user-btn-container">
-        <button
-          className="message-user-btn"
-          onClick={() => setShowMessageForm(!showMessageForm)}
-        >
-          Message User
-        </button>
+            
+          </form></div>}
 
-        </div>
         
-      )}
       </div>
       
       

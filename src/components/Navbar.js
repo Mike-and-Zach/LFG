@@ -1,44 +1,34 @@
 import { useNavigate, Link } from "react-router-dom";
-import HomeIcon from "@mui/icons-material/Home";
-import MailIcon from "@mui/icons-material/Mail";
-import LogoutIcon from "@mui/icons-material/Logout";
-import LoginIcon from "@mui/icons-material/Login";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
+import DropdownMenu from "./DropdownMenu";
 
-const Navbar = ({ setToken }) => {
+const Navbar = ({ setToken, setGameTitle, token }) => {
+  const [openDropdown, setOpenDropdown] = useState(false);
+  console.log("openDropdown :>> ", openDropdown);
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
   const handleReloadHomePage = () => {
     navigate("/posts");
-    window.location.reload()
-    
+    location.reload();
   };
 
   return (
     <div className="navbar-container">
       <Link to="/posts" onClick={handleReloadHomePage}>
-      <div className="navbar-group1">
-        <img src="/img/lfg-logo.jpeg" />
-        <h2 className="header">ImLFG</h2>
-      </div>
+        <div className="navbar-group1">
+          <img src="/img/lfg-logo.jpeg" />
+          <h2 className="header">ImLFG</h2>
+        </div>
       </Link>
-      <div className="socials">
-        <InstagramIcon className="social" id="insta" fontSize="large" />
-        <FacebookIcon className="social" fontSize="large" />
-        <TwitterIcon className="social" fontSize="large" />
-      </div>
       <div className="link-container">
         <ul className="navbar">
           <li className="navbar-links">
             <div className="home-container">
-              <HomeIcon sx={{ fontSize: 20 }} />
+
               <Link
                 to="/posts"
                 className="single-links"
-                id="home"
                 onClick={handleReloadHomePage}
               >
                 Home
@@ -48,7 +38,7 @@ const Navbar = ({ setToken }) => {
           {username && (
             <li className="navbar-links">
               <div className="inbox-navbar-container">
-                <MailIcon fontSize="small" sx={{ fontSize: 18 }} />
+
                 <Link to="/inbox" className="single-links">
                   Inbox
                 </Link>
@@ -57,20 +47,17 @@ const Navbar = ({ setToken }) => {
           )}
 
           {!username && (
-            <li className="navbar-links">
-              <div className="login-container">
-                <LoginIcon fontSize="small" sx={{ fontSize: 20 }} />
+
+              <li className="navbar-links">
                 <Link to="/login" className="single-links">
                   Login
                 </Link>
-              </div>
-            </li>
+              </li>
           )}
           {!username && (
             <li className="navbar-links">
               <div className="register-container">
-                <HowToRegIcon fontSize="small" sx={{ fontSize: 20 }} />
-                <Link to="/register" className="register-btn">
+                <Link to="/register" className="single-links">
                   Register
                 </Link>
               </div>
@@ -79,10 +66,9 @@ const Navbar = ({ setToken }) => {
           {username && (
             <li className="navbar-links">
               <div className="logout-container">
-                <LogoutIcon fontSize="small" sx={{ fontSize: 20 }} />
                 <Link
                   to="/login"
-                  className="logout-btn"
+                  className="single-links"
                   onClick={() => {
                     localStorage.removeItem("token");
                     localStorage.removeItem("username");
@@ -100,6 +86,21 @@ const Navbar = ({ setToken }) => {
             </li>
           )}
         </ul>
+        <div className="dropdown-menu-icon-container">
+          <MenuIcon
+            sx={{ fontSize: 30 }}
+            onClick={() => setOpenDropdown(!openDropdown)}
+          />
+        </div>
+
+        {openDropdown && (
+          <DropdownMenu
+            openDropdown={openDropdown}
+            setOpenDropdown={setOpenDropdown}
+            setGameTitle={setGameTitle}
+            token={token}
+          />
+        )}
       </div>
     </div>
   );

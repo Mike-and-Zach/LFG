@@ -2,11 +2,11 @@ import { callApi } from "../api/utils";
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import allGames from "./GameInfo";
+import Sidebar from "./Sidebar";
 import defaultBackground from "./game-img/simple-background.webp"
 import { useNavigate } from "react-router-dom";
 
-const Posts = ({ token, selectedGame, setSelectedGame }) => {
-  const [gameTitle, setGameTitle] = useState("");
+const Posts = ({ token, gameTitle, setGameTitle }) => {
   const [description, setDescription] = useState("");
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -14,7 +14,11 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
   const [userSystem, setUserSystem] = useState("");
   const [createPostError, setCreatePostError] = useState("");
   const [showMakePost, setShowMakePost] = useState(false);
+  const [allComments, setAllComments] = useState([]);
+
   const navigate = useNavigate();
+  const userId =  localStorage.getItem("userId");
+  const username = localStorage.getItem("username");
 
   const fetchPosts = async () => {
     try {
@@ -28,47 +32,45 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
   };
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [allComments]);
 
+ 
   const fetchFilteredPosts = async () => {
     try {
       const data = await callApi({
-        path: `/posts/gameTitle/${selectedGame}`,
+        path: `/posts/gameTitle/${gameTitle}`,
       });
       setFilteredPosts(data);
     } catch (err) {
       console.error(err);
     }
   };
-
   const handleCloseForm = () => {
     setCreatePostError("");
     setShowMakePost(false);
   }
 
   useEffect(() => {
-    fetchFilteredPosts();
-  }, [selectedGame]);
+    if (gameTitle) fetchFilteredPosts();
+  }, [gameTitle]);
 
   const handleMakePost = async (e) => {
     e.preventDefault();
     try {
-      const userId =  localStorage.getItem("userId");
-      const username = localStorage.getItem("username");
-      if (selectedGame && gameActivity && description && userSystem) {
+      if (gameTitle && gameActivity && description && userSystem) {
         const data = await callApi({
           method: "POST",
           path: `/posts/${userId}`,
           body: {
             username_of_post: username,
-            gameTitle: selectedGame ? selectedGame : gameTitle ,
+            gameTitle: gameTitle,
             game_activity: gameActivity,
             description: description,
             system: userSystem,
           },
         });
         navigate("/posts");
-        window.location.reload();
+        location.reload();
       } else {
         setCreatePostError("Missing Credentials");
       }
@@ -104,7 +106,7 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
             >
               <option>-- Select One --</option>
               {allGames.map((game) => {
-                if (game.title === selectedGame) {
+                if (game.title === gameTitle) {
                   return game.activities.map((activity, index) => {
                     return (
                       <option key={index} value={activity}>
@@ -167,12 +169,12 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
             htmlFor="description"
             className="create-post-description-lable"
           >
-            Description:{" "}
+            Description{" "}
           </label>{" "}
           <textarea
             id="description"
             className="description-text"
-            placeholder="Description..."
+            placeholder=""
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
           <p className="create-post-error">{createPostError}</p>
@@ -181,7 +183,7 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
               onClick={() => handleCloseForm()}
               className="close-btn"
             >
-              Close
+              Cancel
             </button>
             <input
               type="submit"
@@ -196,41 +198,48 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
   };
 
   return (
+
     <div
-      className="posts"
-      style={{ backgroundImage: `url(${getUrl(selectedGame)})` }}
+      className="main-page"
     >
+          <Sidebar setGameTitle={setGameTitle}/>
+
+          <div className="posts-and-header">
       <div className="create-post-btn-and-header">
-        {!selectedGame ? (
+        {!gameTitle ? (
           <h1 className="posts-header">HOME</h1>
         ) : (
-          <h1 className="posts-header">{selectedGame}</h1>
+          <h1 className="posts-header">{gameTitle}</h1>
         )}
         {showMakePost && makePost()}
-        {!showMakePost && selectedGame && token && (
+        {!showMakePost && gameTitle && token && (
           <button
             className="create-post-btn"
             onClick={() => setShowMakePost(!showMakePost)}
+            title="Create Post"
           >
             Create Post
           </button>
         )}
       </div>
-      <hr />
-      {
+        
         <Post
           posts={posts}
           setPosts={setPosts}
           token={token}
           filteredPosts={filteredPosts}
           setFilteredPosts={setFilteredPosts}
-          selectedGame={selectedGame}
           gameActivity={gameActivity}
           userSystem={userSystem}
-          setSelectedGame={setSelectedGame}
+          allComments={allComments}
+          setAllComments={setAllComments}
+          setGameTitle={setGameTitle}
         />
-      }
-    </div>
+          </div>
+
+      
+      </div>
+
   );
 };
 
