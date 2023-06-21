@@ -8,8 +8,7 @@ const MessageForm= ({postUserId, postUsername, token}) => {
   const userId = localStorage.getItem("userId");
 
 
-  const sendDirectMessage = async (recipientId, recipientUsername) => {
-
+  const sendDirectMessage = async ( recipientId, recipientUsername) => {
     try {
       const data = callApi({
         method: "POST",
@@ -45,7 +44,7 @@ const MessageForm= ({postUserId, postUsername, token}) => {
                type="submit"
                value="send"
                className="send-message-btn"
-               onClick={() => sendDirectMessage(postUserId, postUsername)}
+               onClick={() => sendDirectMessage( postUserId, postUsername)}
              />
             }
 

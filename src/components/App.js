@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import { Route, Routes, Link } from "react-router-dom";
-import { callApi } from "../api/utils";
+import { Route, Routes } from "react-router-dom";
 import Posts from "./Posts";
 import Register from "./Register";
 import Login from "./Login";
 import Inbox from "./Inbox";
-import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const [selectedGame, setSelectedGame] = useState("");
+  const [gameTitle, setGameTitle] = useState("");
+
+  console.log('token :>> ', token);
 
   useEffect(() => {
     localStorage.setItem("token", token);
@@ -20,11 +20,11 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <Navbar setToken={setToken} />
+      <Navbar setToken={setToken} gameTitle={gameTitle} setGameTitle={setGameTitle} token={token}/>
       <Routes>
         <Route
           path="/posts"
-          element={<Posts token={token} selectedGame={selectedGame} />}
+          element={<Posts token={token} gameTitle={gameTitle} setGameTitle={setGameTitle}/>}
         ></Route>
 
         <Route

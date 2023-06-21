@@ -6,22 +6,25 @@ const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+  console.log('loginError :>> ', loginError);
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoginError("");
     try {
       const data = await callApi({
         method: "POST",
         body: { email, password },
         path: "/users/login",
       });
+      console.log('data :>> ', data);
       setToken(data.token);
       localStorage.setItem("username", data.user.username);
       localStorage.setItem("userId", data.user.id);
       navigate("/posts");
     } catch (err) {
       setLoginError(err)
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -32,30 +35,26 @@ const Login = ({ setToken }) => {
         <form className="login-form">
           <div className="login-label-container">
             <label htmlFor="username" className="login-label">
-              Email:
             </label>{" "}
           </div>
           <input
             type="text"
-            placeholder="Username"
-            id="username"
+            placeholder="Email"
             className="input-login"
             onChange={(e) => setEmail(e.target.value)}
           />{" "}
           <div className="login-label-container">
             <label htmlFor="password" className="login-label">
-              Password:
             </label>{" "}
 
           </div>
           <input
             type="password"
             placeholder="Password"
-            id="password"
             className="input-login"
             onChange={(e) => setPassword(e.target.value)}
           />{" "}
-          <p className="login-error">{loginError}</p>
+          {loginError && <p className="login-error">{loginError}</p>}
           <div className="login-btn-form-container">
             <input
               type="submit"

@@ -43,11 +43,9 @@ html {
   overflow: auto;
 }
 
-.register-container {
-  background-color: green;
-  border: 1px solid var(--secondaryColor);
-  border-radius: 5px;
-  margin-right: 5px;
+.register-btn {
+    padding: .25em .5em;
+    color: var(--primaryTextColor);
 }
 
 .register-container:hover {
@@ -58,20 +56,25 @@ html {
   display: flex;
   flex-direction: row;
   list-style: none;
+  margin: .5em;
+}
+
+.single-links {
+    padding: .7em 5px .25em 5px;
+    border: var(--primaryBackground);
+}
+
+.single-links:hover {
+    border-bottom: 1px solid var(--secondaryColor);
+    transition: 200ms;
 }
 
 a {
   text-decoration: none;
-  padding: 5px;
-  padding-left: 0;
 }
 
 .single-links:visited {
   color: var(--primaryTextColor);
-}
-
-.navbar-links {
-  padding-left: 5px;
 }
 
 .navbar-group1 {
@@ -83,18 +86,17 @@ a {
 .link-container {
   display: flex;
   justify-content: center;
-  padding-right: 1em;
 }
 
 .header {
   font-size: 2.5em;
-  padding: 0 1em;
+  padding: 0 0.5em;
   color: var(--primaryTextColor);
 }
 
 .posts-header {
   font-size: 35px;
-    text-align: center;
+  text-align: center;
 }
 
 .posts {
@@ -115,11 +117,7 @@ a {
   padding: 2em 1em;
   position: relative;
   border-bottom: 1px solid #262a2e;
- margin: 1em 0px;
-}
-
-.post-inner {
-  padding-left: 15px;
+  margin: 1em 0px;
 }
 
 .post-gametitle-and-activity {
@@ -143,9 +141,9 @@ a {
   padding: 1em;
   border-radius: 5px;
   color: var(--primaryTextColor);
-    background-color: var(--primaryBackground);
-    outline: none;
-    border: solid rgba(181, 173, 173, 0.471);
+  background-color: var(--primaryBackground);
+  outline: none;
+  border: solid rgba(181, 173, 173, 0.471);
 }
 
 .create-post-btn:hover {
@@ -163,7 +161,7 @@ a {
 
 .close-btn {
   color: red;
-  padding: .5em 2em;
+  padding: 0.5em 2em;
   border-radius: 5px;
   cursor: pointer;
   background-color: var(--primaryBackground);
@@ -172,18 +170,23 @@ a {
 
 .close-btn:hover {
   transition: 350ms;
-    box-shadow: 2px 2px 30px 0px red;
-
-
+  box-shadow: 2px 2px 30px 0px red;
 }
 
 .description-text {
   padding: 15px;
-  height: 90px;
+  height: 80px;
   width: 100%;
   resize: none;
-  margin-top: 10px;
+  margin-top: 0.5em;
   border-radius: 5px;
+  background-color: #262a2e;
+  color: var(--primaryTextColor);
+}
+
+.inbox-message {
+    color: var(--secondaryTextColor);
+    margin-left: 1em;
 }
 
 textarea:focus {
@@ -192,7 +195,7 @@ textarea:focus {
 }
 
 .submit-post-btn {
-    padding: .5em 1em;
+  padding: 0.5em 1em;
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid var(--secondaryColor);
@@ -202,30 +205,29 @@ textarea:focus {
 
 .submit-post-btn:hover {
   transition: 350ms;
-    box-shadow: 1px 2px 15px 0px var(--primaryButtonColor);
+  box-shadow: 1px 2px 15px 0px var(--primaryButtonColor);
 }
 
 .message-user-btn {
-    border-radius: 5px;
-
-    cursor: pointer;
-    background-color: var(--primaryBackground);
-    color: var(--primaryButtonColor);
-    outline: none;
-    border: var(--primaryBackground);
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--primaryBackground);
+  color: var(--primaryButtonColor);
+  outline: none;
+  border: var(--primaryBackground);
 }
 
 .message-user-btn:hover {
   transition: 300ms ease-in-out;
-    border: 1px solid var(--primaryButtonColor);
-    padding: .5em;
+  border: 1px solid var(--primaryButtonColor);
+  padding: 0.5em;
 }
 
 .message-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1em;
 }
 
 .send-message-btn-container {
@@ -235,21 +237,21 @@ textarea:focus {
 }
 
 .send-message-btn {
-    background-color: var(--primaryBackground);
-    color: var(--primaryTextColor);
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    padding: .5em 1.5em;
-    font-weight: bold;
-    border: 1px solid var(--primaryBackground);
-    margin: auto;
+  background-color: var(--primaryBackground);
+  color: var(--primaryTextColor);
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  padding: 0.5em 1.5em;
+  font-weight: bold;
+  border: 1px solid var(--primaryButtonColor);
+  margin: auto;
 }
 
 .send-message-btn:hover {
-    transition: 350ms ease-in-out;
-    border: 1px solid var(--secondaryColor);
-    box-shadow: 1px 2px 11px -1px var(--secondaryColor);
+  transition: 350ms ease-in-out;
+  border: 1px solid var(--primaryButtonColor);
+  box-shadow: 1px 2px 11px -1px var(--primaryButtonColor);
 }
 
 .created-post-user {
@@ -263,24 +265,19 @@ textarea:focus {
   color: red;
 }
 
-.game-title-container {
-  width: 100%;
-}
 
 .game-title {
-  font-size: 40px;
-  padding-bottom: 10px;
+  font-size: 30px;
   color: var(--primaryTextColor);
 }
 
 .game-description {
-  font-size: 20px;
-  text-align: center;
+  font-size: 18px;
 }
 
 .comments-container {
   padding-bottom: 10px;
-  padding-left: .5em;
+  padding-left: 0.5em;
 }
 
 .comment-user {
@@ -288,10 +285,10 @@ textarea:focus {
 }
 
 .comment-time {
-  font-size: 12px;
+  font-size: 10px;
   padding-left: 10px;
 
-  color: var(--secondaryTextColor)
+  color: var(--secondaryTextColor);
 }
 
 .comments-header {
@@ -314,24 +311,24 @@ textarea:focus {
   cursor: pointer;
   border: none;
   height: 50%;
-  padding: .5em 1.5em;
+  padding: 0.5em 1.5em;
   font-weight: bold;
   border: 1px solid var(--primaryBackground);
 }
 
 .comment-btn-container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .add-comment-btn-active:hover {
-    transition: 350ms ease-in-out;
-    border: 1px solid var(--secondaryColor);
-    box-shadow: 1px 2px 11px -1px var(--secondaryColor);
+  transition: 350ms ease-in-out;
+  border: 1px solid var(--secondaryColor);
+  box-shadow: 1px 2px 11px -1px var(--secondaryColor);
 }
 
 .add-comment-btn-closed {
-    display: none;
+  display: none;
 }
 
 .add-comment-btn:hover {
@@ -350,12 +347,6 @@ textarea:focus {
   border-radius: 5px;
   cursor: pointer;
   border: none;
-}
-
-.delete-post-btn:hover {
-  background-color: rgba(159, 0, 0, 0.582);
-  color: var(--primaryTextColor);
-  transition: 400ms;
 }
 
 .edit-post-form {
@@ -383,13 +374,6 @@ textarea:focus {
   border-radius: 5px;
 }
 
-.edit-post-btn:hover {
-  background-color: rgb(114, 116, 0);
-  color: var(--primaryTextColor);
-  transition: 400ms;
-  transform: translateX(2px);
-}
-
 .sidebarContainer {
   position: sticky;
   max-width: 40%;
@@ -401,6 +385,8 @@ textarea:focus {
   gap: 3em;
   padding: 2em;
   border-right: 1px groove var(--secondaryColor);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar-link-name {
@@ -410,27 +396,23 @@ textarea:focus {
   border: var(--primaryBackground);
 }
 
-/* .sidebar-link-name:hover {
- 
-} */
-
 .sidebar-link-name-container:hover {
-    border: 1px solid var(--secondaryColor);
-    box-shadow: 2px 2px 10px 0px var(--secondaryColor);
-    padding: 1em .5em ;
-    transition: 200ms ease-in-out;
+  border: 1px solid var(--secondaryColor);
+  box-shadow: 2px 2px 10px 0px var(--secondaryColor);
+  padding: 1em 0.5em;
+  transition: 200ms ease-in-out;
 }
 
 img {
-  height: 50px;
+  height: 40px;
 }
 
 .posts-and-header {
   display: flex;
   flex-direction: column;
   padding: 2em;
-    margin: auto;
-    margin-top: 0;
+  margin: auto;
+  margin-top: 0;
 }
 
 .comment-username-and-time {
@@ -442,6 +424,9 @@ img {
 
 .comment-message {
   padding-left: 5px;
+  font-size: 12px;
+  color: var(--primaryTextColor);
+  width: 60dvw;
   font-size: 12px;
 }
 
@@ -458,27 +443,11 @@ option {
   padding-bottom: 3px;
 }
 
-.login-container,
-.register-container,
-.inbox-navbar-container,
-.home-container,
-.logout-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-container:hover,
-.inbox-navbar-container:hover,
-.home-container:hover {
-  transition: 400ms;
-  border-radius: 10px;
-}
 
 .game-title-and-description {
   display: flex;
   flex-direction: column;
-    padding: 1em 0 2em 0;
+  padding: 1em 0 2em 0;
 }
 
 .confirm-edit-post-btn {
@@ -504,20 +473,22 @@ option {
 }
 
 .logout-btn {
-    color: var(--primaryTextColor);
+  color: var(--primaryTextColor);
 }
 
 .game-title-select {
-  padding: .5em;
+  padding: 0.5em;
   font-size: 1em;
   font-weight: bold;
+  background-color: #262a2e;
+  color: var(--primaryTextColor);
 }
 
 .user-login-container {
-  position: absolute;
-  right: 30%;
-  padding-top: 20px;
-  width: 20%;
+  margin: auto;
+  min-height: 100dvh;
+  margin-top: 2em;
+  overflow-y: hidden;
 }
 
 .login-header-page {
@@ -530,15 +501,23 @@ option {
   position: absolute;
   top: 3px;
   right: 30px;
-  font-size: .75em;
+  font-size: 0.75em;
   align-self: flex-start;
   color: var(--secondaryColor);
 }
 
 .input-login {
-  padding: 10px;
-  font-size: 15px;
-  align-items: center;
+  background-color: var(--primaryBackground);
+  color: var(--primaryTextColor);
+  padding: 1em;
+  outline: none;
+}
+
+.input-login:focus {
+  border: 1px solid var(--primaryButtonColor);
+  transition: 200ms ease-in-out;
+  box-shadow: 1px 2px 11px -1px var(--primaryButtonColor);
+  background-color: var(--primaryBackground);
 }
 
 .login-label-container {
@@ -547,15 +526,16 @@ option {
 
 input[type="text"],
 input[type="password"] {
+  padding: 1em;
   border-radius: 15px;
-  padding: 15px;
-  border: 1px solid var(--secondaryColor);
+  border: 1px solid rgb(145, 140, 133);
+  color: var(--primaryTextColor);
 }
 
 .login-btn-form-container {
   display: flex;
   justify-content: center;
-  padding-top: 20px;
+  padding: 1em;
 }
 
 .login-btn-form {
@@ -565,52 +545,53 @@ input[type="password"] {
   border-radius: 10px;
   border: 1px solid white;
   cursor: pointer;
+  min-width: 70%;
 }
 
 .login-btn-form:hover {
-  background-color: rgb(78, 78, 78);
+  border: 1px solid var(--primaryButtonColor);
+  box-shadow: 1px 2px 11px -1px var(--primaryButtonColor);
   transition: 400ms;
-  transform: translateY(3px);
 }
 
 .register-container-main {
-  position: absolute;
-  right: 30%;
-  padding-top: 20px;
-  width: 20%;
+  height: 100dvh;
 }
 
 .register-header-main {
   display: flex;
   justify-content: center;
-  padding-bottom: 15px;
+  padding-top: 1em;
 }
 
 .register-submit-btn {
   background-color: #202124;
-  padding: 10px;
-  color: white;
+  padding: 0.75em;
+  color: var(--primaryTextColor);
   border-radius: 10px;
   border: 1px solid white;
   cursor: pointer;
 }
 
 .register-submit-btn:hover {
-  background-color: rgb(0, 106, 7);
-  transition: 400ms;
-  transform: translateY(3px);
+  border: 1px solid var(--primaryButtonColor);
+  box-shadow: 1px 2px 11px -1px var(--secondaryColor);
+  transition: 350ms;
+  padding: 1em;
 }
 
 .register-submit-btn-container {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 1em;
 }
 
 .post-game-title {
-  font-size: 25px;
+  font-size: 2em;
   padding: 1em;
-  align-self: center;
+    text-align: center;
+  font-weight: bold;
+  color: var(--secondaryColor);
 }
 
 .game-activity {
@@ -650,7 +631,7 @@ input[type="password"] {
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
-    margin: 1em 0;
+  margin: 1em 0;
 }
 
 .system-label {
@@ -678,15 +659,11 @@ input[type="password"] {
 .post-user-and-img {
   display: flex;
   align-items: center;
-}
-
-.game-title {
-  padding-right: 10px;
-  padding-bottom: 0;
+  gap: 0.75em;
 }
 
 .system-logo {
-  height: 35px;
+  height: 25px;
   padding-top: 3px;
 }
 
@@ -712,7 +689,7 @@ hr {
 }
 
 .comment-text-and-btn {
-    display: flex;
+  display: flex;
 }
 
 .comment-textfield {
@@ -723,33 +700,38 @@ hr {
   flex: 1;
   line-height: 20px;
   height: 100%;
-  border: none;
+  border: var(--primaryBackground);
 }
 
+.comment-textfield:focus {
+  border-bottom: 1px solid var(--secondaryColor);
+  transition: 300ms;
+}
 
-  .message-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1em;
-    padding-top: 1em;
-    padding-bottom: 2em;
-  }
+.message-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  padding-top: 1em;
+  padding-bottom: 2em;
+}
 
 .message-form textarea {
-    background-color: var(--primaryBackground);
+  background-color: var(--primaryBackground);
   color: var(--primaryTextColor);
   padding: 1em;
   resize: none;
   border: solid rgba(154, 144, 144, 0.331);
-  line-height: 15px;
+  line-height: 2em;
+  width: 100;
   height: auto;
 }
 
 .message-form textarea:focus {
-    border: 1px solid var(--secondaryColor);
-    transition: 300ms ease-in-out;
-    box-shadow: 1px 2px 11px -1px var(--secondaryColor);
+  border: 1px solid var(--primaryButtonColor);
+  transition: 300ms ease-in-out;
+  box-shadow: 1px 2px 11px -1px var(--primaryButtonColor);
 }
 
 .message-form-arrow-left {
@@ -764,14 +746,12 @@ hr {
   position: relative;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
 }
 
 .login-error {
-  display: flex;
   text-align: center;
   color: red;
-  padding-top: 3px;
+  padding-top: 1em;
 }
 
 .register-error {
@@ -779,7 +759,7 @@ hr {
   text-align: center;
   justify-content: center;
   color: red;
-  padding-top: 3px;
+  padding-top: 1em;
 }
 
 .register-form {
@@ -787,6 +767,20 @@ hr {
   position: relative;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.register-form input[type="text"],
+input[type="password"] {
+  background-color: var(--primaryBackground);
+}
+
+.register-form input[type="text"]:focus,
+input[type="password"]:focus {
+  border: 1px solid var(--primaryButtonColor);
+  outline: none;
+  transition: 300ms;
 }
 
 .create-post-error {
@@ -820,26 +814,150 @@ hr {
   right: -25px;
 }
 
-.menu-icon {
-    display: none;
+.dropdown-menu-icon-container {
+  display: none;
+  cursor: pointer;
+  margin-right: .5em;
+}
+
+.dropdown-container-active {
+  position: fixed;
+  display: flex;
+  gap: 2em;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  background-color: #02080d;
+  width: 100dvw;
+  height: 100%;
+  overflow-y: auto;
+  color: var(--primaryTextColor);
+  animation: dropdown-scroll-in 200ms ease-in-out;
+}
+
+.dropdown-container-active a {
+  border: 1px solid var(--primaryButtonColor);
+  padding: 1em 5em;
+  cursor: pointer;
+  margin-bottom: 1em;
+  color: var(--primaryTextColor);
+}
+
+.dropdown-container-active li {
+  list-style-type: none;
+}
+
+.dropdown-container-closed {
+  position: fixed;
+  right: 1000%;
+  animation: dropdown-scroll-in 200ms ease-in-out;
+}
+
+.dropdown-game-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--primaryBackground);
+    max-height: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.dropdown-game-menu ul {
+  margin-top: 3em;
+}
+
+.dropdown-game-menu li {
+    border: 1px solid var(--primaryButtonColor);
+    text-align: center;
+    padding: 1em;
+    margin: 2em;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.close-game-menu {
+    position: fixed;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.dropdown-game-list {
+  margin-top: 3em;
+}
+
+@keyframes dropdown-scroll-in {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.dropdown-link-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 2em;
+}
+
+.dropdown-close-icon {
+  display: none;
+}
+
+.dropdown-close-icon-active {
+  display: flex;
+  justify-content: end;
+  padding: 0.25em;
+  cursor: pointer;
+}
+
+.login-error {
+  color: red;
+  font-weight: bold;
+}
+
+.comment-error {
+  color: red;
+  font-size: 12px;
+  padding: 1em;
 }
 
 @media (max-width: 950px) {
   .sidebarContainer {
     display: none;
   }
-
 }
 
 @media (max-width: 700px) {
-    .navbar-links {
-        display: none;
-    }
+  .navbar-links {
+    display: none;
+  }
+  .game-description {
+    text-align: center;
+  }
+
+.message-container {
+  align-items: center;
+}
+
+  .post-user-and-img {
+    justify-content: center;
+  }
+  .message-form textarea {
+    width: 70dvw;
+  }
 }
 
 @media (max-width: 700px) {
-    .menu-icon {
-        display: flex;
-        align-items: center;
-    }
+  .dropdown-menu-icon-container {
+    display: flex;
+    align-items: center;
+  }
 }

@@ -11,7 +11,7 @@ const Sidebar = ({ setGameTitle }) => {
           <h1 className="sidebar-header">Games</h1>
           {allGames.map((game, i) => {
             return (
-              <div className="sidebar-link-name-container">
+              <div className="sidebar-link-name-container" key={i}>
               <Link
                 to="/posts"
                 key={i}

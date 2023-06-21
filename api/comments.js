@@ -24,13 +24,22 @@ router.get("/", async (req, res, next) => {
 
   router.post("/:postId", async (req, res, next) => {
     try {
+      if (req.user) {
       const postId = req.params.postId;
       const { username_comment, message } = req.body;
       const userMessage = await addMessageToComment(postId, username_comment, message);
-      console.log('userMessage :>> ', userMessage);
       res.send(userMessage)
+      } else {
+        next({
+          name: "Comment Error",
+          message: "Please login to leave a comment"
+        })
+      }
     } catch ({name, message}) {
-      next({name, message})
+      next({
+        name: "Error Commenting", 
+        message: "Please login to comment"
+      })
     }
   })
 

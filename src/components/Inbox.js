@@ -5,6 +5,7 @@ import moment from "moment";
 
 const Inbox = ({token}) => {
     const [userInbox, setUserInbox] = useState([]);
+    console.log('userInbox :>> ', userInbox);
 
     const timeNow = moment();
     
@@ -14,6 +15,7 @@ const Inbox = ({token}) => {
                 path:"/direct_message/user_inbox",
                 token
             })
+            console.log('data :>> ', data);
             setUserInbox(data)
         } catch (err) {
             console.log(err);

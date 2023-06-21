@@ -16,6 +16,8 @@ const Post = ({
   filteredPosts,
   setFilteredPosts,
   selectedGame,
+  allComments,
+  setAllComments
 }) => {
 
   const userId = localStorage.getItem("userId");
@@ -87,7 +89,7 @@ const Post = ({
               </div>
               <div className="post-inner">
                 <div className="game-title-and-description">
-                  <div className="game-title-container">
+
                     <div className="post-user-and-img">
                       <h2 className="game-title">{post.username_of_post}</h2>
                       <p>{chooseSystem(post.system)}</p>
@@ -101,14 +103,14 @@ const Post = ({
                     <p className="post-time-sent">
                       {handleTime(post.sent_time)}
                     </p>
-                  </div>
+
                   <div className="description-container">
                     <p className="game-description">{post.description}</p>
                   </div>
                 </div>
-                <Comments postId={post.id} />
+                <Comments postId={post.id} allComments={allComments} setAllComments={setAllComments} token={token}/>
 
-                {<EditPost postId={post.id} postUserId={post.userId} />}
+                <EditPost postId={post.id} postUserId={post.userId} />
                 <div className="delete-post-btn-container">
                   {post.userId == userId && (
                     <button

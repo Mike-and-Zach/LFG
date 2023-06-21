@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { callApi } from "../api/utils";
-import SendIcon from '@mui/icons-material/Send';
 import moment from "moment";
 
 
-const Comments = ({postId}) => {
-  const [allComments, setAllComments] = useState([]);
+const Comments = ({postId, allComments, setAllComments, token}) => {
   const [comment, setComment] = useState("");
+  const [commentError, setCommentError] = useState("");
+  console.log('commentError :>> ', commentError);
   const username = localStorage.getItem("username");
 
 
@@ -26,16 +26,20 @@ const Comments = ({postId}) => {
     fetchAllComments();
   }, []);
 
-  const handleCommentSubmit = async (postId) => {
+  const handleCommentSubmit = async (e, postId) => {
+    e.preventDefault();
     try {
-      await callApi({
-        method: "POST",
-        path: `/comments/${postId}`,
-        body: { username_comment: username, message: comment },
-      });
-    } catch (err) {
-      console.log(err);
-    }
+        await callApi({
+          method: "POST",
+          path: `/comments/${postId}`,
+          body: { username_comment: username, message: comment },
+          token,
+        });
+      } catch (err) {
+        setCommentError(err);
+        console.log(err);
+      }
+      
   };
 
     return (
@@ -76,11 +80,13 @@ const Comments = ({postId}) => {
                     <div className="comment-btn-container">
                     <button
                       type="submit"
-                      onClick={() => handleCommentSubmit(postId)}
+                      onClick={(e) => handleCommentSubmit(e, postId)}
                       className={comment.length > 0 ? "add-comment-btn-active" : "add-comment-btn-closed"}
                     >Post</button>
                     </div>
                 </form>
+                {commentError && <p className="comment-error">{commentError}</p>}
+
               </div>
 
     )

@@ -55,7 +55,7 @@ router.post("/login", async (req, res, next) => {
         const {email, password} = req.body
         if (!email || !password) {
             next({
-                name: "Missing CredentialsError",
+                name: "Missing Credentials Error",
                 message: "Please supply both a username and password"
             })
         }
@@ -72,9 +72,14 @@ router.post("/login", async (req, res, next) => {
                 message: "You're logged in",
                 token,
                 user })
+        } else {
+            next({
+                name: "Login Error",
+                message: "Incorrect Email or Password"
+                })
         }
-    } catch ({name, message}) {
-        next({name, message})
+    } catch (err) {
+        next(err)
     }
 })
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { callApi } from "../api/utils";
-import swal from "sweetalert";
+import swal from "sweetalert";  
 import { useNavigate } from "react-router-dom";
 
 const Register = ({ setToken }) => {
@@ -17,6 +17,8 @@ const Register = ({ setToken }) => {
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
+    setRegisterError("");
+    
     try {
       if (password !== confirmPassword) {
         setRegisterError("Passwords do not match!")
@@ -28,7 +30,7 @@ const Register = ({ setToken }) => {
         });
         window.localStorage.setItem("username", data.user.username);
         window.localStorage.setItem("userId", data.user.id);
-        window.localStorage.setItem("token", data.token);
+        // window.localStorage.setItem("token", data.token);
         setToken(data.token);
         
         navigate("/posts");
@@ -45,7 +47,7 @@ const Register = ({ setToken }) => {
         <h1 className="register-header-main">Register</h1>
         <form className="register-form">
           <div className="login-label-container">
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="username"></label>
           </div>
           <input
             type="text"
@@ -54,7 +56,7 @@ const Register = ({ setToken }) => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <div className="login-label-container">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email"></label>
           </div>
           <input
             type="text"
@@ -63,7 +65,7 @@ const Register = ({ setToken }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <div className="login-label-container">
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password"></label>
           </div>
           <input
             type="password"
@@ -72,7 +74,7 @@ const Register = ({ setToken }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <div className="login-label-container">
-            <label htmlFor="password-confirm">Confirm Password:</label>
+            <label htmlFor="password-confirm"></label>
           </div>
           <input
             type="password"

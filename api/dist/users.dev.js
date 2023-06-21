@@ -112,7 +112,7 @@ router.get("/", function _callee2(req, res, next) {
   });
 });
 router.post("/login", function _callee3(req, res, next) {
-  var _req$body, email, password, user, token, name, message;
+  var _req$body, email, password, user, token;
 
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
@@ -123,7 +123,7 @@ router.post("/login", function _callee3(req, res, next) {
 
           if (!email || !password) {
             next({
-              name: "Missing CredentialsError",
+              name: "Missing Credentials Error",
               message: "Please supply both a username and password"
             });
           }
@@ -144,22 +144,22 @@ router.post("/login", function _callee3(req, res, next) {
               token: token,
               user: user
             });
+          } else {
+            next({
+              name: "Login Error",
+              message: "Incorrect Email or Password"
+            });
           }
 
-          _context3.next = 14;
+          _context3.next = 12;
           break;
 
         case 9:
           _context3.prev = 9;
           _context3.t0 = _context3["catch"](0);
-          name = _context3.t0.name;
-          message = _context3.t0.message;
-          next({
-            name: name,
-            message: message
-          });
+          next(_context3.t0);
 
-        case 14:
+        case 12:
         case "end":
           return _context3.stop();
       }

@@ -6,8 +6,7 @@ import Sidebar from "./Sidebar";
 import defaultBackground from "./game-img/simple-background.webp"
 import { useNavigate } from "react-router-dom";
 
-const Posts = ({ token, selectedGame, setSelectedGame }) => {
-  const [gameTitle, setGameTitle] = useState("");
+const Posts = ({ token, gameTitle, setGameTitle }) => {
   const [description, setDescription] = useState("");
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -15,17 +14,11 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
   const [userSystem, setUserSystem] = useState("");
   const [createPostError, setCreatePostError] = useState("");
   const [showMakePost, setShowMakePost] = useState(false);
+  const [allComments, setAllComments] = useState([]);
+
   const navigate = useNavigate();
   const userId =  localStorage.getItem("userId");
   const username = localStorage.getItem("username");
- console.log('token :>> ', token);
- console.log('gameActivity :>> ', gameActivity);
- console.log('description :>> ', description);
- console.log('userSystem :>> ', userSystem);
- console.log('username :>> ', username);
- console.log('userId :>> ', userId);
-
-
 
   const fetchPosts = async () => {
     try {
@@ -39,7 +32,7 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
   };
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [allComments]);
 
  
   const fetchFilteredPosts = async () => {
@@ -236,10 +229,11 @@ const Posts = ({ token, selectedGame, setSelectedGame }) => {
           token={token}
           filteredPosts={filteredPosts}
           setFilteredPosts={setFilteredPosts}
-          selectedGame={selectedGame}
           gameActivity={gameActivity}
           userSystem={userSystem}
-          setSelectedGame={setSelectedGame}
+          allComments={allComments}
+          setAllComments={setAllComments}
+          setGameTitle={setGameTitle}
         />
           </div>
 
