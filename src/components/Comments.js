@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { callApi } from "../api/utils";
 import moment from "moment";
+import { handleTime } from "../helpers/handleTime";
 
 
 const Comments = ({postId, allComments, setAllComments, token}) => {
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState("");
   const username = localStorage.getItem("username");
-
-
-  const timeNow = moment();
 
   const fetchAllComments = async () => {
     try {
@@ -34,6 +32,8 @@ const Comments = ({postId, allComments, setAllComments, token}) => {
           body: { username_comment: username, message: comment },
           token,
         });
+
+        fetchAllComments();
       } catch (err) {
         setCommentError(err);
         console.error(err);
@@ -56,8 +56,7 @@ const Comments = ({postId, allComments, setAllComments, token}) => {
                             {comment.username_comment}
                           </p>
                           <span className="comment-time">
-                            {timeNow.diff(comment.sent_time, "minutes")} mins
-                            ago
+                            {handleTime(comment.sent_time)} 
                           </span>
                         </div>
                         <p className="comment-message">{comment.message}</p>

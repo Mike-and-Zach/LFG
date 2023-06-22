@@ -20,6 +20,9 @@ const Login = ({ setToken }) => {
       setToken(data.token);
       localStorage.setItem("username", data.user.username);
       localStorage.setItem("userId", data.user.id);
+      swal({
+        text: "Welcome Back!",
+      });
       navigate("/posts");
     } catch (err) {
       setLoginError(err)
@@ -54,6 +57,9 @@ const Login = ({ setToken }) => {
             onChange={(e) => setPassword(e.target.value)}
           />{" "}
           {loginError && <p className="login-error">{loginError}</p>}
+          <div className="test-login">
+          <p>Test Email: testemail@gmail.com</p> <p>Test Password: testpassword</p>
+          </div>
           <div className="login-btn-form-container">
             <input
               type="submit"

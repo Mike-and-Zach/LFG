@@ -9,9 +9,9 @@ const DropdownGameMenu = ({setOpenDropdown, setGameTitle}) => {
             <div className="close-game-menu" onClick={() => setOpenDropdown(false)}><CloseIcon sx={{fontSize: 35}}/></div>
 
         <ul>
-            {allGames.map(game => {
+            {allGames.map((game, i) => {
                 return (
-                    <li onClick={() => {
+                    <li key={i} onClick={() => {
                         setGameTitle(game.title)
                         setOpenDropdown(false)
                     }} to="/posts">
