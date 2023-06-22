@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
         const comments = await getAllComments();
         res.send(comments)
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   })
 

@@ -11,7 +11,6 @@ const Register = ({ setToken }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [registerError, setRegisterError] = useState("");
-  console.log('registerError :>> ', registerError);
 
   const navigate = useNavigate();
 
@@ -37,7 +36,7 @@ const Register = ({ setToken }) => {
       }
     } catch (err) {
       setRegisterError(err)
-      console.log(err);
+      console.error(err);
     }
   };
 

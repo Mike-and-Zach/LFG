@@ -5,7 +5,6 @@ import DropdownMenu from "./DropdownMenu";
 
 const Navbar = ({ setToken, setGameTitle, token }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
-  console.log("openDropdown :>> ", openDropdown);
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
   const handleReloadHomePage = () => {

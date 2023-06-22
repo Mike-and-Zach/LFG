@@ -33,7 +33,7 @@ const Post = ({
       setPosts((prev) => prev.filter((post) => postId !== post.id));
       setFilteredPosts((prev) => prev.filter((post) => postId !== post.id));
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

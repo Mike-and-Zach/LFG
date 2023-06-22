@@ -244,13 +244,12 @@ router.get("/gameTitle/:gameTitle", function _callee7(req, res, next) {
 
         case 4:
           posts = _context7.sent;
-          console.log('posts :>> ', posts);
           res.send(posts);
-          _context7.next = 14;
+          _context7.next = 13;
           break;
 
-        case 9:
-          _context7.prev = 9;
+        case 8:
+          _context7.prev = 8;
           _context7.t0 = _context7["catch"](0);
           name = _context7.t0.name;
           message = _context7.t0.message;
@@ -259,11 +258,11 @@ router.get("/gameTitle/:gameTitle", function _callee7(req, res, next) {
             message: message
           });
 
-        case 14:
+        case 13:
         case "end":
           return _context7.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 8]]);
 });
 module.exports = router;

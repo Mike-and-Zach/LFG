@@ -9,7 +9,7 @@ async function getCommentsByPostId(postId) {
         `, [postId])
         return rows;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
   
@@ -20,10 +20,9 @@ async function getCommentsByPostId(postId) {
       VALUES($1, $2, $3)
       RETURNING *;
     `, [postId, username_comment, message])
-      console.log('userComment :>> ', userComment);
     return userComment
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     
   }

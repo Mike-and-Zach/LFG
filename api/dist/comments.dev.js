@@ -28,7 +28,7 @@ router.get("/", function _callee(req, res, next) {
         case 7:
           _context.prev = 7;
           _context.t0 = _context["catch"](0);
-          console.log(_context.t0);
+          console.error(_context.t0);
 
         case 10:
         case "end":

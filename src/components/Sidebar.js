@@ -17,7 +17,6 @@ const Sidebar = ({ setGameTitle }) => {
                 key={i}
                 className="sidebar-link-name"
                 onClick={() => {
-                  console.log('game.title :>> ', game.title);
                   setGameTitle(game.title)
                 }}
               >

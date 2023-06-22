@@ -77,7 +77,6 @@ router.delete("/:postId", async (req, res, next) => {
     try {
       const title = req.params.gameTitle
       const posts = await getPostsByGameTitle(title)
-      console.log('posts :>> ', posts);
       res.send(posts)
     } catch ({name, message}) {
       next({name, message})

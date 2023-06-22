@@ -5,7 +5,6 @@ async function getAllUsers() {
     const { rows } = await client.query(`
       SELECT * FROM users
     `)
-    console.log(rows);
     return rows
   } catch (err) {
     throw err
@@ -47,7 +46,6 @@ async function getAllUsers() {
 
   async function validateAndGetUser(email, password) {
     const user = await getUserByEmail(email);
-    console.log('validateddduser :>> ', user);
     if(!user) {
       throw new Error("Incorrect email or password")
     }

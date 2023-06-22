@@ -27,7 +27,7 @@ const Posts = ({ token, gameTitle, setGameTitle }) => {
       });
       setPosts(data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   useEffect(() => {
@@ -76,7 +76,7 @@ const Posts = ({ token, gameTitle, setGameTitle }) => {
       }
     } catch (err) {
       setCreatePostError(err);
-      console.log(err);
+      console.error(err);
     }
   };
 
