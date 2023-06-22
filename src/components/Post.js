@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+
 import { callApi } from "../api/utils";
+import { handleTime } from "../helpers/handleTime";
 import EditPost from "./EditPost";
 import xboxLogo from "./game-img/Xbox_logo.png";
 import psLogo from "./game-img/Playstation_icon.png";
@@ -15,13 +16,12 @@ const Post = ({
   token,
   filteredPosts,
   setFilteredPosts,
-  selectedGame,
+  gameTitle,
   allComments,
   setAllComments
 }) => {
 
   const userId = localStorage.getItem("userId");
-  const timeNow = moment();
 
   const handleDeletePost = async (postId) => {
     try {
@@ -55,24 +55,6 @@ const Post = ({
     }
   };
 
-  const handleTime = (timeInMilliSeconds) => {
-    if (timeNow.diff(timeInMilliSeconds, "months") > 11) {
-      return "Over a year ago";
-    } else if (timeNow.diff(timeInMilliSeconds, "weeks") > 3) {
-      return `${timeNow.diff(timeInMilliSeconds, "months")} month(s) ago`;
-    } else if (timeNow.diff(timeInMilliSeconds, "days") > 6) {
-      return `${timeNow.diff(timeInMilliSeconds, "weeks")} week(s) ago`;
-    } else if (timeNow.diff(timeInMilliSeconds, "hours") > 23) {
-      return `${timeNow.diff(timeInMilliSeconds, "days")} day(s) ago`;
-    } else if (timeNow.diff(timeInMilliSeconds, "minutes") > 59) {
-      return `${timeNow.diff(timeInMilliSeconds, "hours")} hour(s) ago`;
-    } else if (timeNow.diff(timeInMilliSeconds, "minutes") < 1) {
-      return "just now";
-    } else {
-      return `${timeNow.diff(timeInMilliSeconds, "minutes")} min(s) ago`;
-    }
-  };
-
   return (
     <>
       {postsAreFiltered()
@@ -82,7 +64,7 @@ const Post = ({
           return (
             <div key={post.id} className="post">
               <div className="post-gametitle-and-activity">
-                {!selectedGame && (
+                {!gameTitle && (
                   <p className="post-game-title">{post.gameTitle}</p>
                 )}
                 <p className="game-activity">{post["game_activity"]}</p>

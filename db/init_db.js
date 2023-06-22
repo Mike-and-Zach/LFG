@@ -109,12 +109,16 @@ async function populateInitialData() {
         username: "Maxy",
         email: "maxysemail@email.com",
         password: "maxyspassword"
-
       },
       {
         username: "Duke",
         email: "duke@email.com",
         password: "password"
+      },
+      {
+        username: "Awesome Person",
+        email: "testemail@gmail.com",
+        password: "testpassword"
       }
     ];
 

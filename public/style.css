@@ -44,8 +44,8 @@ html {
 }
 
 .register-btn {
-    padding: .25em .5em;
-    color: var(--primaryTextColor);
+  padding: 0.25em 0.5em;
+  color: var(--primaryTextColor);
 }
 
 .register-container:hover {
@@ -56,21 +56,25 @@ html {
   display: flex;
   flex-direction: row;
   list-style: none;
-  margin: .5em;
+  margin: 0.5em;
 }
 
 .single-links {
-    padding: .7em 5px .25em 5px;
-    border: var(--primaryBackground);
+  padding: 0.7em 5px 0.25em 5px;
+  border: var(--primaryBackground);
 }
 
 .single-links:hover {
-    border-bottom: 1px solid var(--secondaryColor);
-    transition: 200ms;
+  border-bottom: 1px solid var(--secondaryColor);
+  transition: 200ms;
 }
 
 a {
   text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
 }
 
 .single-links:visited {
@@ -185,13 +189,8 @@ a {
 }
 
 .inbox-message {
-    color: var(--secondaryTextColor);
-    margin-left: 1em;
-}
-
-textarea:focus {
-  outline: white;
-  border: none;
+  color: var(--secondaryTextColor);
+  margin-left: 1em;
 }
 
 .submit-post-btn {
@@ -264,7 +263,6 @@ textarea:focus {
   padding-left: 15px;
   color: red;
 }
-
 
 .game-title {
   font-size: 30px;
@@ -376,7 +374,6 @@ textarea:focus {
 
 .sidebarContainer {
   position: sticky;
-  max-width: 40%;
   height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -387,6 +384,7 @@ textarea:focus {
   border-right: 1px groove var(--secondaryColor);
   overflow-y: auto;
   overflow-x: hidden;
+  width: 28dvw;
 }
 
 .sidebar-link-name {
@@ -394,6 +392,7 @@ textarea:focus {
   color: var(--primaryTextColor);
   padding: 1em;
   border: var(--primaryBackground);
+  width: 70%;
 }
 
 .sidebar-link-name-container:hover {
@@ -442,7 +441,6 @@ option {
   font-size: 30px;
   padding-bottom: 3px;
 }
-
 
 .game-title-and-description {
   display: flex;
@@ -535,7 +533,11 @@ input[type="password"] {
 .login-btn-form-container {
   display: flex;
   justify-content: center;
-  padding: 1em;
+  padding: 2em;
+}
+
+.test-login {
+  margin: .5em;
 }
 
 .login-btn-form {
@@ -588,8 +590,8 @@ input[type="password"] {
 
 .post-game-title {
   font-size: 2em;
-  padding: 1em;
-    text-align: center;
+  padding: .5em;
+  text-align: center;
   font-weight: bold;
   color: var(--secondaryColor);
 }
@@ -609,7 +611,7 @@ input[type="password"] {
 
 .inbox-header {
   font-size: 35px;
-  padding-bottom: 15px;
+  padding-bottom: 1em;
 }
 
 .inbox-inner {
@@ -705,6 +707,7 @@ hr {
 
 .comment-textfield:focus {
   border-bottom: 1px solid var(--secondaryColor);
+  outline: none;
   transition: 300ms;
 }
 
@@ -723,9 +726,10 @@ hr {
   padding: 1em;
   resize: none;
   border: solid rgba(154, 144, 144, 0.331);
-  line-height: 2em;
-  width: 100;
-  height: auto;
+  line-height: 1em;
+  width: 100%;
+  height: 7em;
+  outline: none;
 }
 
 .message-form textarea:focus {
@@ -817,7 +821,7 @@ input[type="password"]:focus {
 .dropdown-menu-icon-container {
   display: none;
   cursor: pointer;
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
 .dropdown-container-active {
@@ -840,7 +844,9 @@ input[type="password"]:focus {
   padding: 1em 5em;
   cursor: pointer;
   margin-bottom: 1em;
+  width: 70%;
   color: var(--primaryTextColor);
+  text-align: center;
 }
 
 .dropdown-container-active li {
@@ -854,16 +860,16 @@ input[type="password"]:focus {
 }
 
 .dropdown-game-menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: var(--primaryBackground);
-    max-height: 100%;
-    min-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--primaryBackground);
+  max-height: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
 }
 
 .dropdown-game-menu ul {
@@ -871,19 +877,20 @@ input[type="password"]:focus {
 }
 
 .dropdown-game-menu li {
-    border: 1px solid var(--primaryButtonColor);
-    text-align: center;
-    padding: 1em;
-    margin: 2em;
-    list-style-type: none;
-    cursor: pointer;
+  border: 1px solid var(--primaryButtonColor);
+  text-align: center;
+  padding: 1em;
+  margin: 2em;
+  list-style-type: none;
+  cursor: pointer;
+  width: 70%;
 }
 
 .close-game-menu {
-    position: fixed;
-    right: 5px;
-    top: 5px;
-    cursor: pointer;
+  position: fixed;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
 }
 
 .dropdown-game-list {
@@ -943,9 +950,9 @@ input[type="password"]:focus {
     text-align: center;
   }
 
-.message-container {
-  align-items: center;
-}
+  .message-container {
+    align-items: center;
+  }
 
   .post-user-and-img {
     justify-content: center;
@@ -953,11 +960,14 @@ input[type="password"]:focus {
   .message-form textarea {
     width: 70dvw;
   }
-}
-
-@media (max-width: 700px) {
   .dropdown-menu-icon-container {
     display: flex;
     align-items: center;
+  }
+  .message-user-btn {
+    transition: 300ms ease-in-out;
+    border: 1px solid var(--primaryButtonColor);
+    padding: 0.5em;
+    margin: 1em;
   }
 }

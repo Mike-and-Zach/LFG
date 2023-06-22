@@ -69,8 +69,13 @@ const Posts = ({ token, gameTitle, setGameTitle }) => {
             system: userSystem,
           },
         });
-        navigate("/posts");
-        location.reload();
+        swal({
+          text: "Post has been created!",
+        });
+        setShowMakePost(false)
+        fetchFilteredPosts();
+        
+
       } else {
         setCreatePostError("Missing Credentials");
       }
@@ -234,6 +239,7 @@ const Posts = ({ token, gameTitle, setGameTitle }) => {
           allComments={allComments}
           setAllComments={setAllComments}
           setGameTitle={setGameTitle}
+          gameTitle={gameTitle}
         />
           </div>
 

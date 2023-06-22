@@ -5,7 +5,7 @@ import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 
 const EditPost = ({ postId, postUserId }) => {
-  const [editGameTitle, setEditGameTitle] = useState("");
+  const [editGameTitle, setEditGameTitle] = useState("Call of Duty");
   const [editDescription, setEditDescription] = useState("");
   const [editGameActivity, setEditGameActivity] = useState("");
   const [editUserSystem, setEditUserSystem] = useState("");

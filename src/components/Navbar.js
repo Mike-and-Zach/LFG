@@ -98,6 +98,7 @@ const Navbar = ({ setToken, setGameTitle, token }) => {
             setOpenDropdown={setOpenDropdown}
             setGameTitle={setGameTitle}
             token={token}
+            setToken={setToken}
           />
         )}
       </div>

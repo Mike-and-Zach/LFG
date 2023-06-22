@@ -31,7 +31,9 @@ const Register = ({ setToken }) => {
         window.localStorage.setItem("userId", data.user.id);
         // window.localStorage.setItem("token", data.token);
         setToken(data.token);
-        
+        swal({
+          text: "Thank you for signing up!",
+        });
         navigate("/posts");
       }
     } catch (err) {
