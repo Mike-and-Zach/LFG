@@ -7,7 +7,7 @@ async function getAllPosts() {
     `);
   return rows;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   
 }
@@ -20,7 +20,7 @@ async function getPostById(postId) {
     `, [postId])
     return post;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }
 
@@ -32,7 +32,7 @@ async function getAllPostsAndUsers() {
     `)
     return rows
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }
 
@@ -51,7 +51,7 @@ async function createPost( {userId, username_of_post, gameTitle, game_activity, 
   
     return post;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }
 
@@ -68,7 +68,7 @@ async function deletePost(id) {
       `, [id]);
       return post
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   
 }
@@ -97,7 +97,7 @@ async function editPost({ id, ...fields }) {
 
   return post;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   
 }
@@ -108,10 +108,9 @@ async function getPostsByGameTitle(title) {
         SELECT * FROM posts
         WHERE "gameTitle" = $1
       `,[title]);
-      console.log('rows :>> ', rows);
       return rows;
   } catch (err) {
-      console.log(err);
+      console.error(err);
   }
 }
 

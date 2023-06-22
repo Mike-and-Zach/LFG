@@ -21,7 +21,7 @@ router.post("/:recipientId", async (req, res, next) => {
         const directMessage = await sendDirectMessage(senderId, sender_username, recipient_username, recipientId, message_text)
         res.send(directMessage)
     } catch ({name, message}) {
-        next(console.log({name, message}))
+        next({name, message})
         
     }
 })

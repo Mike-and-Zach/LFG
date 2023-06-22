@@ -34,7 +34,7 @@ function getAllPosts() {
         case 8:
           _context.prev = 8;
           _context.t0 = _context["catch"](0);
-          console.log(_context.t0);
+          console.error(_context.t0);
 
         case 11:
         case "end":
@@ -64,7 +64,7 @@ function getPostById(postId) {
         case 9:
           _context2.prev = 9;
           _context2.t0 = _context2["catch"](0);
-          console.log(_context2.t0);
+          console.error(_context2.t0);
 
         case 12:
         case "end":
@@ -93,7 +93,7 @@ function getAllPostsAndUsers() {
         case 8:
           _context3.prev = 8;
           _context3.t0 = _context3["catch"](0);
-          console.log(_context3.t0);
+          console.error(_context3.t0);
 
         case 11:
         case "end":
@@ -124,7 +124,7 @@ function createPost(_ref4) {
         case 10:
           _context4.prev = 10;
           _context4.t0 = _context4["catch"](1);
-          console.log(_context4.t0);
+          console.error(_context4.t0);
 
         case 13:
         case "end":
@@ -153,7 +153,7 @@ function deletePost(id) {
         case 8:
           _context5.prev = 8;
           _context5.t0 = _context5["catch"](0);
-          console.log(_context5.t0);
+          console.error(_context5.t0);
 
         case 11:
         case "end":
@@ -196,7 +196,7 @@ function editPost(_ref7) {
         case 13:
           _context6.prev = 13;
           _context6.t0 = _context6["catch"](1);
-          console.log(_context6.t0);
+          console.error(_context6.t0);
 
         case 16:
         case "end":
@@ -220,20 +220,19 @@ function getPostsByGameTitle(title) {
         case 3:
           _ref9 = _context7.sent;
           rows = _ref9.rows;
-          console.log('rows :>> ', rows);
           return _context7.abrupt("return", rows);
 
-        case 9:
-          _context7.prev = 9;
+        case 8:
+          _context7.prev = 8;
           _context7.t0 = _context7["catch"](0);
-          console.log(_context7.t0);
+          console.error(_context7.t0);
 
-        case 12:
+        case 11:
         case "end":
           return _context7.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 8]]);
 }
 
 module.exports = {

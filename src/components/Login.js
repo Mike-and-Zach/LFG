@@ -6,8 +6,8 @@ const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
-  console.log('loginError :>> ', loginError);
   const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoginError("");
@@ -17,7 +17,6 @@ const Login = ({ setToken }) => {
         body: { email, password },
         path: "/users/login",
       });
-      console.log('data :>> ', data);
       setToken(data.token);
       localStorage.setItem("username", data.user.username);
       localStorage.setItem("userId", data.user.id);

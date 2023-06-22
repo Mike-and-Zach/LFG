@@ -6,7 +6,6 @@ import moment from "moment";
 const Comments = ({postId, allComments, setAllComments, token}) => {
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState("");
-  console.log('commentError :>> ', commentError);
   const username = localStorage.getItem("username");
 
 
@@ -19,7 +18,7 @@ const Comments = ({postId, allComments, setAllComments, token}) => {
       });
       setAllComments(data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   useEffect(() => {
@@ -37,7 +36,7 @@ const Comments = ({postId, allComments, setAllComments, token}) => {
         });
       } catch (err) {
         setCommentError(err);
-        console.log(err);
+        console.error(err);
       }
       
   };

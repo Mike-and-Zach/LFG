@@ -16,7 +16,6 @@ const EditPost = ({ postId, postUserId }) => {
   const userId = localStorage.getItem("userId");
 
   const handleEditPost = async () => {
-    console.log("description :>> ", description);
     try {
       const data = await callApi({
         method: "PATCH",
@@ -32,7 +31,7 @@ const EditPost = ({ postId, postUserId }) => {
         path: `posts/${postId}`,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

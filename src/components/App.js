@@ -12,7 +12,6 @@ const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [gameTitle, setGameTitle] = useState("");
 
-  console.log('token :>> ', token);
 
   useEffect(() => {
     localStorage.setItem("token", token);
