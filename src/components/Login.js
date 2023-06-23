@@ -58,7 +58,7 @@ const Login = ({ setToken }) => {
           />{" "}
           {loginError && <p className="login-error">{loginError}</p>}
           <div className="test-login">
-          <p>Test Email: testemail@gmail.com</p> <p>Test Password: testpassword</p>
+          <p>Test Email: testemail@gmail.com</p> <p>Test Password: password</p>
           </div>
           <div className="login-btn-form-container">
             <input
