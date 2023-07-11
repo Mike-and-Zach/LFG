@@ -1,4 +1,4 @@
-const {client} = require('../client.js');
+const {client} = require('../client.js').default;
 const bcrypt = require("bcrypt");
 async function getAllUsers() {
   try {

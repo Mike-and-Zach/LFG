@@ -12,8 +12,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var _require = require("../client"),
-    client = _require.client;
+var client = require("../client")["default"].client;
 
 function getAllPosts() {
   var _ref, rows;
