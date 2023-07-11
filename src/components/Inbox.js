@@ -8,8 +8,6 @@ import { handleTime } from "../helpers/handleTime";
 
 const Inbox = ({token}) => {
     const [userInbox, setUserInbox] = useState([]);
-
-    const timeNow = moment();
     
     const fetchUserInbox = async () => {
         try {
