@@ -8,7 +8,7 @@ var _require = require('pg'),
 
 
 var client = new Client({
-  connectionString: "postgres://imlfg_user:r4BXWMuvamTWL8izpzLC2qUfa8HajBnz@dpg-cimam2unqqldjqj3vdag-a.oregon-postgres.render.com/imlfg",
+  connectionString: "postgresql://michael:GuI7rMgSGkrDYqXOmEMaiA@imlfgg-2873.g95.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full",
   ssl: true
 });
 module.exports = {
