@@ -1,5 +1,5 @@
-const baseUrl = "http://localhost:4000/api"
-// const baseUrl = "https://imlfg.onrender.com/api"
+// const baseUrl = "http://localhost:4000/api"
+const baseUrl = "https://imlfg.onrender.com/api"
 
 export const callApi = async ({ method, path, token, body }) => {
   const options = {

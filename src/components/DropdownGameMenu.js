@@ -16,7 +16,7 @@ const DropdownGameMenu = ({setOpenDropdown, setGameTitle}) => {
                     <li key={i} onClick={() => {
                         setGameTitle(game.title);
                         setOpenDropdown(false);
-                        navigate("/posts")
+                        navigate("/posts");
                     }} to="/posts">
                         {game.title}
                     </li>

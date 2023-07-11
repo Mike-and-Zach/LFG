@@ -227,7 +227,6 @@ const Posts = ({ token, gameTitle, setGameTitle }) => {
           </button>
         )}
       </div>
-        
         <Post
           posts={posts}
           setPosts={setPosts}
