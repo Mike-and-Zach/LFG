@@ -32,7 +32,7 @@ var _require = require('./db'),
     client = _require.client; // connect to the server
 
 
-var PORT = 5432 || 4000;
+var PORT = process.env.PORT || 4000;
 server.use(function (error, req, res, next) {
   res.send({
     error: error.message,

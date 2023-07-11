@@ -1,4 +1,4 @@
-const { client } = require("../client").default
+const { client } = require("../client")
 
 async function getUserInboxById(userId) {
     const { rows } = await client.query(`
